@@ -6,7 +6,8 @@ arch=(any)
 license=(None)
 depends=(
 	bluedevil
-	gnome-keyring
+	kwallet
+	kwalletmanager
 	networkmanager
 	plasma-nm
 	polkit-kde-agent

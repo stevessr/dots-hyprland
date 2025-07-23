@@ -32,7 +32,7 @@ argb_to_hex = lambda argb: "#{:02X}{:02X}{:02X}".format(*map(round, rgba_from_ar
 hex_to_argb = lambda hex_code: argb_from_rgb(int(hex_code[1:3], 16), int(hex_code[3:5], 16), int(hex_code[5:], 16))
 display_color = lambda rgba : "\x1B[38;2;{};{};{}m{}\x1B[0m".format(rgba[0], rgba[1], rgba[2], "\x1b[7m   \x1b[7m")
 
-def calculate_optimal_size (width: int, height: int, bitmap_size: int) -> (int, int):
+def calculate_optimal_size (width: int, height: int, bitmap_size: int) -> tuple[int, int]:
     image_area = width * height;
     bitmap_area = bitmap_size ** 2
     scale = math.sqrt(bitmap_area/image_area) if image_area > bitmap_area else 1

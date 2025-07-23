@@ -54,7 +54,7 @@ const getFriendlyNotifTimeString = (timestamp) => {
 
     // Less than 1 minute
     if (diffMs < 60000) 
-        return 'Now';
+        return '刚刚';
     
     // Same day - show relative time
     if (messageTime.toDateString() === now.toDateString()) {
@@ -70,7 +70,7 @@ const getFriendlyNotifTimeString = (timestamp) => {
     
     // Yesterday
     if (messageTime.toDateString() === new Date(now.getTime() - 86400000).toDateString()) 
-        return 'Yesterday';
+        return '昨天';
     
     // Older dates
     return Qt.formatDateTime(messageTime, "MMMM dd");

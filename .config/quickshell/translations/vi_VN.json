@@ -260,7 +260,7 @@
   "Copy code": "Sao chép code",
   "Load prompt from %1": "Tải chỉ dẫn từ %1",
   "Time": "Thời gian",
-  "**Pricing**: free. Data use policy varies depending on your OpenRouter account settings.\n\n**Instructions**: Log into OpenRouter account, go to Keys on the topright menu, click Create API Key": "**Giá**: miễn phí. Chính sách sử dụng dữ liệu tùy thuộc vào cài đặt tài khoản OpenRouter của bạn.\n\n**Hướng dẫn**: Đăng nhập vào tài khoản OpenRouter, mở Keys ở menu góc trên bên phải, ấn Create API Key",
+  "openrouter free": "**Giá**: miễn phí. Chính sách sử dụng dữ liệu tùy thuộc vào cài đặt tài khoản OpenRouter của bạn.\n\n**Hướng dẫn**: Đăng nhập vào tài khoản OpenRouter, mở Keys ở menu góc trên bên phải, ấn Create API Key",
   "Bar style": "Phong cách bar",
   "Configuration": "Cài đặt",
   "Prefixes": "Kí tự đầu",
