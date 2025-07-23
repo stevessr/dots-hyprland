@@ -397,7 +397,7 @@ Item { // Wrapper
                             type: Translation.tr("Search the web"),
                             materialSymbol: 'travel_explore',
                             execute: () => {
-                                let url = Config.options.search.engineBaseUrl + root.searchingText;
+                                let url = Config.options.search.engines[Config.options.search.selectedEngine].url + root.searchingText;
                                 for (let site of Config.options.search.excludedSites) {
                                     url += ` -site:${site}`;
                                 }

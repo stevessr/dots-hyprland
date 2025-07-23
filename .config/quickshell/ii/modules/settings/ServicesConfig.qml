@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Controls
 import qs
 import qs.services
 import qs.modules.common
@@ -188,13 +189,51 @@ ContentPage {
         }
         ContentSubsection {
             title: Translation.tr("Web search")
+            ConfigRow {
+                description: Translation.tr("Search engine")
+                uniform: true
+                ComboBox {
+                    id: searchEngineComboBox
+                    Layout.fillWidth: true
+                    model: Object.keys(Config.options.search.engines)
+                    textRole: "name"
+                    valueRole: "key"
+
+                    delegate: ItemDelegate {
+                        width: parent.width
+                        contentItem: Text {
+                            text: Config.options.search.engines[modelData].name
+                            font: parent.font
+                            elide: Text.ElideRight
+                            verticalAlignment: Text.AlignVCenter
+                        }
+                        highlighted: searchEngineComboBox.currentIndex === index
+                    }
+
+                    Component.onCompleted: {
+                        var keys = Object.keys(Config.options.search.engines);
+                        var selectedIndex = keys.indexOf(Config.options.search.selectedEngine);
+                        if (selectedIndex !== -1) {
+                            searchEngineComboBox.currentIndex = selectedIndex;
+                        }
+                    }
+
+                    onCurrentValueChanged: {
+                        if (model.length > 0) {
+                             Config.options.search.selectedEngine = currentValue
+                        }
+                    }
+
+                    property var currentValue: model[currentIndex]
+                }
+            }
             MaterialTextField {
                 Layout.fillWidth: true
                 placeholderText: Translation.tr("Base URL")
-                text: Config.options.search.engineBaseUrl
+                text: Config.options.search.engines[Config.options.search.selectedEngine].url
                 wrapMode: TextEdit.Wrap
                 onTextChanged: {
-                    Config.options.search.engineBaseUrl = text;
+                    Config.options.search.engines[Config.options.search.selectedEngine].url = text;
                 }
             }
         }

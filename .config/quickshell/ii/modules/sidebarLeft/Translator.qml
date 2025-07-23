@@ -153,7 +153,7 @@ Item {
                             color: searchButton.enabled ? Appearance.colors.colOnLayer1 : Appearance.colors.colSubtext
                         }
                         onClicked: {
-                            let url = Config.options.search.engineBaseUrl + outputCanvas.displayedText;
+                            let url = Config.options.search.engines[Config.options.search.selectedEngine].url + outputCanvas.displayedText;
                             for (let site of Config.options.search.excludedSites) {
                                 url += ` -site:${site}`;
                             }
