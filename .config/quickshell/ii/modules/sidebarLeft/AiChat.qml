@@ -40,7 +40,7 @@ Item {
     property var allCommands: [
         {
             name: "model",
-            description: Translation.tr("Choose model"),
+            description: "选择模型",
             execute: (args) => {
                 Ai.setModel(args[0]);
             }
@@ -63,7 +63,7 @@ Item {
         },
         {
             name: "prompt",
-            description: Translation.tr("Set the system prompt for the model."),
+            description: "为模型设置系统提示。",
             execute: (args) => {
                 if (args.length === 0 || args[0] === "get") {
                     Ai.printPrompt();
@@ -74,7 +74,7 @@ Item {
         },
         {
             name: "key",
-            description: Translation.tr("Set API key"),
+            description: "设置 API 密钥",
             execute: (args) => {
                 if (args[0] == "get") {
                     Ai.printApiKey()
@@ -85,7 +85,7 @@ Item {
         },
         {
             name: "save",
-            description: Translation.tr("Save chat"),
+            description: "保存对话",
             execute: (args) => {
                 const joinedArgs = args.join(" ")
                 if (joinedArgs.trim().length == 0) {
@@ -97,7 +97,7 @@ Item {
         },
         {
             name: "load",
-            description: Translation.tr("Load chat"),
+            description: "加载对话",
             execute: (args) => {
                 const joinedArgs = args.join(" ")
                 if (joinedArgs.trim().length == 0) {
@@ -109,14 +109,14 @@ Item {
         },
         {
             name: "clear",
-            description: Translation.tr("Clear chat history"),
+            description: "清除对话历史",
             execute: () => {
                 Ai.clearMessages();
             }
         },
         {
             name: "temp",
-            description: Translation.tr("Set temperature (randomness) of the model. Values range between 0 to 2 for Gemini, 0 to 1 for other models. Default is 0.5."),
+            description: "设置模型的温度（随机性）。Gemini 的取值范围是 0 到 2，其他模型是 0 到 1。默认为 0.5。",
             execute: (args) => {
                 // console.log(args)
                 if (args.length == 0 || args[0] == "get") {
@@ -129,7 +129,7 @@ Item {
         },
         {
             name: "test",
-            description: Translation.tr("Markdown test"),
+            description: "Markdown 测试",
             execute: () => {
                 Ai.addMessage(`
 <think>
@@ -195,7 +195,7 @@ Inline w/ backslash and round brackets \\(e^{i\\pi} + 1 = 0\\)
             if (commandObj) {
                 commandObj.execute(args);
             } else {
-                Ai.addMessage(Translation.tr("Unknown command: ") + command, Ai.interfaceRole);
+                Ai.addMessage("未知命令：" + command, Ai.interfaceRole);
             }
         }
         else {
@@ -348,7 +348,7 @@ Inline w/ backslash and round brackets \\(e^{i\\pi} + 1 = 0\\)
                         font.family: Appearance.font.family.title
                         color: Appearance.m3colors.m3outline
                         horizontalAlignment: Text.AlignHCenter
-                        text: Translation.tr("Large language models")
+                        text: "大型语言模型"
                     }
                     StyledText {
                         id: widgetDescriptionText
@@ -357,7 +357,7 @@ Inline w/ backslash and round brackets \\(e^{i\\pi} + 1 = 0\\)
                         color: Appearance.m3colors.m3outline
                         horizontalAlignment: Text.AlignLeft
                         wrapMode: Text.Wrap
-                        text: Translation.tr("Type /key to get started with online models\nCtrl+O to expand the sidebar\nCtrl+P to detach sidebar into a window")
+                        text: "输入 /key 开始使用在线模型\nCtrl+O 展开侧边栏\nCtrl+P 将侧边栏分离为窗口"
                     }
                 }
             }
@@ -455,7 +455,7 @@ Inline w/ backslash and round brackets \\(e^{i\\pi} + 1 = 0\\)
                     Layout.fillWidth: true
                     padding: 10
                     color: activeFocus ? Appearance.m3colors.m3onSurface : Appearance.m3colors.m3onSurfaceVariant
-                    placeholderText: Translation.tr('Message the model... "%1" for commands').arg(root.commandPrefix)
+                    placeholderText: qsTr('向模型发送消息... "%1" 查看命令').arg(root.commandPrefix)
 
                     background: null
 
@@ -497,7 +497,7 @@ Inline w/ backslash and round brackets \\(e^{i\\pi} + 1 = 0\\)
                                 return {
                                     name: `${messageInputField.text.trim().split(" ").length == 1 ? (root.commandPrefix + "prompt ") : ""}${file.target}`,
                                     displayName: `${FileUtils.trimFileExt(FileUtils.fileNameForPath(file.target))}`,
-                                    description: Translation.tr("Load prompt from %1").arg(file.target),
+                                    description: qsTr("从 %1 加载提示").arg(file.target),
                                 }
                             })
                         } else if (messageInputField.text.startsWith(`${root.commandPrefix}save`)) {
@@ -516,7 +516,7 @@ Inline w/ backslash and round brackets \\(e^{i\\pi} + 1 = 0\\)
                                 return {
                                     name: `${messageInputField.text.trim().split(" ").length == 1 ? (root.commandPrefix + "save ") : ""}${chatName}`,
                                     displayName: `${chatName}`,
-                                    description: Translation.tr("Save chat to %1").arg(chatName),
+                                    description: qsTr("将对话保存到 %1").arg(chatName),
                                 }
                             })
                         } else if (messageInputField.text.startsWith(`${root.commandPrefix}load`)) {
@@ -535,7 +535,7 @@ Inline w/ backslash and round brackets \\(e^{i\\pi} + 1 = 0\\)
                                 return {
                                     name: `${messageInputField.text.trim().split(" ").length == 1 ? (root.commandPrefix + "load ") : ""}${chatName}`,
                                     displayName: `${chatName}`,
-                                    description: Translation.tr(`Load chat from %1`).arg(file.target),
+                                    description: Translation.tr(`从 %1加载对话`).arg(file.target),
                                 }
                             })
                         } else if (messageInputField.text.startsWith(`${root.commandPrefix}tool`)) {
@@ -654,7 +654,7 @@ Inline w/ backslash and round brackets \\(e^{i\\pi} + 1 = 0\\)
                 ApiInputBoxIndicator { // Model indicator
                     icon: "api"
                     text: Ai.getModel().name
-                    tooltipText: Translation.tr("Current model: %1\nSet it with %2model MODEL")
+                    tooltipText: qsTr("当前模型：%1\n使用 %2model MODEL 设置")
                         .arg(Ai.getModel().name)
                         .arg(root.commandPrefix)
                 }

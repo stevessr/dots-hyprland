@@ -28,9 +28,8 @@ QuickToggleButton {
         }
     }
     StyledToolTip {
-        content: Translation.tr("%1 | Right-click to configure").arg(
-            (Bluetooth.bluetoothEnabled && Bluetooth.bluetoothDeviceName.length > 0) ? 
-            Bluetooth.bluetoothDeviceName : Translation.tr("Bluetooth"))
+        content: ((Bluetooth.bluetoothEnabled && Bluetooth.bluetoothDeviceName.length > 0) ?
+            Bluetooth.bluetoothDeviceName : "蓝牙") + " | 右键单击进行配置"
 
     }
 }

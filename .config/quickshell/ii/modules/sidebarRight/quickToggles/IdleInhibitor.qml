@@ -26,6 +26,6 @@ QuickToggleButton {
         }
     }
     StyledToolTip {
-        content: Translation.tr("Keep system awake")
+        content: "保持系统唤醒"
     }
 }

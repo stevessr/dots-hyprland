@@ -5,6 +5,7 @@ import qs.services
 import qs.modules.common
 import qs.modules.common.widgets
 import qs.modules.common.functions
+import Quickshell
 
 MouseArea {
     id: root
@@ -116,6 +117,29 @@ MouseArea {
                 function onCurrentTextChanged() {
                     passwordBox.text = root.context.currentText;
                 }
+            }
+        }
+    
+        // Shutdown button
+        RippleButton {
+            anchors {
+                bottom: parent.bottom
+                right: parent.right
+                rightMargin: 20
+                bottomMargin: 20
+            }
+    
+            implicitHeight: 44
+            implicitWidth: 44
+            buttonRadius: Appearance.rounding.full
+            colBackground: Appearance.colors.colLayer2
+            onClicked: { Quickshell.execDetached(["bash", "-c", "systemctl poweroff || loginctl poweroff"]) }
+    
+            contentItem: MaterialSymbol {
+                anchors.centerIn: parent
+                iconSize: 24
+                text: "power_settings_new"
+                color: Appearance.colors.colOnLayer2
             }
         }
     }

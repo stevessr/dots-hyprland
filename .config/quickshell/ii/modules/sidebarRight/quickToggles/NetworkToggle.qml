@@ -29,6 +29,6 @@ QuickToggleButton {
         }
     }
     StyledToolTip {
-        content: Translation.tr("%1 | Right-click to configure").arg(Network.networkName)
+        content: Network.networkName + " | 右键单击进行配置"
     }
 }

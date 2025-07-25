@@ -284,19 +284,19 @@ Singleton {
             "requires_key": true,
             "key_id": "openrouter",
             "key_get_link": "https://openrouter.ai/settings/keys",
-            "key_get_description": Translation.tr("openrouter free"),
+            "key_get_description": "openrouter 免费",
         },
         "openrouter-deepseek-r1": {
             "name": "DeepSeek R1",
             "icon": "deepseek-symbolic",
-            "description": Translation.tr("Online via %1 | %2's model").arg("OpenRouter").arg("DeepSeek"),
+            "description": qsTr("通过 %1 在线 | %2 的模型").arg("OpenRouter").arg("DeepSeek"),
             "homepage": "https://openrouter.ai/deepseek/deepseek-r1:free",
             "endpoint": "https://openrouter.ai/api/v1/chat/completions",
             "model": "deepseek/deepseek-r1:free",
             "requires_key": true,
             "key_id": "openrouter",
             "key_get_link": "https://openrouter.ai/settings/keys",
-            "key_get_description": Translation.tr("openrouter free"),
+            "key_get_description": "openrouter 免费",
         },
     }
     property var modelList: Object.keys(root.models)
@@ -364,7 +364,7 @@ Singleton {
                         root.addModel(safeModelName, {
                             "name": guessModelName(model),
                             "icon": guessModelLogo(model),
-                            "description": Translation.tr("Local Ollama model | %1").arg(model),
+                            "description": qsTr("本地 Ollama 模型 | %1").arg(model),
                             "homepage": `https://ollama.com/library/${model}`,
                             "endpoint": "http://localhost:11434/v1/chat/completions",
                             "model": model,
@@ -429,12 +429,12 @@ Singleton {
         onLoadedChanged: {
             if (!promptLoader.loaded) return;
             Config.options.ai.systemPrompt = promptLoader.text();
-            root.addMessage(Translation.tr("Loaded the following system prompt\n\n---\n\n%1").arg(Config.options.ai.systemPrompt), root.interfaceRole);
+            root.addMessage(qsTr("已加载以下系统提示\n\n---\n\n%1").arg(Config.options.ai.systemPrompt), root.interfaceRole);
         }
     }
 
     function printPrompt() {
-        root.addMessage(Translation.tr("The current system prompt is\n\n---\n\n%1").arg(Config.options.ai.systemPrompt), root.interfaceRole);
+        root.addMessage(qsTr("当前系统提示为\n\n---\n\n%1").arg(Config.options.ai.systemPrompt), root.interfaceRole);
     }
 
     function loadPrompt(filePath) {
@@ -467,8 +467,8 @@ Singleton {
 
     function addApiKeyAdvice(model) {
         root.addMessage(
-            Translation.tr('To set an API key, pass it with the %4 command\n\nTo view the key, pass "get" with the command<br/>\n\n### For %1:\n\n**Link**: %2\n\n%3')
-                .arg(model.name).arg(model.key_get_link).arg(model.key_get_description ?? Translation.tr("<i>No further instruction provided</i>")).arg("/key"), 
+            qsTr('要设置 API 密钥，请随命令传递它\n\n要查看密钥，请随命令传递 %4 <br/>\n\n### 对于 %1：\n\n**链接**：%2\n\n%3')
+                .arg(model.name).arg(model.key_get_link).arg(model.key_get_description ?? "<i>未提供进一步说明</i>"),
             Ai.interfaceRole
         );
     }
@@ -487,13 +487,13 @@ Singleton {
             // See if policy prevents online models
             if (Config.options.policies.ai === 2 && !model.endpoint.includes("localhost")) {
                 root.addMessage(
-                    Translation.tr("Online models disallowed\n\nControlled by `policies.ai` config option"),
+                    "在线模型已禁用\n\n由 `policies.ai` 配置选项控制",
                     root.interfaceRole
                 );
                 return;
             }
             if (setPersistentState) Persistent.states.ai.model = modelId;
-            if (feedback) root.addMessage(Translation.tr("Model set to %1").arg(model.name), root.interfaceRole);
+            if (feedback) root.addMessage(qsTr("模型已设置为 %1").arg(model.name), root.interfaceRole);
             if (model.requires_key) {
                 // If key not there show advice
                 if (root.apiKeysLoaded && (!root.apiKeys[model.key_id] || root.apiKeys[model.key_id].length === 0)) {
@@ -501,8 +501,17 @@ Singleton {
                 }
             }
         } else {
-            if (feedback) root.addMessage(Translation.tr("Invalid model. Supported: \n```\n") + modelList.join("\n```\n```\n"), Ai.interfaceRole) + "\n```"
+            if (feedback) root.addMessage("无效模型。支持：\n```\n" + modelList.join("\n```\n```\n"), Ai.interfaceRole) + "\n```"
         }
+    }
+
+    function setTool(tool) {
+        if (!root.tools[models[currentModelId]?.api_format] || !(tool in root.tools[models[currentModelId]?.api_format])) {
+            root.addMessage(Translation.tr("无效工具. 支持的工具为:\n- %1").arg(root.availableTools.join("\n- ")), root.interfaceRole);
+            return false;
+        }
+        Config.options.ai.tool = tool;
+        return true;
     }
 
     function setTool(tool) {
@@ -520,18 +529,18 @@ Singleton {
 
     function setTemperature(value) {
         if (value == NaN || value < 0 || value > 2) {
-            root.addMessage(Translation.tr("Temperature must be between 0 and 2"), Ai.interfaceRole);
+            root.addMessage("温度必须在 0 和 2 之间", Ai.interfaceRole);
             return;
         }
         Persistent.states.ai.temperature = value;
         root.temperature = value;
-        root.addMessage(Translation.tr("Temperature set to %1").arg(value), Ai.interfaceRole);
+        root.addMessage(qsTr("温度已设置为 %1").arg(value), Ai.interfaceRole);
     }
 
     function setApiKey(key) {
         const model = models[currentModelId];
         if (!model.requires_key) {
-            root.addMessage(Translation.tr("%1 does not require an API key").arg(model.name), Ai.interfaceRole);
+            root.addMessage(qsTr("%1 不需要 API 密钥").arg(model.name), Ai.interfaceRole);
             return;
         }
         if (!key || key.length === 0) {
@@ -540,7 +549,7 @@ Singleton {
             return;
         }
         KeyringStorage.setNestedField(["apiKeys", model.key_id], key.trim());
-        root.addMessage(Translation.tr("API key set for %1").arg(model.name), Ai.interfaceRole);
+        root.addMessage(qsTr("已为 %1 设置 API 密钥").arg(model.name), Ai.interfaceRole);
     }
 
     function printApiKey() {
@@ -548,17 +557,17 @@ Singleton {
         if (model.requires_key) {
             const key = root.apiKeys[model.key_id];
             if (key) {
-                root.addMessage(Translation.tr("API key:\n\n```txt\n%1\n```").arg(key), Ai.interfaceRole);
+                root.addMessage(qsTr("API 密钥：\n\n```txt\n%1\n```").arg(key), Ai.interfaceRole);
             } else {
-                root.addMessage(Translation.tr("No API key set for %1").arg(model.name), Ai.interfaceRole);
+                root.addMessage(qsTr("未为 %1 设置 API 密钥").arg(model.name), Ai.interfaceRole);
             }
         } else {
-            root.addMessage(Translation.tr("%1 does not require an API key").arg(model.name), Ai.interfaceRole);
+            root.addMessage(qsTr("%1 不需要 API 密钥").arg(model.name), Ai.interfaceRole);
         }
     }
 
     function printTemperature() {
-        root.addMessage(Translation.tr("Temperature: %1").arg(root.temperature), Ai.interfaceRole);
+        root.addMessage(qsTr("温度：%1").arg(root.temperature), Ai.interfaceRole);
     }
 
     function clearMessages() {
@@ -759,7 +768,7 @@ Singleton {
             const modelId = root.currentModelId;
             root.currentTool = "search"
             root.postResponseHook = () => { root.currentTool = "functions" }
-            addFunctionOutputMessage(name, Translation.tr("Switched to search mode. Continue with the user's request."))
+            addFunctionOutputMessage(name, "已切换到搜索模式。请继续用户的请求。")
             requester.makeRequest();
         } else if (name === "get_shell_config") {
             const configJson = CF.ObjectUtils.toPlainObject(Config.options)
@@ -767,7 +776,7 @@ Singleton {
             requester.makeRequest();
         } else if (name === "set_shell_config") {
             if (!args.key || !args.value) {
-                addFunctionOutputMessage(name, Translation.tr("Invalid arguments. Must provide `key` and `value`."));
+                addFunctionOutputMessage(name, "无效参数。必须提供 `key` 和 `value`。");
                 return;
             }
             const key = args.key;
@@ -775,15 +784,15 @@ Singleton {
             Config.setNestedValue(key, value);
         } else if (name === "run_shell_command") {
             if (!args.command || args.command.length === 0) {
-                addFunctionOutputMessage(name, Translation.tr("Invalid arguments. Must provide `command`."));
+                addFunctionOutputMessage(name, Translation.tr("无效参数. 必须提供 `command`."));
                 return;
             }
-            const contentToAppend = `\n\n**Command execution request**\n\n\`\`\`command\n${args.command}\n\`\`\``;
+            const contentToAppend = `\n\n**命令执行请求**\n\n\`\`\`命令\n${args.command}\n\`\`\``;
             message.rawContent += contentToAppend;
             message.content += contentToAppend;
             message.functionPending = true; // Use thinking to indicate the command is waiting for approval
         }
-        else root.addMessage(Translation.tr("Unknown function call: %1").arg(name), "assistant");
+        else root.addMessage(qsTr("未知的函数调用：%1").arg(name), "assistant");
     }
 
     function chatToJson() {

@@ -119,7 +119,7 @@ ColumnLayout {
         wrapMode: TextEdit.Wrap
         color: messageData.thinking ? Appearance.colors.colSubtext : Appearance.colors.colOnLayer1
         textFormat: renderMarkdown ? TextEdit.MarkdownText : TextEdit.PlainText
-        text: Translation.tr("Waiting for response...")
+        text: "等待响应..."
 
         onTextChanged: {
             if (!root.editing) return
