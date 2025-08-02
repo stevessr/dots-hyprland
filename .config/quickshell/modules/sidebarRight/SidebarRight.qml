@@ -151,10 +151,20 @@ Scope {
                                     StyledToolTip {
                                         content: "设置"
                                     }
-                                }
-                                QuickToggleButton {
-                                    toggled: false
-                                    buttonIcon: "power_settings_new"
+                                 }
+                                 QuickToggleButton {
+                                     toggled: false
+                                     buttonIcon: "tablet_mac"
+                                     onClicked: {
+                                         Quickshell.execDetached(["nwg-displays"])
+                                     }
+                                     StyledToolTip {
+                                         content: "屏幕管理"
+                                     }
+                                 }
+                                 QuickToggleButton {
+                                     toggled: false
+                                     buttonIcon: "power_settings_new"
                                     onClicked: {
                                         GlobalStates.sessionOpen = true
                                     }
