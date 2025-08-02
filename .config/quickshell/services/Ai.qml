@@ -284,8 +284,8 @@ Singleton {
             "requires_key": true,
             "key_id": "openrouter",
             "key_get_link": "https://openrouter.ai/settings/keys",
-            "key_get_description": "openrouter 免费",
-        },
+            "key_get_description": "openrouter 免费"
+        }),
         "openrouter-deepseek-r1": {
             "name": "DeepSeek R1",
             "icon": "deepseek-symbolic",
@@ -508,15 +508,6 @@ Singleton {
     function setTool(tool) {
         if (!root.tools[models[currentModelId]?.api_format] || !(tool in root.tools[models[currentModelId]?.api_format])) {
             root.addMessage(Translation.tr("无效工具. 支持的工具为:\n- %1").arg(root.availableTools.join("\n- ")), root.interfaceRole);
-            return false;
-        }
-        Config.options.ai.tool = tool;
-        return true;
-    }
-
-    function setTool(tool) {
-        if (!root.tools[models[currentModelId]?.api_format] || !(tool in root.tools[models[currentModelId]?.api_format])) {
-            root.addMessage(Translation.tr("Invalid tool. Supported tools:\n- %1").arg(root.availableTools.join("\n- ")), root.interfaceRole);
             return false;
         }
         Config.options.ai.tool = tool;
