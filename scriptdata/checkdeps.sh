@@ -17,8 +17,8 @@ remove_bashcomments_emptylines $pkglistfile_orig $pkglistfile_orig_s
 
 cat $pkglistfile_orig_s | sed "s_\ _\n_g" > $pkglistfile
 
-echo "The non-existent pkgs in $pkglistfile_orig are listed as follows."
+echo "在 $pkglistfile_orig 中不存在的包如下所列。"
 # Borrowed from https://bbs.archlinux.org/viewtopic.php?pid=1490795#p1490795
 comm -23 <(sort -u $pkglistfile) <(sort -u <(wget -q -O - https://aur.archlinux.org/packages.gz | gunzip) <(pacman -Ssq))
-echo "End of list. If nothing appears, then all pkgs exist."
+echo "列表结束。如果没有显示任何内容，则所有包都存在。"
 rm $pkglistfile

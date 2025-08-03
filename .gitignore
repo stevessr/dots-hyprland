@@ -9,3 +9,5 @@
 __pycache__/
 *.py[cod]
 .config/quickshell/ii/.qmlls.ini
+logs
+*.db

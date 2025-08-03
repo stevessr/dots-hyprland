@@ -32,19 +32,19 @@ NC='\033[0m' # No Color
 
 # === Helper Functions ===
 log_info() {
-  echo -e "${BLUE}[INFO]${NC} $1"
+  echo -e "${BLUE}[信息]${NC} $1"
 }
 
 log_success() {
-  echo -e "${GREEN}[SUCCESS]${NC} $1"
+  echo -e "${GREEN}[成功]${NC} $1"
 }
 
 log_warning() {
-  echo -e "${YELLOW}[WARNING]${NC} $1"
+  echo -e "${YELLOW}[警告]${NC} $1"
 }
 
 log_error() {
-  echo -e "${RED}[ERROR]${NC} $1" >&2
+  echo -e "${RED}[错误]${NC} $1" >&2
 }
 
 log_header() {
@@ -74,12 +74,12 @@ safe_read() {
     # If read failed and we have a default, use it
     if [[ -n "$default" ]]; then
       echo
-      log_warning "Using default: $default"
+      log_warning "使用默认值: $default"
       eval "$varname='$default'"
       return 0
     else
       echo
-      log_error "Failed to read input"
+      log_error "读取输入失败"
       return 1
     fi
   fi
@@ -173,15 +173,15 @@ show_diff() {
   local file1="$1"
   local file2="$2"
 
-  echo -e "\n${CYAN}Showing differences:${NC}"
-  echo -e "${CYAN}Old file: $file1${NC}"
-  echo -e "${CYAN}New file: $file2${NC}"
+  echo -e "\n${CYAN}显示差异:${NC}"
+  echo -e "${CYAN}旧文件: $file1${NC}"
+  echo -e "${CYAN}新文件: $file2${NC}"
   echo "----------------------------------------"
 
   if command -v diff &>/dev/null; then
     diff -u "$file1" "$file2" || true
   else
-    echo "diff command not available"
+    echo "diff 命令不可用"
   fi
   echo "----------------------------------------"
 }
@@ -193,112 +193,112 @@ handle_file_conflict() {
   local filename=$(basename "$home_file")
   local dirname=$(dirname "$home_file")
 
-  echo -e "\n${YELLOW}Conflict detected:${NC} $home_file"
-  echo "Repository version differs from your local version."
+  echo -e "\n${YELLOW}检测到冲突:${NC} $home_file"
+  echo "仓库中的版本与您的本地版本不同。"
   echo
-  echo "Choose an action:"
-  echo "1) Replace local file with repository version"
-  echo "2) Keep local file unchanged"
-  echo "3) Backup local file as ${filename}.old, use repository version"
-  echo "4) Save repository version as ${filename}.new, keep local file"
-  echo "5) Show diff and decide"
-  echo "6) Skip this file"
-  echo "7) Add to ignore and skip"
+  echo "请选择操作："
+  echo "1) 使用仓库版本替换本地文件"
+  echo "2) 保留本地文件"
+  echo "3) 将本地文件备份为 ${filename}.old，并使用仓库版本"
+  echo "4) 将仓库版本另存为 ${filename}.new，并保留本地文件"
+  echo "5) 显示差异后决定"
+  echo "6) 跳过此文件"
+  echo "7) 添加到忽略列表并跳过"
   echo
 
   while true; do
-    if ! safe_read "Enter your choice (1-7): " choice "6"; then
+    if ! safe_read "请输入您的选择 (1-7): " choice "6"; then
       echo
-      log_warning "Failed to read input. Skipping file."
+      log_warning "读取输入失败。正在跳过文件。"
       return
     fi
 
     case $choice in
     1)
       cp -p "$repo_file" "$home_file"
-      log_success "Replaced $home_file with repository version"
+      log_success "已使用仓库版本替换 $home_file"
       break
       ;;
     2)
-      log_info "Keeping local version of $home_file"
+      log_info "已保留 $home_file 的本地版本"
       break
       ;;
     3)
       mv "$home_file" "${dirname}/${filename}.old"
       cp -p "$repo_file" "$home_file"
-      log_success "Backed up local file to ${filename}.old and updated with repository version"
+      log_success "已将本地文件备份到 ${filename}.old 并使用仓库版本更新"
       break
       ;;
     4)
       cp -p "$repo_file" "${dirname}/${filename}.new"
-      log_success "Saved repository version as ${filename}.new, kept local file"
+      log_success "已将仓库版本另存为 ${filename}.new，并保留本地文件"
       break
       ;;
     5)
       show_diff "$home_file" "$repo_file"
       echo
-      echo "After reviewing the diff, choose:"
-      echo "r) Replace with repository version"
-      echo "k) Keep local version"
-      echo "b) Backup local and use repository version"
-      echo "n) Save repository version as .new"
-      echo "s) Skip this file"
-      echo "i) Add to ignore and skip"
+      echo "查看差异后，请选择："
+      echo "r) 使用仓库版本替换"
+      echo "k) 保留本地版本"
+      echo "b) 备份本地文件并使用仓库版本"
+      echo "n) 将仓库版本另存为 .new"
+      echo "s) 跳过此文件"
+      echo "i) 添加到忽略列表并跳过"
 
-      if ! safe_read "Enter your choice (r/k/b/n/s/i): " subchoice "s"; then
+      if ! safe_read "请输入您的选择 (r/k/b/n/s/i): " subchoice "s"; then
         echo
-        log_warning "Failed to read input. Skipping file."
+        log_warning "无法读取输入。正在跳过文件。"
         return
       fi
 
       case $subchoice in
       r)
         cp -p "$repo_file" "$home_file"
-        log_success "Replaced $home_file with repository version"
+        log_success "已使用仓库版本替换 $home_file"
         break
         ;;
       k)
-        log_info "Keeping local version of $home_file"
+        log_info "已保留 $home_file 的本地版本"
         break
         ;;
       b)
         mv "$home_file" "${dirname}/${filename}.old"
         cp -p "$repo_file" "$home_file"
-        log_success "Backed up local file to ${filename}.old and updated"
+        log_success "已将本地文件备份到 ${filename}.old 并更新"
         break
         ;;
       n)
         cp -p "$repo_file" "${dirname}/${filename}.new"
-        log_success "Saved repository version as ${filename}.new"
+        log_success "已将仓库版本另存为 ${filename}.new"
         break
         ;;
       s)
-        log_info "Skipping $home_file"
+        log_info "正在跳过 $home_file"
         break
         ;;
       i)
         local relative_path_to_home="${home_file#$HOME/}"
         echo "$relative_path_to_home" >>"$HOME_UPDATE_IGNORE_FILE"
-        log_success "Added '$relative_path_to_home' to $HOME_UPDATE_IGNORE_FILE and skipped."
+        log_success "已将 '$relative_path_to_home' 添加到 $HOME_UPDATE_IGNORE_FILE 并跳过。"
         break
         ;;
       *)
-        echo "Invalid choice. Please try again."
+        echo "无效选择。请重试。"
         ;;
       esac
       ;;
     6)
-      log_info "Skipping $home_file"
+      log_info "正在跳过 $home_file"
       break
       ;;
     7)
       local relative_path_to_home="${home_file#$HOME/}"
       echo "$relative_path_to_home" >>"$HOME_UPDATE_IGNORE_FILE"
-      log_success "Added '$relative_path_to_home' to $HOME_UPDATE_IGNORE_FILE and skipped."
+      log_success "已将 '$relative_path_to_home' 添加到 $HOME_UPDATE_IGNORE_FILE 并跳过。"
       break
       ;;
     *)
-      echo "Invalid choice. Please enter 1-7."
+      echo "无效选择。请输入 1-7。"
       ;;
     esac
   done
@@ -333,7 +333,7 @@ list_packages() {
   local changed_packages=()
 
   if [[ ! -d "$ARCH_PACKAGES_DIR" ]]; then
-    log_warning "No arch-packages directory found"
+    log_warning "未找到 arch-packages 目录"
     return 1
   fi
 
@@ -349,21 +349,21 @@ list_packages() {
   done
 
   if [[ ${#available_packages[@]} -eq 0 ]]; then
-    log_info "No packages found in arch-packages directory"
+    log_info "在 arch-packages 目录中未找到任何软件包"
     return 1
   fi
 
-  echo -e "\n${CYAN}Available packages:${NC}"
+  echo -e "\n${CYAN}可用软件包:${NC}"
   for pkg in "${available_packages[@]}"; do
     if [[ " ${changed_packages[*]} " =~ " ${pkg} " ]]; then
-      echo -e "  ${GREEN}● ${pkg}${NC} (PKGBUILD changed)"
+      echo -e "  ${GREEN}● ${pkg}${NC} (PKGBUILD 已更改)"
     else
       echo -e "  ○ ${pkg}"
     fi
   done
 
   if [[ ${#changed_packages[@]} -gt 0 ]]; then
-    echo -e "\n${YELLOW}Packages with changed PKGBUILDs: ${changed_packages[*]}${NC}"
+    echo -e "\n${YELLOW}PKGBUILD 已更改的软件包: ${changed_packages[*]}${NC}"
   fi
 
   return 0
@@ -395,9 +395,9 @@ build_packages() {
     done
     ;;
   "select")
-    echo -e "\nEnter package names separated by spaces (or 'all' for all packages):"
-    if ! safe_read "Packages to build: " user_selection ""; then
-      log_warning "Failed to read input. Skipping package builds."
+    echo -e "\n请输入用空格分隔的软件包名称（或输入 'all' 选择所有）："
+    if ! safe_read "要构建的软件包: " user_selection ""; then
+      log_warning "无法读取输入。正在跳过软件包构建。"
       return
     fi
 
@@ -415,19 +415,19 @@ build_packages() {
   esac
 
   if [[ ${#packages_to_build[@]} -eq 0 ]]; then
-    log_info "No packages selected for building"
+    log_info "未选择任何软件包进行构建。"
     return
   fi
 
-  echo -e "\n${CYAN}Packages to build: ${packages_to_build[*]}${NC}"
+  echo -e "\n${CYAN}将要构建的软件包：${packages_to_build[*]}${NC}"
 
-  if ! safe_read "Proceed with building these packages? (Y/n): " confirm "Y"; then
-    log_warning "Failed to read input. Skipping package builds."
+  if ! safe_read "是否继续构建这些软件包？(Y/n): " confirm "Y"; then
+    log_warning "无法读取输入。正在跳过软件包构建。"
     return
   fi
 
   if [[ "$confirm" =~ ^[Nn]$ ]]; then
-    log_info "Package building cancelled by user"
+    log_info "用户取消了软件包构建。"
     return
   fi
 
@@ -435,27 +435,27 @@ build_packages() {
     local pkg_dir="${ARCH_PACKAGES_DIR}/${pkg_name}"
 
     if [[ ! -d "$pkg_dir" || ! -f "${pkg_dir}/PKGBUILD" ]]; then
-      log_error "Package not found or missing PKGBUILD: $pkg_name"
+      log_error "未找到软件包或缺少 PKGBUILD：$pkg_name"
       continue
     fi
 
-    log_info "Building package: $pkg_name"
+    log_info "正在构建软件包：$pkg_name"
     cd "$pkg_dir" || continue
 
     if makepkg -si --noconfirm; then
-      log_success "Successfully built and installed $pkg_name"
+      log_success "成功构建并安装了 $pkg_name"
       ((rebuilt_packages++))
     else
-      log_error "Failed to build package $pkg_name"
+      log_error "构建软件包 $pkg_name 失败"
     fi
 
-    cd "$REPO_DIR" || die "Failed to return to repository directory"
+    cd "$REPO_DIR" || die "无法返回仓库目录"
   done
 
   if [[ $rebuilt_packages -eq 0 ]]; then
-    log_warning "No packages were successfully built"
+    log_warning "没有软件包被成功构建。"
   else
-    log_success "Successfully rebuilt $rebuilt_packages package(s)"
+    log_success "成功重新构建了 $rebuilt_packages 个软件包。"
   fi
 }
 
@@ -501,7 +501,7 @@ has_new_commits() {
 }
 
 # Main script starts here
-log_header "Dotfiles Update Script"
+log_header "Dotfiles 更新脚本"
 
 check=true
 
@@ -510,74 +510,74 @@ while [[ $# -gt 0 ]]; do
   case $1 in
   -f | --force)
     FORCE_CHECK=true
-    log_info "Force check mode enabled - will check all files regardless of git changes"
+    log_info "已启用强制检查模式 - 将检查所有文件，无论 git 是否有更改"
     shift
     ;;
   -p | --packages)
     CHECK_PACKAGES=true
-    log_info "Package checking enabled"
+    log_info "已启用软件包检查"
     shift
     ;;
   -h | --help)
-    echo "Usage: $0 [OPTIONS]"
+    echo "用法：$0 [选项]"
     echo ""
-    echo "Options:"
-    echo "  -f, --force      Force check all files even if no new commits"
-    echo "  -p, --packages   Enable package checking and building"
-    echo "  -h, --help       Show this help message"
+    echo "选项："
+    echo "  -f, --force      强制检查所有文件，即使没有新的提交"
+    echo "  -p, --packages   启用软件包检查和构建"
+    echo "  -h, --help       显示此帮助信息"
     echo ""
-    echo "This script updates your dotfiles by:"
-    echo "  1. Pulling latest changes from git remote"
-    echo "  2. Optionally rebuilding packages (if -p flag is used)"
-    echo "  3. Syncing configuration files"
-    echo "  4. Updating script permissions"
+    echo "此脚本通过以下步骤更新您的 dotfiles："
+    echo "  1. 从 git 远程拉取最新更改"
+    echo "  2. （可选）重新构建软件包（如果使用 -p 标志）"
+    echo "  3. 同步配置文件"
+    echo "  4. 更新脚本权限"
     echo ""
-    echo "Package modes (when -p is used):"
-    echo "  - If no PKGBUILDs changed: asks if you want to check packages anyway"
-    echo "  - If PKGBUILDs changed: offers to build changed packages"
-    echo "  - Interactive selection of packages to build"
+    echo "软件包模式（当使用 -p 时）："
+    echo "  - 如果没有 PKGBUILD 更改：询问您是否仍要检查软件包"
+    echo "  - 如果 PKGBUILD 已更改：提供构建已更改软件包的选项"
+    echo "  - 交互式选择要构建的软件包"
     exit 0
     ;;
   --skip-notice)
-    log_warning "Skipping notice about script being untested"
+    log_warning "正在跳过关于脚本未经测试的通知"
     check=false
     shift
     ;;
   *)
-    log_error "Unknown option: $1"
-    echo "Use --help for usage information"
+    log_error "未知选项：$1"
+    echo "使用 --help 获取用法信息"
     exit 1
     ;;
   esac
 done
 
 if [[ "$check" == true ]]; then
-  log_warning "THIS SCRIPT IS NOT FULLY TESTED AND MAY CAUSE ISSUES!"
-  safe_read "BY CONTINUE YOU WILL USE IT AT YOUR OWN RISK (y/N): " response "N"
+  log_warning "此脚本未经充分测试，可能会导致问题！"
+  safe_read "继续操作将意味着您自行承担风险 (y/N): " response "N"
 
   if [[ ! "$response" =~ ^[Yy]$ ]]; then
-    log_error "Update aborted by user"
+    log_error "用户中止了更新。"
     exit 1
   fi
 fi
 
 # Check if we're in a git repository
-cd "$REPO_DIR" || die "Failed to change to repository directory"
+cd "$REPO_DIR" || die "切换到仓库目录失败"
 
 if git rev-parse --is-inside-work-tree &>/dev/null; then
-  log_info "Running in git repository: $(git rev-parse --show-toplevel)"
+  log_info "正在 git 仓库中运行: $(git rev-parse --show-toplevel)"
 else
-  log_error "Not in a git repository. Please run this script from your dotfiles repository."
+  log_error "不在 git 仓库中。请从您的 dotfiles 仓库运行此脚本。"
   exit 1
 fi
 
 # Step 1: Pull latest commits
-log_header "Pulling Latest Changes"
+log_header "拉取最新更改"
 
 # Check current branch
 current_branch=$(git branch --show-current)
 if [[ -z "$current_branch" ]]; then
-  log_warning "In detached HEAD state. Checking out main/master branch..."
+  log_warning "处于分离 HEAD 状态。正在检出 main/master 分支..."
   if git show-ref --verify --quiet refs/heads/main; then
     git checkout main
     current_branch="main"
@@ -585,54 +585,54 @@ if [[ -z "$current_branch" ]]; then
     git checkout master
     current_branch="master"
   else
-    die "Could not find main or master branch"
+    die "找不到 main 或 master 分支"
   fi
 fi
 
-log_info "Current branch: $current_branch"
+log_info "当前分支: $current_branch"
 
 # Check for uncommitted changes
 if ! git diff --quiet || ! git diff --cached --quiet; then
-  log_warning "You have uncommitted changes:"
+  log_warning "您有未提交的更改:"
   git status --short
   echo
 
-  if ! safe_read "Do you want to continue? This will stash your changes. (y/N): " response "N"; then
+  if ! safe_read "是否要继续？这将储藏您的更改。 (y/N): " response "N"; then
     echo
-    log_error "Failed to read input. Aborting."
+    log_error "读取输入失败。正在中止。"
     exit 1
   fi
 
   if [[ ! "$response" =~ ^[Yy]$ ]]; then
-    die "Aborted by user"
+    die "用户中止"
   fi
-  git stash push -m "Auto-stash before update $(date)"
-  log_info "Changes stashed"
+  git stash push -m "更新前自动储藏 $(date)"
+  log_info "更改已储藏"
 fi
 
 # Check if remote exists
 if git remote get-url origin &>/dev/null; then
   # Pull changes
-  log_info "Pulling changes from origin/$current_branch..."
+  log_info "正在从 origin/$current_branch 拉取更改..."
   if git pull; then
-    log_success "Successfully pulled latest changes"
+    log_success "成功拉取最新更改"
   else
-    log_warning "Failed to pull changes from remote. Continuing with local repository..."
-    log_info "You may need to resolve conflicts manually later."
+    log_warning "从远程拉取更改失败。将继续使用本地仓库..."
+    log_info "您可能需要稍后手动解决冲突。"
   fi
 else
-  log_warning "No remote 'origin' configured. Skipping pull operation."
-  log_info "This appears to be a local-only repository."
+  log_warning "未配置远程 'origin'。正在跳过拉取操作。"
+  log_info "这似乎是一个仅限本地的仓库。"
 fi
 
 # Step 2: Handle package building (only if requested)
 rebuilt_packages=0
 
 if [[ "$CHECK_PACKAGES" == true ]]; then
-  log_header "Package Management"
+  log_header "软件包管理"
 
   if [[ ! -d "$ARCH_PACKAGES_DIR" ]]; then
-    log_warning "No arch-packages directory found. Skipping package management."
+    log_warning "未找到 arch-packages 目录。正在跳过软件包管理。"
   else
     # Check if any PKGBUILDs have changed
     changed_pkgbuilds=()
@@ -646,16 +646,16 @@ if [[ "$CHECK_PACKAGES" == true ]]; then
     done
 
     if [[ ${#changed_pkgbuilds[@]} -gt 0 ]]; then
-      log_info "Found ${#changed_pkgbuilds[@]} package(s) with changed PKGBUILDs: ${changed_pkgbuilds[*]}"
+      log_info "发现 ${#changed_pkgbuilds[@]} 个软件包的 PKGBUILD 已更改：${changed_pkgbuilds[*]}"
       echo
-      echo "Package build options:"
-      echo "1) Build only packages with changed PKGBUILDs"
-      echo "2) List all packages and select which to build"
-      echo "3) Build all packages"
-      echo "4) Skip package building"
+      echo "软件包构建选项："
+      echo "1) 仅构建 PKGBUILD 已更改的软件包"
+      echo "2) 列出所有软件包并选择要构建的软件包"
+      echo "3) 构建所有软件包"
+      echo "4) 跳过软件包构建"
       echo
 
-      if safe_read "Choose an option (1-4): " pkg_choice "1"; then
+      if safe_read "请选择一个选项 (1-4): " pkg_choice "1"; then
         case $pkg_choice in
         1)
           build_packages "changed"
@@ -669,25 +669,25 @@ if [[ "$CHECK_PACKAGES" == true ]]; then
           build_packages "all"
           ;;
         4 | *)
-          log_info "Skipping package building"
+          log_info "正在跳过软件包构建。"
           ;;
         esac
       else
-        log_warning "Failed to read input. Skipping package building."
+        log_warning "无法读取输入。正在跳过软件包构建。"
       fi
     else
-      log_info "No PKGBUILDs have changed since last update."
+      log_info "自上次更新以来，没有 PKGBUILD 发生更改。"
       echo
-      if safe_read "Do you want to check and build packages anyway? (y/N): " check_anyway "N"; then
+      if safe_read "是否仍要检查并构建软件包？(y/N): " check_anyway "N"; then
         if [[ "$check_anyway" =~ ^[Yy]$ ]]; then
           if list_packages; then
             echo
-            echo "Package build options:"
-            echo "1) Select specific packages to build"
-            echo "2) Build all packages"
-            echo "3) Skip package building"
+            echo "软件包构建选项："
+            echo "1) 选择要构建的特定软件包"
+            echo "2) 构建所有软件包"
+            echo "3) 跳过软件包构建"
 
-            if safe_read "Choose an option (1-3): " build_choice "3"; then
+            if safe_read "请选择一个选项 (1-3): " build_choice "3"; then
               case $build_choice in
               1)
                 build_packages "select"
@@ -696,24 +696,24 @@ if [[ "$CHECK_PACKAGES" == true ]]; then
                 build_packages "all"
                 ;;
               3 | *)
-                log_info "Skipping package building"
+                log_info "正在跳过软件包构建。"
                 ;;
               esac
             else
-              log_info "Skipping package building"
+              log_info "正在跳过软件包构建。"
             fi
           fi
         else
-          log_info "Skipping package management"
+          log_info "正在跳过软件包管理。"
         fi
       else
-        log_info "Skipping package management"
+        log_info "正在跳过软件包管理。"
       fi
     fi
   fi
 else
-  log_header "Package Management"
-  log_info "Package checking disabled. Use -p or --packages flag to enable package management."
+  log_header "软件包管理"
+  log_info "软件包检查已禁用。使用 -p 或 --packages 标志启用软件包管理。"
 
   # Still show a hint if there are changed PKGBUILDs
   if [[ -d "$ARCH_PACKAGES_DIR" ]]; then
@@ -725,24 +725,24 @@ else
     done
 
     if [[ $changed_count -gt 0 ]]; then
-      log_warning "Note: $changed_count package(s) have changed PKGBUILDs. Use -p flag to manage packages."
+      log_warning "注意：有 $changed_count 个软件包的 PKGBUILD 已更改。请使用 -p 标志管理软件包。"
     fi
   fi
 fi
 
 # Step 3: Update configuration files
-log_header "Updating Configuration Files"
+log_header "更新配置文件"
 
 # Check if we should process files
 process_files=false
 if [[ "$FORCE_CHECK" == true ]]; then
   process_files=true
-  log_info "Force mode: checking all configuration files"
+  log_info "强制模式：正在检查所有配置文件"
 elif has_new_commits; then
   process_files=true
-  log_info "New commits detected: checking changed configuration files"
+  log_info "检测到新提交：正在检查已更改的配置文件"
 else
-  log_info "No new commits found: checking for local file differences"
+  log_info "未发现新提交：正在检查本地文件差异"
   process_files=true # Always check for differences even without commits
 fi
 
@@ -756,11 +756,11 @@ if [[ "$process_files" == true ]]; then
     home_dir_path="${HOME}/${dir_name}"
 
     if [[ ! -d "$repo_dir_path" ]]; then
-      log_warning "Repository directory not found: $repo_dir_path"
+      log_warning "未找到仓库目录：$repo_dir_path"
       continue
     fi
 
-    log_info "Processing directory: $dir_name"
+    log_info "正在处理目录：$dir_name"
 
     # Create home directory if it doesn't exist
     mkdir -p "$home_dir_path"
@@ -784,14 +784,14 @@ if [[ "$process_files" == true ]]; then
       if [[ -f "$home_file" ]]; then
         # File exists, check if different
         if ! cmp -s "$repo_file" "$home_file"; then
-          log_info "Found difference in: $rel_path"
+          log_info "在以下文件中发现差异：$rel_path"
           handle_file_conflict "$repo_file" "$home_file"
           ((files_updated++))
         fi
       else
         # New file, copy it
         cp -p "$repo_file" "$home_file"
-        log_success "Created new file: $home_file"
+        log_success "已创建新文件：$home_file"
         ((files_created++))
       fi
     done < <(get_changed_files "$repo_dir_path")
@@ -799,65 +799,65 @@ if [[ "$process_files" == true ]]; then
 
   # Show processing summary
   echo
-  log_info "File processing summary:"
-  log_info "- Files processed: $files_processed"
-  log_info "- Files with conflicts: $files_updated"
-  log_info "- New files created: $files_created"
+  log_info "文件处理摘要："
+  log_info "- 已处理文件：$files_processed"
+  log_info "- 存在冲突的文件：$files_updated"
+  log_info "- 已创建的新文件：$files_created"
 else
-  log_info "Skipping file updates (no changes detected and not in force mode)"
+  log_info "正在跳过文件更新（未检测到更改且未启用强制模式）"
 fi
 
 # Step 4: Update script permissions
-log_header "Updating Script Permissions"
+log_header "更新脚本权限"
 
 if [[ -d "${REPO_DIR}/scriptdata" ]]; then
   find "${REPO_DIR}/scriptdata" -type f -name "*.sh" -exec chmod +x {} \;
   find "${REPO_DIR}/scriptdata" -type f -executable -exec chmod +x {} \;
-  log_success "Updated script permissions"
+  log_success "已更新脚本权限"
 fi
 
 # Make sure local bin scripts are executable
 if [[ -d "${HOME}/.local/bin" ]]; then
   find "${HOME}/.local/bin" -type f -exec chmod +x {} \; 2>/dev/null || true
-  log_success "Updated ~/.local/bin script permissions"
+  log_success "已更新 ~/.local/bin 脚本权限"
 fi
 
-log_header "Update Complete"
-log_success "Dotfiles update completed successfully!"
+log_header "更新完成"
+log_success "Dotfiles 更新成功完成！"
 
 # Show summary
 echo
-echo -e "${CYAN}Summary:${NC}"
-echo "- Repository: $(git log -1 --pretty=format:'%h - %s (%cr)')"
-echo "- Branch: $current_branch"
-echo "- Mode: $([ "$FORCE_CHECK" == true ] && echo "Force check" || echo "Normal")"
-echo "- Package checking: $([ "$CHECK_PACKAGES" == true ] && echo "Enabled" || echo "Disabled")"
+echo -e "${CYAN}摘要:${NC}"
+echo "- 仓库: $(git log -1 --pretty=format:'%h - %s (%cr)')"
+echo "- 分支: $current_branch"
+echo "- 模式: $([ "$FORCE_CHECK" == true ] && echo "强制检查" || echo "普通")"
+echo "- 软件包检查: $([ "$CHECK_PACKAGES" == true ] && echo "已启用" || echo "已禁用")"
 
 if [[ $rebuilt_packages -gt 0 ]]; then
-  echo "- Packages rebuilt: $rebuilt_packages"
+  echo "- 重新构建的软件包: $rebuilt_packages"
 fi
 
 if [[ "$process_files" == true ]]; then
-  echo "- Files processed: $files_processed"
-  echo "- Files updated/conflicted: $files_updated"
-  echo "- New files created: $files_created"
+  echo "- 已处理文件: $files_processed"
+  echo "- 已更新/冲突的文件: $files_updated"
+  echo "- 已创建的新文件: $files_created"
 fi
 
-echo "- Configuration directories: ${MONITOR_DIRS[*]}"
+echo "- 配置目录: ${MONITOR_DIRS[*]}"
 
 # Remind about ignore files and show examples
 if [[ ! -f "$HOME_UPDATE_IGNORE_FILE" && ! -f "$UPDATE_IGNORE_FILE" ]]; then
   echo
-  log_info "Tip: Create ignore files to exclude files from updates:"
-  echo "  - Repository ignore: ${REPO_DIR}/.updateignore"
-  echo "  - User ignore: ~/.updateignore"
+  log_info "提示: 创建忽略文件以在更新中排除某些文件:"
+  echo "  - 仓库忽略: ${REPO_DIR}/.updateignore"
+  echo "  - 用户忽略: ~/.updateignore"
   echo
-  echo "Example patterns:"
-  echo "  *.log                 # Ignore all .log files"
-  echo "  .config/personal/     # Ignore entire directory"
-  echo "  secret-config.conf    # Ignore specific file"
-  echo "  /temp-file            # Ignore from root only"
-  echo "  *secret*              # Ignore files containing 'secret'"
+  echo "示例模式:"
+  echo "  *.log                 # 忽略所有 .log 文件"
+  echo "  .config/personal/     # 忽略整个目录"
+  echo "  secret-config.conf    # 忽略特定文件"
+  echo "  /temp-file            # 仅从根目录忽略"
+  echo "  *secret*              # 忽略包含 'secret' 的文件"
 fi
 
 echo

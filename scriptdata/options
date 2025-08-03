@@ -4,23 +4,21 @@
 # The script that use this file should have two lines on its top as follows:
 # cd "$(dirname "$0")" export base="$(pwd)"
 showhelp(){
-echo -e "Syntax: $0 [Options]...
-
-Idempotent installation script for dotfiles.
-If no option is specified, run default install process.
-
-  -h, --help                Print this help message and exit
-  -f, --force               (Dangerous) Force mode without any confirm
-  -c, --clean               Clean the build cache first
-  -s, --skip-sysupdate      Skip \"sudo pacman -Syu\"
-      --skip-hyprland       Skip installing the config for Hyprland
-      --skip-fish           Skip installing the config for Fish
-      --skip-plasmaintg     Skip installing plasma-browser-integration
-      --skip-miscconf       Skip copying the dirs and files to \".configs\" except for
-                            AGS, Fish and Hyprland
-      --deplistfile <path>  Specify a dependency list file. By default
-                            \"./scriptdata/dependencies.conf\"
-      --fontset <set>       (Unavailable yet) Use a set of pre-defined font and config
+echo -e "用法: $0 [选项]...
+ 
+用于点文件的幂等安装脚本。
+如果未指定任何选项，将运行默认安装过程。
+ 
+  -h, --help                打印此帮助信息并退出
+  -f, --force               (危险) 强制模式，无任何确认
+  -c, --clean               首先清理构建缓存
+  -s, --skip-sysupdate      跳过 \"sudo pacman -Syu\"
+      --skip-hyprland       跳过安装 Hyprland 配置
+      --skip-fish           跳过安装 Fish 配置
+      --skip-plasmaintg     跳过安装 plasma-browser-integration
+      --skip-miscconf       跳过复制目录和文件到 \".configs\" (AGS, Fish 和 Hyprland 除外)
+      --deplistfile <路径>  指定依赖列表文件。默认为 \"./scriptdata/dependencies.conf\"
+      --fontset <集合>      (尚不可用) 使用一组预定义的字体和配置
 "
 }
 
@@ -33,7 +31,7 @@ para=$(getopt \
        -o hfk:cs \
        -l help,force,fontset:,deplistfile:,clean,skip-sysupdate,skip-fish,skip-hyprland,skip-plasmaintg,skip-miscconf \
        -n "$0" -- "$@")
-[ $? != 0 ] && echo "$0: Error when getopt, please recheck parameters." && exit 1
+[ $? != 0 ] && echo "$0: getopt 发生错误，请重新检查参数。" && exit 1
 #####################################################################################
 ## getopt Phase 1
 # ignore parameter's order, execute options below first
@@ -68,18 +66,18 @@ while true ; do
     if [ -f "$2" ];then
       DEPLISTFILE="$2"
     else
-      echo -e "Deplist file \"$2\" does not exist.";exit 1
+      echo -e "依赖列表文件 \"$2\" 不存在。";exit 1
     fi
     shift 2 ;;
 
     --fontset)
     case $2 in
       "default"|"zh-CN"|"vi") fontset="$2";;
-      *) echo -e "Wrong argument for $1.";exit 1;;
-    esac;echo "The fontset is ${fontset}.";shift 2;;
+      *) echo -e "$1 的参数错误。";exit 1;;
+esac;echo "字体集为 ${fontset}。";shift 2;;
 
     ## Ending
     --) break ;;
-    *) echo -e "$0: Wrong parameters.";exit 1;;
+    *) echo -e "$0: 参数错误。";exit 1;;
   esac
 done

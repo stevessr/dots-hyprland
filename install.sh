@@ -8,39 +8,39 @@ source ./scriptdata/options
 
 #####################################################################################
 if ! command -v pacman >/dev/null 2>&1; then
-  printf "\e[31m[$0]: pacman not found, it seems that the system is not ArchLinux or Arch-based distros. Aborting...\e[0m\n"
+  printf "\e[31m[$0]: 未找到 pacman，看来您的系统不是 ArchLinux 或基于 Arch 的发行版。正在中止...\e[0m\n"
   exit 1
 fi
 prevent_sudo_or_root
 
 startask () {
-  printf "\e[34m[$0]: Hi there! Before we start:\n"
+  printf "\e[34m[$0]: 您好！在开始之前：\n"
   printf '\n'
-  printf '[NEW] illogical-impulse is now powered by Quickshell. If you were using the old AGS version and would like to keep it, do not run this script.\n'
-  printf '      The AGS version, although uses less memory, has much worse performance. If you do not need (inconsistent) translations, the Quickshell version is recommended.\n'
-  printf '      If you would like it anyway, run the script in its branch instead: git checkout ii-ags && ./install.sh\n'
+  printf '[新] illogical-impulse 现在由 Quickshell 驱动。如果您之前使用的是旧的 AGS 版本并希望保留它，请不要运行此脚本。\n'
+  printf '      AGS 版本虽然使用较少内存，但性能要差得多。如果您不需要（不一致的）翻译，建议使用 Quickshell 版本。\n'
+  printf '      如果您仍然需要它，请在其分支中运行脚本：git checkout ii-ags && ./install.sh\n'
   printf '\n'
-  printf 'This script 1. only works for ArchLinux and Arch-based distros.\n'
-  printf '            2. does not handle system-level/hardware stuff like Nvidia drivers\n'
+  printf '此脚本 1. 仅适用于 ArchLinux 及基于 Arch 的发行版。\n'
+  printf '        2. 不处理系统级/硬件相关事宜，如 Nvidia 驱动程序。\n'
   printf "\e[31m"
 
-  printf "Would you like to create a backup for \"$XDG_CONFIG_HOME\" and \"$HOME/.local/\" folders?\n[y/N]: "
+  printf "您想为 \"$XDG_CONFIG_HOME\" 和 \"$HOME/.local/\" 文件夹创建备份吗？\n[y/N]: "
   read -p " " backup_confirm
   case $backup_confirm in
     [yY][eE][sS]|[yY])
       backup_configs
       ;;
     *)
-      echo "Skipping backup..."
+      echo "正在跳过备份..."
       ;;
   esac
 
 
   printf '\n'
-  printf 'Do you want to confirm every time before a command executes?\n'
-  printf '  y = Yes, ask me before executing each of them. (DEFAULT)\n'
-  printf '  n = No, just execute them automatically.\n'
-  printf '  a = Abort.\n'
+  printf '您想在执行每条命令前都进行确认吗？\n'
+  printf '  y = 是，在执行每条命令前询问我。(默认)\n'
+  printf '  n = 否，直接自动执行。\n'
+  printf '  a = 中止。\n'
   read -p "====> " p
   case $p in
     n) ask=false ;;
@@ -56,7 +56,7 @@ esac
 
 set -e
 #####################################################################################
-printf "\e[36m[$0]: 1. Get packages and setup user groups/services\n\e[0m"
+printf "\e[36m[$0]: 1. 获取软件包并设置用户组/服务\n\e[0m"
 
 # Issue #363
 case $SKIP_SYSUPDATE in
@@ -70,7 +70,7 @@ readarray -t pkglist < ./cache/dependencies_stripped.conf
 # Use yay. Because paru does not support cleanbuild.
 # Also see https://wiki.hyprland.org/FAQ/#how-do-i-update
 if ! command -v yay >/dev/null 2>&1;then
-  echo -e "\e[33m[$0]: \"yay\" not found.\e[0m"
+  echo -e "\e[33m[$0]: 未找到 \"yay\"。\e[0m"
   showfun install-yay
   v install-yay
 fi
@@ -128,16 +128,16 @@ case $SKIP_PLASMAINTG in
   true) sleep 0;;
   *)
     if $ask;then
-      echo -e "\e[33m[$0]: NOTE: The size of \"plasma-browser-integration\" is about 600 MiB.\e[0m"
-      echo -e "\e[33mIt is needed if you want playtime of media in Firefox to be shown on the music controls widget.\e[0m"
-      echo -e "\e[33mInstall it? [y/N]\e[0m"
+      echo -e "\e[33m[$0]: 注意: \"plasma-browser-integration\" 的大小约为 600 MiB。\e[0m"
+      echo -e "\e[33m如果您希望在音乐控制小部件中显示 Firefox 中媒体的播放时间，则需要此软件包。\e[0m"
+      echo -e "\e[33m要安装吗？[y/N]\e[0m"
       read -p "====> " p
     else
       p=y
     fi
     case $p in
       y) x sudo pacman -S --needed --noconfirm plasma-browser-integration ;;
-      *) echo "Ok, won't install"
+      *) echo "好的，不安装"
     esac
     ;;
 esac
@@ -152,7 +152,7 @@ v kwriteconfig6 --file kdeglobals --group KDE --key widgetStyle Darkly
 
 
 #####################################################################################
-printf "\e[36m[$0]: 2. Copying + Configuring\e[0m\n"
+printf "\e[36m[$0]: 2. 复制与配置\e[0m\n"
 
 # In case some folders does not exists
 v mkdir -p $XDG_BIN_HOME $XDG_CACHE_HOME $XDG_CONFIG_HOME $XDG_DATA_HOME
@@ -167,7 +167,7 @@ case $SKIP_MISCCONF in
   *)
     for i in $(find .config/ -mindepth 1 -maxdepth 1 ! -name 'fish' ! -name 'hypr' -exec basename {} \;); do
 #      i=".config/$i"
-      echo "[$0]: Found target: .config/$i"
+      echo "[$0]: 找到目标: .config/$i"
       if [ -d ".config/$i" ];then v rsync -av --delete ".config/$i/" "$XDG_CONFIG_HOME/$i/"
       elif [ -f ".config/$i" ];then v rsync -av ".config/$i" "$XDG_CONFIG_HOME/$i"
       fi
@@ -189,40 +189,40 @@ case $SKIP_HYPRLAND in
     v rsync -av --delete --exclude '/custom' --exclude '/hyprlock.conf' --exclude '/hypridle.conf' --exclude '/hyprland.conf' .config/hypr/ "$XDG_CONFIG_HOME"/hypr/
     t="$XDG_CONFIG_HOME/hypr/hyprland.conf"
     if [ -f $t ];then
-      echo -e "\e[34m[$0]: \"$t\" already exists.\e[0m"
+      echo -e "\e[34m[$0]: \"$t\" 已存在。\e[0m"
       v mv $t $t.old
       v cp -f .config/hypr/hyprland.conf $t
       existed_hypr_conf_firstrun=y
     else
-      echo -e "\e[33m[$0]: \"$t\" does not exist yet.\e[0m"
+      echo -e "\e[33m[$0]: \"$t\" 尚不存在。\e[0m"
       v cp .config/hypr/hyprland.conf $t
       existed_hypr_conf=n
     fi
     t="$XDG_CONFIG_HOME/hypr/hypridle.conf"
     if [ -f $t ];then
-      echo -e "\e[34m[$0]: \"$t\" already exists.\e[0m"
+      echo -e "\e[34m[$0]: \"$t\" 已存在。\e[0m"
       v cp -f .config/hypr/hypridle.conf $t.new
       existed_hypridle_conf=y
     else
-      echo -e "\e[33m[$0]: \"$t\" does not exist yet.\e[0m"
+      echo -e "\e[33m[$0]: \"$t\" 尚不存在。\e[0m"
       v cp .config/hypr/hypridle.conf $t
       existed_hypridle_conf=n
     fi
     t="$XDG_CONFIG_HOME/hypr/hyprlock.conf"
     if [ -f $t ];then
-      echo -e "\e[34m[$0]: \"$t\" already exists.\e[0m"
+      echo -e "\e[34m[$0]: \"$t\" 已存在。\e[0m"
       v cp -f .config/hypr/hyprlock.conf $t.new
       existed_hyprlock_conf=y
     else
-      echo -e "\e[33m[$0]: \"$t\" does not exist yet.\e[0m"
+      echo -e "\e[33m[$0]: \"$t\" 尚不存在。\e[0m"
       v cp .config/hypr/hyprlock.conf $t
       existed_hyprlock_conf=n
     fi
     t="$XDG_CONFIG_HOME/hypr/custom"
     if [ -d $t ];then
-      echo -e "\e[34m[$0]: \"$t\" already exists, will not do anything.\e[0m"
+      echo -e "\e[34m[$0]: \"$t\" 已存在，不执行任何操作。\e[0m"
     else
-      echo -e "\e[33m[$0]: \"$t\" does not exist yet.\e[0m"
+      echo -e "\e[33m[$0]: \"$t\" 尚不存在。\e[0m"
       v rsync -av --delete .config/hypr/custom/ $t/
     fi
     ;;
@@ -259,38 +259,38 @@ for i in ${warn_files_tests[@]}; do
 done
 
 #####################################################################################
-printf "\e[36m[$0]: Finished. See the \"Import Manually\" folder and grab anything you need.\e[0m\n"
+printf "\e[36m[$0]: 已完成。请查看 “Import Manually” 文件夹并获取您需要的任何内容。\e[0m\n"
 printf "\n"
-printf "\e[36mIt is recommended to check out\n"
-printf "https://end-4.github.io/dots-hyprland-wiki/en/i-i/01setup/#post-installation \n"
-printf "for hints on launching Hyprland.\e[0m\n"
+printf "\e[36m建议您查阅\n"
+printf "https://end-4.github.io/dots-hyprland-wiki/zh-cn/i-i/01setup/#post-installation \n"
+printf "以获取有关启动 Hyprland 的提示。\e[0m\n"
 printf "\n"
-printf "\e[36mIf you are already running Hyprland,\e[0m\n"
-printf "\e[36mPress \e[30m\e[46m Ctrl+Super+T \e[0m\e[36m to select a wallpaper\e[0m\n"
-printf "\e[36mPress \e[30m\e[46m Super+/ \e[0m\e[36m for a list of keybinds\e[0m\n"
+printf "\e[36m如果您已经在运行 Hyprland，\e[0m\n"
+printf "\e[36m按 \e[30m\e[46m Ctrl+Super+T \e[0m\e[36m 选择壁纸\e[0m\n"
+printf "\e[36m按 \e[30m\e[46m Super+/ \e[0m\e[36m 查看快捷键列表\e[0m\n"
 printf "\n"
 
 case $existed_hypr_conf_firstrun in
-  y) printf "\n\e[33m[$0]: Warning: \"$XDG_CONFIG_HOME/hypr/hyprland.conf\" already existed before. As it seems it is your first run, we replaced it with a new one. \e[0m\n"
-     printf "\e[33mAs it seems it is your first run, we replaced it with a new one. The old one has been renamed to \"$XDG_CONFIG_HOME/hypr/hyprland.conf.old\".\e[0m\n"
+  y) printf "\n\e[33m[$0]: 警告: \"$XDG_CONFIG_HOME/hypr/hyprland.conf\" 已存在。由于这似乎是您第一次运行，我们已将其替换为新文件。\e[0m\n"
+     printf "\e[33m旧文件已被重命名为 \"$XDG_CONFIG_HOME/hypr/hyprland.conf.old\"。\e[0m\n"
 ;;esac
 case $existed_hypr_conf in
-  y) printf "\n\e[33m[$0]: Warning: \"$XDG_CONFIG_HOME/hypr/hyprland.conf\" already existed before and we didn't overwrite it. \e[0m\n"
-     printf "\e[33mPlease use \"$XDG_CONFIG_HOME/hypr/hyprland.conf.new\" as a reference for a proper format.\e[0m\n"
+  y) printf "\n\e[33m[$0]: 警告: \"$XDG_CONFIG_HOME/hypr/hyprland.conf\" 已存在，我们没有覆盖它。\e[0m\n"
+     printf "\e[33m请使用 \"$XDG_CONFIG_HOME/hypr/hyprland.conf.new\" 作为正确格式的参考。\e[0m\n"
 ;;esac
 case $existed_hypridle_conf in
-  y) printf "\n\e[33m[$0]: Warning: \"$XDG_CONFIG_HOME/hypr/hypridle.conf\" already existed before and we didn't overwrite it. \e[0m\n"
-     printf "\e[33mPlease use \"$XDG_CONFIG_HOME/hypr/hypridle.conf.new\" as a reference for a proper format.\e[0m\n"
+  y) printf "\n\e[33m[$0]: 警告: \"$XDG_CONFIG_HOME/hypr/hypridle.conf\" 已存在，我们没有覆盖它。\e[0m\n"
+     printf "\e[33m请使用 \"$XDG_CONFIG_HOME/hypr/hypridle.conf.new\" 作为正确格式的参考。\e[0m\n"
 ;;esac
 case $existed_hyprlock_conf in
-  y) printf "\n\e[33m[$0]: Warning: \"$XDG_CONFIG_HOME/hypr/hyprlock.conf\" already existed before and we didn't overwrite it. \e[0m\n"
-     printf "\e[33mPlease use \"$XDG_CONFIG_HOME/hypr/hyprlock.conf.new\" as a reference for a proper format.\e[0m\n"
+  y) printf "\n\e[33m[$0]: 警告: \"$XDG_CONFIG_HOME/hypr/hyprlock.conf\" 已存在，我们没有覆盖它。\e[0m\n"
+     printf "\e[33m请使用 \"$XDG_CONFIG_HOME/hypr/hyprlock.conf.new\" 作为正确格式的参考。\e[0m\n"
 ;;esac
 
 if [[ -z "${ILLOGICAL_IMPULSE_VIRTUAL_ENV}" ]]; then
-  printf "\n\e[31m[$0]: \!! Important \!! : Please ensure environment variable \e[0m \$ILLOGICAL_IMPULSE_VIRTUAL_ENV \e[31m is set to proper value (by default \"~/.local/state/quickshell/.venv\"), or Quickshell config will not work. We have already provided this configuration in ~/.config/hypr/hyprland/env.conf, but you need to ensure it is included in hyprland.conf, and also a restart is needed for applying it.\e[0m\n"
+  printf "\n\e[31m[$0]: \!! 重要 \!! : 请确保环境变量 \e[0m \$ILLOGICAL_IMPULSE_VIRTUAL_ENV \e[31m 设置为正确的值 (默认为 \"~/.local/state/quickshell/.venv\")，否则 Quickshell 配置将无法工作。我们已经在 ~/.config/hypr/hyprland/env.conf 中提供了此配置，但您需要确保它已包含在 hyprland.conf 中，并且需要重新启动才能应用它。\e[0m\n"
 fi
 
 if [[ ! -z "${warn_files[@]}" ]]; then
-  printf "\n\e[31m[$0]: \!! Important \!! : Please delete \e[0m ${warn_files[*]} \e[31m manually as soon as possible, since we\'re now using AUR package or local PKGBUILD to install them for Arch(based) Linux distros, and they'll take precedence over our installation, or at least take up more space.\e[0m\n"
+  printf "\n\e[31m[$0]: \!! 重要 \!! : 请尽快手动删除 \e[0m ${warn_files[*]} \e[31m，因为我们现在使用 AUR 包或本地 PKGBUILD 为 Arch(及衍生) Linux 发行版安装它们，它们将优先于我们的安装，或者至少占用更多空间。\e[0m\n"
 fi
