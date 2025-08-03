@@ -156,7 +156,7 @@ Variants {
                 const lower = Math.floor(bgRoot.firstWorkspaceId / chunkSize) * chunkSize;
                 const upper = Math.ceil(bgRoot.lastWorkspaceId / chunkSize) * chunkSize;
                 const range = upper - lower;
-                return (Config.options.background.parallax.enableWorkspace ? ((bgRoot.monitor.activeWorkspace?.id - lower) / range) : 0.5)
+                return (Config.options.background.parallax.enableWorkspace ? ((bgRoot.monitor?.activeWorkspace??.id ?? 1 - lower) / range) : 0.5)
                     + (0.15 * GlobalStates.sidebarRightOpen * Config.options.background.parallax.enableSidebar)
                     - (0.15 * GlobalStates.sidebarLeftOpen * Config.options.background.parallax.enableSidebar)
             }
@@ -196,10 +196,10 @@ Variants {
             implicitWidth: clockColumn.implicitWidth
             implicitHeight: clockColumn.implicitHeight
 
-            ColumnLayout {
-                id: clockColumn
-                anchors.centerIn: parent
-                spacing: 0
+                ColumnLayout {
+                    id: clockColumn
+                    anchors.centerIn: parent
+                    spacing: 0
 
                 StyledText {
                     Layout.fillWidth: true
