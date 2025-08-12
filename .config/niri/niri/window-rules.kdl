@@ -1,0 +1,125 @@
+// Window rules for niri
+
+window-rule {
+    // Floating windows
+    match app-id="blueberry.py"
+    default-floating true
+}
+
+window-rule {
+    match app-id="guifetch"
+    default-floating true
+}
+
+window-rule {
+    match app-id="pavucontrol"
+    default-floating true
+    default-column-width { fixed 800; }
+}
+
+window-rule {
+    match app-id="org.pulseaudio.pavucontrol"
+    default-floating true
+    default-column-width { fixed 800; }
+}
+
+window-rule {
+    match app-id="nm-connection-editor"
+    default-floating true
+    default-column-width { fixed 800; }
+}
+
+window-rule {
+    match app-id="kde.*"
+    default-floating true
+}
+
+window-rule {
+    match app-id="org.freedesktop.impl.portal.desktop.kde"
+    default-floating true
+}
+
+window-rule {
+    match app-id="Zotero"
+    default-floating true
+    default-column-width { fixed 900; }
+}
+
+window-rule {
+    match title="Welcome"
+    default-floating true
+}
+
+window-rule {
+    match title="illogical-impulse Settings"
+    default-floating true
+}
+
+// Picture-in-Picture
+window-rule {
+    match title=r#".*[Pp]icture[-\s]?[Ii]n[-\s]?[Pp]icture.*"#
+    default-floating true
+    default-column-width { fixed 400; }
+}
+
+// Dolphin copy dialog positioning
+window-rule {
+    match title="Copying — Dolphin"
+    default-floating true
+}
+
+// Invisible/no-focus windows
+window-rule {
+    match app-id="plasma-changeicons"
+    default-floating true
+    open-on-output "hidden"
+}
+
+// Applications that should tile
+window-rule {
+    match app-id="dev.warp.Warp"
+    default-floating false
+}
+
+// Media and video
+window-rule {
+    match app-id="mpv"
+    default-floating true
+}
+
+window-rule {
+    match app-id="vlc"
+    default-floating true
+}
+
+// Development tools
+window-rule {
+    match app-id="code"
+    default-floating false
+}
+
+window-rule {
+    match app-id="firefox"
+    default-floating false
+}
+
+window-rule {
+    match app-id="chromium"
+    default-floating false
+}
+
+// Terminal applications
+window-rule {
+    match app-id="kitty"
+    default-floating false
+}
+
+window-rule {
+    match app-id="foot"
+    default-floating false
+}
+
+window-rule {
+    match app-id="Alacritty"
+    default-floating false
+}

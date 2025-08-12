@@ -1,0 +1,5 @@
+// Custom startup applications
+// Add your custom autostart programs here
+
+// Example:
+// spawn-at-startup "my-custom-app"

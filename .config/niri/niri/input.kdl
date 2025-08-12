@@ -1,0 +1,35 @@
+// Input configuration for niri
+
+input {
+    keyboard {
+        xkb {
+            layout "us"
+        }
+        repeat-delay 250
+        repeat-rate 35
+        numlock-on-startup true
+    }
+    
+    touchpad {
+        natural-scroll true
+        tap-to-click true
+        tap-button-map "left-right-middle"
+        tap-and-drag true
+        tap-and-drag-lock false
+        click-method "clickfinger"
+        disable-while-typing true
+        scroll-factor 0.5
+    }
+
+    mouse {
+        natural-scroll false
+        accel-speed 0.0
+        accel-profile "adaptive"
+    }
+    
+    // Follow mouse to switch focus
+    focus-follows-mouse
+    
+    // Off window axis events
+    off-window-axis-events "focus"
+}

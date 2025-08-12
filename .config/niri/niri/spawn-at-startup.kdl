@@ -1,0 +1,22 @@
+spawn-at-startup "~/.config/niri/niri/scripts/start_geoclue_agent.sh"
+spawn-at-startup "qs" "-c" "ii"
+
+// Input method
+spawn-at-startup "fcitx5"
+
+// Core components (authentication, lock screen, notification daemon)
+spawn-at-startup "/usr/lib/pam_kwallet_init"
+spawn-at-startup "/usr/lib/polkit-kde-authentication-agent-1"
+spawn-at-startup "hypridle" // Note: may need to be replaced with niri-compatible idle daemon
+spawn-at-startup "dbus-update-activation-environment" "--all"
+
+// Audio effects
+spawn-at-startup "easyeffects" "--gapplication-service"
+
+// Clipboard history
+spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
+spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
+spawn-at-startup "wl-clip-persist" "--clipboard" "regular"
+
+// Set cursor theme and update environment
+spawn-at-startup "sh" "-c" "sleep 1 && dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP"

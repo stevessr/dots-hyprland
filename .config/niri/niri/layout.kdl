@@ -1,0 +1,36 @@
+// Layout configuration for niri
+
+layout {
+    gaps 4
+    center-focused-column "never"
+    
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+    
+    default-column-width { proportion 0.5; }
+    
+    focus-ring {
+        enable true
+        width 1
+        active-color "#0DB7D4"
+        inactive-color "#31313600"
+    }
+    
+    border {
+        enable true
+        width 1
+        active-color "#0DB7D4"
+        inactive-color "#31313600"
+    }
+    
+    struts {
+        // Reserved areas for bars/panels
+        left 0
+        right 0
+        top 0
+        bottom 0
+    }
+}
