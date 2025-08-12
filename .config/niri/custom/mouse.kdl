@@ -1,0 +1,9 @@
+// Custom mouse configuration
+// Add your custom mouse-specific settings here
+// Example:
+// input {
+//     mouse {
+//         accel-speed 0.5
+//         accel-profile "adaptive"
+//     }
+// }

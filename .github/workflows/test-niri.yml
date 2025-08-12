@@ -4,249 +4,70 @@ on:
   push:
     paths:
       - '.config/niri/**'
-      - '.github/workflows/test-niri.yml'
   pull_request:
     paths:
       - '.config/niri/**'
-      - '.github/workflows/test-niri.yml'
 
 jobs:
-  test-niri-config:
+  validate-niri-config:
     runs-on: ubuntu-latest
-    name: Validate Niri Configuration
-
+    
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup test environment
-        run: |
-          # Install basic dependencies for testing
-          sudo apt-get update
-          sudo apt-get install -y \
-            curl \
-            wget \
-            git \
-            python3 \
-            python3-pip \
-            kdl-cli || echo "kdl-cli not available in repos"
-          
-          # Install KDL parser for configuration validation
-          pip3 install kdl-py || echo "kdl-py not available via pip"
-
-      - name: Validate KDL syntax
-        run: |
-          echo "Validating Niri KDL configuration files..."
-          
-          # Function to validate KDL files
-          validate_kdl() {
-            local file="$1"
-            echo "Checking $file..."
-            
-            # Basic syntax validation - check for balanced braces
-            if ! python3 -c "
-          import sys
-          content = open('$file').read()
-          
-          # Basic brace matching
-          stack = []
-          for i, char in enumerate(content):
-              if char == '{':
-                  stack.append(i)
-              elif char == '}':
-                  if not stack:
-                      print(f'Unmatched closing brace at position {i}')
-                      sys.exit(1)
-                  stack.pop()
-          
-          if stack:
-              print(f'Unmatched opening brace at position {stack[0]}')
-              sys.exit(1)
-              
-          print('✓ Basic syntax check passed')
-          "; then
-              echo "❌ Syntax error in $file"
-              return 1
-            fi
-          }
-          
-          # Find and validate all KDL files
-          find .config/niri -name "*.kdl" -type f | while read -r file; do
-            validate_kdl "$file" || exit 1
-          done
-
-      - name: Check required files
-        run: |
-          echo "Checking for required Niri configuration files..."
-          
-          required_files=(
-            ".config/niri/config.kdl"
-            ".config/niri/niri/environment.kdl"
-            ".config/niri/niri/input.kdl"
-            ".config/niri/niri/layout.kdl"
-            ".config/niri/niri/xwayland.kdl"
-            ".config/niri/niri/binds.kdl"
-            ".config/niri/niri/system-menus.kdl"
-            ".config/niri/niri/spawn-at-startup.kdl"
-            ".config/niri/niri/window-rules.kdl"
-            ".config/niri/niri/screenshot.kdl"
-            ".config/niri/niri/animations.kdl"
-            ".config/niri/niri/decoration.kdl"
-            ".config/niri/start-niri.sh"
-            ".config/niri/README.md"
-            ".config/niri/INSTALL.md"
-          )
-          
-          missing_files=()
-          for file in "${required_files[@]}"; do
-            if [[ ! -f "$file" ]]; then
-              missing_files+=("$file")
-              echo "❌ Missing: $file"
-            else
-              echo "✓ Found: $file"
-            fi
-          done
-          
-          if [[ ${#missing_files[@]} -gt 0 ]]; then
-            echo "❌ Missing required files: ${missing_files[*]}"
-            exit 1
-          fi
-          
-          echo "✓ All required files present"
-
-      - name: Validate script permissions
-        run: |
-          echo "Checking script file permissions..."
-          
-          scripts=(
-            ".config/niri/start-niri.sh"
-          )
-          
-          for script in "${scripts[@]}"; do
-            if [[ -f "$script" ]]; then
-              if [[ -x "$script" ]]; then
-                echo "✓ $script is executable"
-              else
-                echo "⚠️  $script is not executable (this may be expected in git)"
-              fi
-            fi
-          done
-
-      - name: Check for conflicting configurations
-        run: |
-          echo "Checking for potential configuration conflicts..."
-          
-          # Check if XWayland is properly configured
-          if grep -q "xwayland" .config/niri/config.kdl; then
-            echo "✓ XWayland configuration is included"
-          else
-            echo "❌ XWayland configuration not found in main config"
-            exit 1
-          fi
-          
-          # Check if system menus are included
-          if grep -q "system-menus" .config/niri/config.kdl; then
-            echo "✓ System menus configuration is included"
-          else
-            echo "❌ System menus configuration not found in main config"
-            exit 1
-          fi
-          
-          # Verify keybinding conflicts
-          echo "Checking for potential keybinding conflicts..."
-          if python3 -c "
-          import re
-          from collections import defaultdict
-          
-          # Read all bind files
-          bind_files = [
-              '.config/niri/niri/binds.kdl',
-              '.config/niri/niri/system-menus.kdl'
-          ]
-          
-          bindings = defaultdict(list)
-          for file in bind_files:
-              try:
-                  with open(file, 'r') as f:
-                      content = f.read()
-                      # Simple regex to find key bindings
-                      matches = re.findall(r'(\w+(?:\+\w+)*)\s+{', content)
-                      for match in matches:
-                          if match not in ['binds', 'environment', 'spawn']:
-                              bindings[match].append(file)
-              except FileNotFoundError:
-                  continue
-          
-          conflicts = {k: v for k, v in bindings.items() if len(v) > 1}
-          if conflicts:
-              print('❌ Potential keybinding conflicts found:')
-              for key, files in conflicts.items():
-                  print(f'  {key}: {files}')
-              exit(1)
-          else:
-              print('✓ No obvious keybinding conflicts detected')
-          "; then
-            echo "✓ Keybinding validation passed"
-          else
-            echo "❌ Keybinding validation failed"
-            exit 1
-          fi
-
-      - name: Validate dependencies
-        run: |
-          echo "Checking if common Niri dependencies are documented..."
-          
-          # List of common tools that should be mentioned in documentation
-          tools=(
-            "niri"
-            "fuzzel"
-            "kitty"
-            "wlr-randr"
-            "nwg-displays"
-            "wl-clipboard"
-            "grim"
-            "slurp"
-            "brightnessctl"
-            "wpctl"
-            "hyprpicker"
-            "qs"
-            "quickshell"
-          )
-          
-          readme_content=""
-          if [[ -f ".config/niri/README.md" ]]; then
-            readme_content=$(cat .config/niri/README.md)
-          fi
-          
-          install_content=""
-          if [[ -f ".config/niri/INSTALL.md" ]]; then
-            install_content=$(cat .config/niri/INSTALL.md)
-          fi
-          
-          all_docs="$readme_content $install_content"
-          
-          missing_tools=()
-          for tool in "${tools[@]}"; do
-            if ! echo "$all_docs" | grep -qi "$tool"; then
-              missing_tools+=("$tool")
-            fi
-          done
-          
-          if [[ ${#missing_tools[@]} -gt 0 ]]; then
-            echo "⚠️  Some tools may not be documented: ${missing_tools[*]}"
-            echo "This is not necessarily an error, but consider documenting important dependencies."
-          else
-            echo "✓ Key dependencies appear to be documented"
-          fi
-
-      - name: Test configuration summary
-        run: |
-          echo "=== Niri Configuration Test Summary ==="
-          echo "✓ KDL syntax validation passed"
-          echo "✓ Required files present"
-          echo "✓ XWayland support enabled"
-          echo "✓ System menus configured"
-          echo "✓ No obvious keybinding conflicts"
-          echo "✓ Configuration structure valid"
-          echo ""
-          echo "Niri configuration appears to be valid and ready for use!"
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Install Rust and Cargo
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        
+    - name: Build niri from source
+      run: |
+        git clone https://github.com/YaLTeR/niri /tmp/niri
+        cd /tmp/niri
+        cargo build --release
+        sudo install target/release/niri /usr/local/bin/
+        
+    - name: Validate niri configuration syntax
+      run: |
+        niri validate .config/niri/config.kdl
+        
+    - name: Check for required dependencies
+      run: |
+        echo "Checking for required tools..."
+        # Core dependencies (informational - not all available in CI)
+        command -v fuzzel >/dev/null 2>&1 || echo "fuzzel not found (expected in CI)"
+        command -v grim >/dev/null 2>&1 || echo "grim not found (expected in CI)"
+        command -v slurp >/dev/null 2>&1 || echo "slurp not found (expected in CI)"
+        command -v wl-copy >/dev/null 2>&1 || echo "wl-copy not found (expected in CI)"
+        command -v playerctl >/dev/null 2>&1 || echo "playerctl not found (expected in CI)"
+        echo "Dependency check completed (some tools expected to be missing in CI)"
+        
+    - name: Verify script permissions
+      run: |
+        test -x .config/niri/start-niri.sh
+        test -x .config/niri/niri/scripts/display-config.sh
+        echo "Script permissions verified"
+        
+    - name: Check configuration structure
+      run: |
+        # Verify main config files exist
+        test -f .config/niri/config.kdl
+        test -f .config/niri/niri/env.kdl
+        test -f .config/niri/niri/execs.kdl
+        test -f .config/niri/niri/general.kdl
+        test -f .config/niri/niri/rules.kdl
+        test -f .config/niri/niri/colors.kdl
+        test -f .config/niri/niri/keybinds.kdl
+        
+        # Verify custom config files exist
+        test -f .config/niri/custom/env.kdl
+        test -f .config/niri/custom/execs.kdl
+        test -f .config/niri/custom/general.kdl
+        test -f .config/niri/custom/rules.kdl
+        test -f .config/niri/custom/keybinds.kdl
+        test -f .config/niri/custom/devices.kdl
+        test -f .config/niri/custom/monitors.kdl
+        test -f .config/niri/custom/mouse.kdl
+        
+        echo "Configuration structure verified"

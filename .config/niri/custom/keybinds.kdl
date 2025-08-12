@@ -1,0 +1,6 @@
+// Custom keybinds
+// Add your custom keybinds here
+// Example:
+// binds {
+//     "Mod+Y" { spawn "your-app"; }
+// }

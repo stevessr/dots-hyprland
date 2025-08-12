@@ -1,0 +1,8 @@
+// Custom device-specific configuration
+// Add configuration for specific input devices here
+// Example:
+// input {
+//     device "specific-device-name" {
+//         // device-specific settings
+//     }
+// }

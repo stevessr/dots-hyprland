@@ -1,86 +1,169 @@
-# Niri Installation Guide
+# Installing Niri for illogical-impulse
 
-## Quick Start
+This guide will help you install and set up Niri as an alternative to Hyprland with the illogical-impulse configuration.
 
-1. **Install Niri**:
-   ```bash
-   # Arch Linux
-   yay -S niri-git
-   
-   # Other distributions: See https://github.com/YaLTeR/niri
-   ```
+## Prerequisites
 
-2. **Copy Configuration**:
-   ```bash
-   # If you already have the dots-hyprland repo
-   ln -sf ~/path/to/dots-hyprland/.config/niri ~/.config/niri
-   
-   # Or copy the directory
-   cp -r .config/niri ~/.config/
-   ```
+### 1. Install Niri
 
-3. **Install Dependencies**:
-   
-   **Core Dependencies** (same as Hyprland setup):
-   - quickshell
-   - wf-recorder, slurp, grim
-   - fuzzel, cliphist
-   - kitty, fcitx5
-   - All other dependencies from the main setup
+**Arch Linux:**
+```bash
+# From AUR
+yay -S niri-git
+# or
+paru -S niri-git
+```
 
-   **Additional Dependencies for Niri**:
-   - **Display Management** (install at least one):
-     - `nwg-displays` (recommended graphical tool)
-     - `wdisplays` (alternative graphical tool) 
-     - `kanshi` + `kanshi-gui` (configuration-based display management)
-     - `wlr-randr` (command-line tool, minimal fallback)
-   
-   - **Network & Bluetooth Management**:
-     - `networkmanager` + `plasma-nm` (for network GUI)
-     - `bluez` + `bluez-utils` + `bluedevil` (for Bluetooth)
-     - `systemsettings` (KDE system settings)
-   
-   - **XWayland Support**:
-     - `xwayland` (for X11 application compatibility)
-   
-   **Installation Examples**:
-   ```bash
-   # Arch Linux
-   yay -S niri-git nwg-displays wlr-randr xwayland plasma-nm bluedevil systemsettings
-   
-   # Fedora
-   sudo dnf install niri nwg-displays wlr-randr xwayland NetworkManager-wifi bluedevil systemsettings
-   
-   # Ubuntu/Debian (may need additional repositories for niri)
-   sudo apt install wlr-randr xwayland network-manager-gnome blueman
-   ```
+**Other distributions:**
+```bash
+# Build from source
+git clone https://github.com/YaLTeR/niri
+cd niri
+cargo build --release
+sudo install target/release/niri /usr/local/bin/
+```
 
-4. **Start Niri**:
-   ```bash
-   # From a TTY or existing session
-   ~/.config/niri/start-niri.sh
-   
-   # Or directly
-   niri --config ~/.config/niri/config.kdl
-   ```
+### 2. Required Dependencies
 
-5. **Session Manager Integration**:
-   Add niri to your display manager by creating `/usr/share/wayland-sessions/niri.desktop`:
-   ```ini
-   [Desktop Entry]
-   Name=Niri
-   Comment=A scrollable-tiling Wayland compositor
-   Exec=/home/YOUR_USERNAME/.config/niri/start-niri.sh
-   Type=Application
-   ```
+Install the same dependencies as for Hyprland:
 
-## Customization
+**Core dependencies:**
+```bash
+# Arch Linux example
+sudo pacman -S \
+  wayland wayland-protocols \
+  xwayland \
+  quickshell \
+  fuzzel \
+  grim slurp \
+  wl-clipboard cliphist \
+  brightnessctl \
+  playerctl \
+  fcitx5 \
+  easyeffects \
+  polkit-kde-agent \
+  dbus
 
-Edit files in `.config/niri/custom/` to add your personal settings without modifying the base configuration.
+# AUR packages
+yay -S wl-clip-persist
+```
+
+**Optional display management tools (choose one or more):**
+```bash
+# Graphical display configuration
+yay -S nwg-displays    # Recommended
+# or
+sudo pacman -S wdisplays
+# or  
+yay -S kanshi-gui
+
+# Command-line fallback
+sudo pacman -S wlr-randr
+```
+
+**System management tools:**
+```bash
+# Network management
+sudo pacman -S networkmanager plasma-nm
+
+# Bluetooth management  
+sudo pacman -S bluedevil bluez bluez-utils
+
+# Audio control
+sudo pacman -S pavucontrol-qt
+# or
+sudo pacman -S pavucontrol
+
+# System settings
+sudo pacman -S systemsettings  # KDE
+# or
+sudo pacman -S gnome-control-center  # GNOME
+```
+
+## Installation Steps
+
+### 1. Configuration Files
+
+The niri configuration is already included in this repository at `.config/niri/`.
+
+### 2. Set Permissions
+
+```bash
+chmod +x ~/.config/niri/start-niri.sh
+chmod +x ~/.config/niri/niri/scripts/*.sh
+```
+
+### 3. Login Manager Setup
+
+**For SDDM (recommended):**
+Create `/usr/share/wayland-sessions/niri.desktop`:
+```ini
+[Desktop Entry]
+Name=Niri (illogical-impulse)
+Comment=A scrollable-tiling Wayland compositor
+Exec=/home/YOUR_USERNAME/.config/niri/start-niri.sh
+Type=Application
+```
+
+**For GDM:**
+The same `.desktop` file should work in `/usr/share/wayland-sessions/`.
+
+### 4. Manual Start (for testing)
+
+```bash
+# From a TTY or existing session
+~/.config/niri/start-niri.sh
+```
+
+## Post-Installation
+
+### 1. Test System Menus
+
+Test the system menu shortcuts:
+- **Super+Ctrl+D** - Display configuration
+- **Super+Ctrl+N** - Network settings  
+- **Super+Ctrl+B** - Bluetooth settings
+- **Super+Ctrl+A** - Audio settings
+- **Super+Ctrl+S** - System settings
+
+### 2. Customize
+
+Add your personal customizations to files in `~/.config/niri/custom/`:
+- Monitor configurations in `custom/monitors.kdl`
+- Additional keybinds in `custom/keybinds.kdl`  
+- Startup applications in `custom/execs.kdl`
+- Environment variables in `custom/env.kdl`
+
+### 3. Quickshell Setup
+
+The niri configuration is designed to work with the existing Quickshell setup. Ensure Quickshell is properly configured and working.
 
 ## Troubleshooting
 
-- Check niri logs: `journalctl --user -u niri -f`
-- Ensure all dependencies are installed
-- Verify quickshell is working: `qs -c ii`
-- For keybinding issues, check `.config/niri/niri/binds.kdl`
+### Niri Won't Start
+- Check that niri is properly installed: `which niri`
+- Verify configuration syntax: `niri validate ~/.config/niri/config.kdl`
+- Check logs: `journalctl -u display-manager` or `~/.local/share/niri/niri.log`
+
+### System Menus Not Working
+- Verify required applications are installed (nm-connection-editor, blueberry, etc.)
+- Check if Quickshell is running: `pgrep qs`
+- Test individual commands manually
+
+### Display Configuration Issues
+- Install a display management tool: `yay -S nwg-displays`
+- For multi-monitor setup, edit `~/.config/niri/custom/monitors.kdl`
+
+### XWayland Applications Not Working
+- Ensure XWayland is installed: `sudo pacman -S xwayland`
+- Check XWayland is enabled in the config (it should be by default)
+
+## Switching Between Hyprland and Niri
+
+You can switch between Hyprland and Niri at the login screen. Both configurations coexist and share the same Quickshell setup and system tools.
+
+The configurations are designed to provide the same functionality and user experience, just with different window management paradigms (traditional workspaces vs. scrollable columns).
+
+## Performance Notes
+
+Niri is generally lighter than Hyprland as it doesn't include some advanced visual effects like blur. This can result in better performance on older hardware while maintaining the same functionality.

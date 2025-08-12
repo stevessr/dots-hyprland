@@ -1,0 +1,120 @@
+// ######## Window rules ########
+
+// Floating applications
+window-rule {
+    match app-id=r#"^blueberry\.py$"#
+    default-column-width { proportion 0.5; }
+    open-floating true
+}
+
+window-rule {
+    match app-id=r#"^guifetch$"#  // FlafyDev/guifetch
+    open-floating true
+}
+
+window-rule {
+    match app-id=r#"^pavucontrol$"#
+    default-column-width { proportion 0.45; }
+    open-floating true
+}
+
+window-rule {
+    match app-id=r#"^org\.pulseaudio\.pavucontrol$"#
+    default-column-width { proportion 0.45; }
+    open-floating true
+}
+
+window-rule {
+    match app-id=r#"^nm-connection-editor$"#
+    default-column-width { proportion 0.45; }
+    open-floating true
+}
+
+window-rule {
+    match app-id=r#".*plasmawindowed.*"#
+    open-floating true
+}
+
+window-rule {
+    match app-id=r#"^kcm_.*"#
+    open-floating true
+}
+
+window-rule {
+    match app-id=r#".*bluedevilwizard.*"#
+    open-floating true
+}
+
+window-rule {
+    match title=r#".*Welcome.*"#
+    open-floating true
+}
+
+window-rule {
+    match title=r#"^illogical-impulse Settings$"#
+    open-floating true
+}
+
+window-rule {
+    match app-id=r#"^org\.freedesktop\.impl\.portal\.desktop\.kde$"#
+    open-floating true
+}
+
+window-rule {
+    match app-id=r#"^Zotero$"#
+    default-column-width { proportion 0.45; }
+    open-floating true
+}
+
+// Move certain windows offscreen
+window-rule {
+    match app-id=r#"^plasma-changeicons$"#
+    open-floating true
+    open-maximized false
+}
+
+// Picture-in-Picture
+window-rule {
+    match title=r#"^[Pp]icture[-\s]?[Ii]n[-\s]?[Pp]icture.*$"#
+    open-floating true
+    default-column-width { fixed 400; }
+}
+
+// Dev environments
+window-rule {
+    match app-id=r#"^dev\.warp\.Warp$"#
+    open-floating false
+}
+
+// Special rules for system dialogs
+window-rule {
+    match app-id=r#"^systemsettings$"#
+    default-column-width { proportion 0.6; }
+}
+
+window-rule {
+    match app-id=r#"^gnome-control-center$"#
+    default-column-width { proportion 0.6; }
+}
+
+// Clipboard and emoji picker
+window-rule {
+    match app-id=r#"^fuzzel$"#
+    open-floating true
+}
+
+// Terminal applications
+window-rule {
+    match app-id=r#"^kitty$"#
+    default-column-width { proportion 0.5; }
+}
+
+window-rule {
+    match app-id=r#"^foot$"#
+    default-column-width { proportion 0.5; }
+}
+
+window-rule {
+    match app-id=r#"^Alacritty$"#
+    default-column-width { proportion 0.5; }
+}

@@ -7,9 +7,7 @@ getaudiooutput() {
     pactl list sources | grep 'Name' | grep 'monitor' | cut -d ' ' -f2
 }
 getactivemonitor() {
-    # For niri, we'll use the first available output
-    # TODO: Update this when niri has proper monitor querying
-    echo "$(niri msg outputs | jq -r '.[0].name' 2>/dev/null || echo "HDMI-A-1")"
+    hyprctl monitors -j | jq -r '.[] | select(.focused == true) | .name'
 }
 
 xdgvideo="$(xdg-user-dir VIDEOS)"

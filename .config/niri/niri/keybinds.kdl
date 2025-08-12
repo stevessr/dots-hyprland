@@ -1,0 +1,110 @@
+// 以 `// [hidden]` 结尾的行不会显示在快捷键速查表中
+// Keybinds configuration for niri
+
+binds {
+    // Overview/launcher bindings
+    "Mod+Space" { spawn "qs" "-c" "ii"; } // 启动器
+    "Mod" { spawn "fuzzel"; } // 启动器 (备用)
+    
+    // Brightness and volume controls
+    "XF86MonBrightnessUp" { spawn "sh" "-c" "qs -c ii ipc call brightness increment || brightnessctl s 5%+"; }
+    "XF86MonBrightnessDown" { spawn "sh" "-c" "qs -c ii ipc call brightness decrement || brightnessctl s 5%-"; }
+    "XF86AudioRaiseVolume" { spawn "wpctl" "set-volume" "-l" "1" "@DEFAULT_AUDIO_SINK@" "2%+"; }
+    "XF86AudioLowerVolume" { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "2%-"; }
+    "XF86AudioMute" { spawn "wpctl" "set-mute" "@DEFAULT_SINK@" "toggle"; }
+    "Mod+Shift+M" { spawn "wpctl" "set-mute" "@DEFAULT_SINK@" "toggle"; } // 切换静音
+    "Alt+XF86AudioMute" { spawn "wpctl" "set-mute" "@DEFAULT_SOURCE@" "toggle"; }
+    "XF86AudioMicMute" { spawn "wpctl" "set-mute" "@DEFAULT_SOURCE@" "toggle"; }
+    "Mod+Alt+M" { spawn "wpctl" "set-mute" "@DEFAULT_SOURCE@" "toggle"; } // 切换麦克风
+    
+    // Shell components
+    "Mod+V" { spawn "sh" "-c" "cliphist list | fuzzel --match-mode fzf --dmenu | cliphist decode | wl-copy"; } // 剪贴板历史 >> 剪贴板
+    "Mod+Period" { spawn "~/.config/niri/niri/scripts/fuzzel-emoji.sh" "copy"; } // 表情符号 >> 剪贴板
+    "Mod+A" { spawn "sh" "-c" "qs -c ii ipc call sidebarLeftToggle"; } // 切换左侧边栏
+    "Mod+N" { spawn "sh" "-c" "qs -c ii ipc call sidebarRightToggle"; } // 切换右侧边栏
+    "Mod+Slash" { spawn "sh" "-c" "qs -c ii ipc call cheatsheetToggle"; } // 切换快捷键速查表
+    "Mod+K" { spawn "sh" "-c" "qs -c ii ipc call oskToggle"; } // 切换屏幕键盘
+    "Mod+M" { spawn "sh" "-c" "qs -c ii ipc call mediaControlsToggle"; } // 切换媒体控制器
+    "Ctrl+Alt+Delete" { spawn "sh" "-c" "qs -c ii ipc call sessionToggle"; } // 切换会话菜单
+    "Mod+J" { spawn "sh" "-c" "qs -c ii ipc call barToggle"; } // 切换状态栏
+    
+    // Wallpaper change
+    "Ctrl+Mod+T" { spawn "~/.config/quickshell/ii/scripts/colors/switchwall.sh"; } // 更换壁纸
+    "Ctrl+Mod+R" { spawn "sh" "-c" "killall ags agsv1 gjs ydotool qs quickshell; qs -c ii &"; } // 重启小部件
+    
+    // Screenshots and utilities
+    "Mod+Shift+S" { spawn "sh" "-c" "grim -g \"$(slurp)\" - | wl-copy"; } // 屏幕截图
+    "Mod+Shift+T" { spawn "sh" "-c" "grim -g \"$(slurp)\" tmp.png && tesseract tmp.png - | wl-copy && rm tmp.png"; } // 字符识别
+    "Mod+Shift+C" { spawn "hyprpicker" "-a"; } // 拾取颜色 (十六进制) >> 剪贴板
+    "Print" { spawn "sh" "-c" "grim - | wl-copy"; } // 截图 >> 剪贴板
+    "Ctrl+Print" { spawn "sh" "-c" "mkdir -p $(xdg-user-dir PICTURES)/Screenshots && grim $(xdg-user-dir PICTURES)/Screenshots/Screenshot_\"$(date '+%Y-%m-%d_%H.%M.%S')\".png"; } // 截图 >> 剪贴板和文件
+    
+    // Recording
+    "Mod+Alt+R" { spawn "~/.config/niri/niri/scripts/record.sh"; } // 录制区域 (无声)
+    "Ctrl+Alt+R" { spawn "~/.config/niri/niri/scripts/record.sh" "--fullscreen"; } // 录制屏幕 (无声)
+    "Mod+Shift+Alt+R" { spawn "~/.config/niri/niri/scripts/record.sh" "--fullscreen-sound"; } // 录制屏幕 (有声)
+    
+    // System menu shortcuts
+    "Mod+Ctrl+D" { spawn "~/.config/niri/niri/scripts/display-config.sh"; } // 显示/显示器配置 (图形化)
+    "Mod+Ctrl+N" { spawn "sh" "-c" "nm-connection-editor || plasma-nm"; } // 网络设置菜单
+    "Mod+Ctrl+B" { spawn "sh" "-c" "blueberry || bluedevil-wizard"; } // 蓝牙设置菜单
+    "Mod+Ctrl+A" { spawn "sh" "-c" "pavucontrol-qt || pavucontrol"; } // 音频设置菜单
+    "Mod+Ctrl+S" { spawn "sh" "-c" "XDG_CURRENT_DESKTOP=gnome systemsettings || gnome-control-center"; } // 系统设置
+    "Mod+Ctrl+Q" { spawn "sh" "-c" "qs -c ii ipc call quickSettingsToggle"; } // 快速设置面板
+    
+    // Window focus (niri-specific actions)
+    "Mod+Left" { focus-column-left; }
+    "Mod+Right" { focus-column-right; }
+    "Mod+Up" { focus-window-up; }
+    "Mod+Down" { focus-window-down; }
+    
+    // Window movement (niri-specific actions)
+    "Mod+Shift+Left" { move-column-left; }
+    "Mod+Shift+Right" { move-column-right; }
+    "Mod+Shift+Up" { move-window-up; }
+    "Mod+Shift+Down" { move-window-down; }
+    
+    // Window close
+    "Alt+F4" { close-window; } // 关闭 (Windows 风格)
+    "Mod+Q" { close-window; } // 关闭
+    
+    // Column resizing (niri-specific)
+    "Mod+Minus" { set-column-width "-10%"; }
+    "Mod+Equal" { set-column-width "+10%"; }
+    
+    // Window states
+    "Mod+F" { fullscreen-window; } // 全屏
+    
+    // Workspace scrolling (niri's key feature)
+    "Mod+Page_Down" { focus-workspace-down; }
+    "Mod+Page_Up" { focus-workspace-up; }
+    "Mod+Shift+Page_Down" { move-column-to-workspace-down; }
+    "Mod+Shift+Page_Up" { move-column-to-workspace-up; }
+    
+    // Media controls
+    "Mod+Shift+N" { spawn "playerctl" "next"; } // 下一曲
+    "XF86AudioNext" { spawn "playerctl" "next"; }
+    "XF86AudioPrev" { spawn "playerctl" "previous"; }
+    "Mod+Shift+B" { spawn "playerctl" "previous"; } // 上一曲
+    "Mod+Shift+P" { spawn "playerctl" "play-pause"; } // 播放/暂停媒体
+    "XF86AudioPlay" { spawn "playerctl" "play-pause"; }
+    "XF86AudioPause" { spawn "playerctl" "play-pause"; }
+    
+    // Applications
+    "Mod+Return" { spawn "~/.config/niri/niri/scripts/launch_first_available.sh" "$TERMINAL" "kitty -1" "foot" "alacritty" "wezterm" "konsole" "kgx" "uxterm" "xterm"; } // 终端
+    "Mod+T" { spawn "~/.config/niri/niri/scripts/launch_first_available.sh" "$TERMINAL" "kitty -1" "foot" "alacritty" "wezterm" "konsole" "kgx" "uxterm" "xterm"; } // (终端) (备用)
+    "Ctrl+Alt+T" { spawn "~/.config/niri/niri/scripts/launch_first_available.sh" "$TERMINAL" "kitty -1" "foot" "alacritty" "wezterm" "konsole" "kgx" "uxterm" "xterm"; } // (terminal) (为 Ubuntu 用户准备)
+    "Mod+E" { spawn "~/.config/niri/niri/scripts/launch_first_available.sh" "dolphin" "nautilus" "nemo" "thunar"; } // 文件管理器
+    "Mod+W" { spawn "~/.config/niri/niri/scripts/launch_first_available.sh" "microsoft-edge-stable" "google-chrome-stable" "zen-browser" "firefox" "brave" "chromium" "opera" "librewolf"; } // 浏览器
+    "Mod+C" { spawn "~/.config/niri/niri/scripts/launch_first_available.sh" "code" "codium" "cursor" "zed" "kate" "gnome-text-editor" "emacs"; } // 代码编辑器
+    "Mod+Shift+W" { spawn "~/.config/niri/niri/scripts/launch_first_available.sh" "wps" "onlyoffice-desktopeditors"; } // 办公软件
+    "Mod+X" { spawn "~/.config/niri/niri/scripts/launch_first_available.sh" "kate" "gnome-text-editor" "emacs"; } // 文本编辑器
+    "Ctrl+Mod+V" { spawn "~/.config/niri/niri/scripts/launch_first_available.sh" "pavucontrol-qt" "pavucontrol"; } // 音量混合器
+    "Mod+I" { spawn "sh" "-c" "XDG_CURRENT_DESKTOP=gnome ~/.config/niri/niri/scripts/launch_first_available.sh 'qs -p ~/.config/quickshell/ii/settings.qml' 'systemsettings' 'gnome-control-center' 'better-control'"; } // 设置应用
+    "Ctrl+Shift+Escape" { spawn "~/.config/niri/niri/scripts/launch_first_available.sh" "gnome-system-monitor" "plasma-systemmonitor"; } // 任务管理器
+    
+    // Session
+    "Mod+L" { spawn "loginctl" "lock-session"; } // 锁定
+    "Mod+Shift+L" { spawn "sh" "-c" "sleep 0.1 && systemctl suspend"; } // 睡眠
+    "Ctrl+Shift+Alt+Mod+Delete" { spawn "systemctl" "poweroff"; } // 关机
+}

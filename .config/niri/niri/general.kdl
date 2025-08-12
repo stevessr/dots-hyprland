@@ -1,0 +1,88 @@
+// MONITOR CONFIG
+output "eDP-1" {
+    mode "1920x1080@60"
+    position x=0 y=0
+    scale 1.0
+}
+
+// Input configuration
+input {
+    keyboard {
+        xkb {
+            layout "us"
+        }
+        repeat-delay 250
+        repeat-rate 35
+    }
+    
+    touchpad {
+        natural-scroll true
+        disable-while-typing true
+        click-method "clickfinger" 
+        scroll-factor 0.5
+    }
+    
+    mouse {
+        accel-speed 0.0
+        accel-profile "flat"
+    }
+}
+
+// Layout configuration
+layout {
+    gaps 4
+    center-focused-column "never"
+    
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+    
+    default-column-width { proportion 0.5; }
+    
+    focus-ring {
+        enable true
+        width 1
+        
+        active-color "#0DB7D4"
+        inactive-color "#31313600"
+    }
+    
+    border {
+        enable true
+        width 1
+        
+        active-color "#0DB7D4"
+        inactive-color "#31313600"
+    }
+}
+
+// Window decorations
+prefer-no-csd true
+
+window-rule {
+    geometry-corner-radius 18
+    clip-to-geometry true
+}
+
+// Animations
+animations {
+    enabled true
+    
+    // Slower config for niri's column-based workflow
+    window-open {
+        duration-ms 300
+        curve "ease-out-cubic"
+    }
+    
+    window-close {
+        duration-ms 200
+        curve "ease-in-cubic"
+    }
+    
+    workspace-switch {
+        duration-ms 400
+        curve "ease-out-cubic"
+    }
+}

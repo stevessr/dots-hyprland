@@ -1,32 +1,22 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-# Start niri with the illogical-impulse configuration
-# This script ensures proper environment setup before launching niri
+# Niri startup script for illogical-impulse
 
-# Set the quickshell config variable
-export qsConfig="ii"
+# Set the config directory
+export NIRI_CONFIG_DIR="$HOME/.config/niri"
 
-# Set Wayland-specific environment variables
-export QT_QPA_PLATFORM=wayland
+# Ensure Wayland environment is set up
 export XDG_SESSION_TYPE=wayland
 export XDG_CURRENT_DESKTOP=niri
-export WAYLAND_DISPLAY=wayland-1
+export QT_QPA_PLATFORM=wayland
+export GDK_BACKEND=wayland
 
-# Input method
-export QT_IM_MODULE=fcitx
-export XMODIFIERS=@im=fcitx
-export SDL_IM_MODULE=fcitx
-export GLFW_IM_MODULE=ibus
-export INPUT_METHOD=fcitx
-
-# Terminal
-export TERMINAL="kitty -1"
-
-# Virtual environment for quickshell
-export ILLOGICAL_IMPULSE_VIRTUAL_ENV=~/.local/state/quickshell/.venv
-
-echo "Starting niri with illogical-impulse configuration..."
-echo "Config location: ~/.config/niri/"
-
-# Launch niri
-exec niri --config ~/.config/niri/config.kdl
+# Start niri with our config
+if command -v niri &> /dev/null; then
+    echo "Starting niri with illogical-impulse configuration..."
+    exec niri --config "$NIRI_CONFIG_DIR/config.kdl"
+else
+    echo "Error: niri is not installed"
+    echo "Please install niri first: https://github.com/YaLTeR/niri"
+    exit 1
+fi

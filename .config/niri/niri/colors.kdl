@@ -1,0 +1,21 @@
+// Color configuration matching the Hyprland theme
+
+layout {
+    focus-ring {
+        active-color "#F7DCDE"
+        inactive-color "#A58A8D"
+    }
+    
+    border {
+        active-color "#F7DCDE"
+        inactive-color "#A58A8D"
+    }
+}
+
+// Window rules for special color states
+window-rule {
+    // Special border color for pinned windows
+    // Note: niri doesn't have pin functionality yet, but keeping for future compatibility
+    match app-id=r#".*pinned.*"#
+    border-color "#FFB2BC"
+}
