@@ -1,0 +1,22 @@
+// This file sources other files in `niri` and `custom` folders
+// You wanna add your stuff in files in `custom`
+
+// Defaults
+include "niri/environment.kdl"
+include "niri/input.kdl"
+include "niri/layout.kdl"
+include "niri/spawn-at-startup.kdl"
+include "niri/window-rules.kdl"
+include "niri/binds.kdl"
+include "niri/screenshot.kdl"
+include "niri/animations.kdl"
+include "niri/decoration.kdl"
+
+// Custom overrides
+include "custom/environment.kdl"
+include "custom/input.kdl"
+include "custom/layout.kdl"
+include "custom/spawn-at-startup.kdl"
+include "custom/window-rules.kdl"
+include "custom/binds.kdl"
+include "custom/monitors.kdl"

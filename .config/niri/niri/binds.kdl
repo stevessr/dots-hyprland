@@ -1,0 +1,128 @@
+// Shell - Quickshell integration and launcher
+binds {
+    Mod+Super_L { spawn "qs" "-c" "ii" "ipc" "call" "quickshell:overviewToggleRelease"; }
+    Mod+Super_R { spawn "qs" "-c" "ii" "ipc" "call" "quickshell:overviewToggleRelease"; }
+    
+    // Fallback launcher
+    Mod+R { spawn "fuzzel"; }
+    
+    // Sidebar toggles
+    Mod+A { spawn "qs" "-c" "ii" "ipc" "call" "quickshell:sidebarLeftToggle"; }
+    Mod+N { spawn "qs" "-c" "ii" "ipc" "call" "quickshell:sidebarRightToggle"; }
+    
+    // Utilities
+    Mod+V { spawn "qs" "-c" "ii" "ipc" "call" "quickshell:overviewClipboardToggle"; }
+    Mod+Period { spawn "qs" "-c" "ii" "ipc" "call" "quickshell:overviewEmojiToggle"; }
+    Mod+K { spawn "qs" "-c" "ii" "ipc" "call" "quickshell:oskToggle"; }
+    Mod+M { spawn "qs" "-c" "ii" "ipc" "call" "quickshell:mediaControlsToggle"; }
+    Mod+J { spawn "qs" "-c" "ii" "ipc" "call" "quickshell:barToggle"; }
+    Mod+Slash { spawn "qs" "-c" "ii" "ipc" "call" "quickshell:cheatsheetToggle"; }
+    
+    // Session controls
+    Ctrl+Alt+Delete { spawn "qs" "-c" "ii" "ipc" "call" "quickshell:sessionToggle"; }
+}
+
+// Audio controls
+binds {
+    XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "-l" "1" "@DEFAULT_AUDIO_SINK@" "2%+"; }
+    XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "2%-"; }
+    XF86AudioMute { spawn "wpctl" "set-mute" "@DEFAULT_SINK@" "toggle"; }
+    XF86AudioMicMute { spawn "wpctl" "set-mute" "@DEFAULT_SOURCE@" "toggle"; }
+    Mod+Shift+M { spawn "wpctl" "set-mute" "@DEFAULT_SINK@" "toggle"; }
+    Mod+Alt+M { spawn "wpctl" "set-mute" "@DEFAULT_SOURCE@" "toggle"; }
+}
+
+// Brightness controls
+binds {
+    XF86MonBrightnessUp { spawn "brightnessctl" "s" "5%+"; }
+    XF86MonBrightnessDown { spawn "brightnessctl" "s" "5%-"; }
+}
+
+// Application launching
+binds {
+    Mod+Return { spawn "kitty" "-1"; }
+    Mod+E { spawn "dolphin"; }
+    Mod+W { spawn "firefox"; }
+}
+
+// Window management
+binds {
+    Mod+Q { close-window; }
+    Alt+F4 { close-window; }
+    
+    // Focus movement
+    Mod+Left { focus-column-left; }
+    Mod+Right { focus-column-right; }
+    Mod+Up { focus-window-up; }
+    Mod+Down { focus-window-down; }
+    
+    // Window movement
+    Mod+Shift+Left { move-column-left; }
+    Mod+Shift+Right { move-column-right; }
+    Mod+Shift+Up { move-window-up; }
+    Mod+Shift+Down { move-window-down; }
+    
+    // Window states
+    Mod+F { fullscreen-window; }
+    Mod+D { maximize-column; }
+    
+    // Column sizing
+    Mod+Semicolon { set-column-width "-10%"; }
+    Mod+Apostrophe { set-column-width "+10%"; }
+}
+
+// Workspace management
+binds {
+    // Switch to workspace
+    Mod+1 { focus-workspace 1; }
+    Mod+2 { focus-workspace 2; }
+    Mod+3 { focus-workspace 3; }
+    Mod+4 { focus-workspace 4; }
+    Mod+5 { focus-workspace 5; }
+    Mod+6 { focus-workspace 6; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+    Mod+0 { focus-workspace 10; }
+    
+    // Move window to workspace
+    Mod+Alt+1 { move-window-to-workspace 1; }
+    Mod+Alt+2 { move-window-to-workspace 2; }
+    Mod+Alt+3 { move-window-to-workspace 3; }
+    Mod+Alt+4 { move-window-to-workspace 4; }
+    Mod+Alt+5 { move-window-to-workspace 5; }
+    Mod+Alt+6 { move-window-to-workspace 6; }
+    Mod+Alt+7 { move-window-to-workspace 7; }
+    Mod+Alt+8 { move-window-to-workspace 8; }
+    Mod+Alt+9 { move-window-to-workspace 9; }
+    Mod+Alt+0 { move-window-to-workspace 10; }
+    
+    // Navigate workspaces
+    Mod+Page_Up { focus-workspace-up; }
+    Mod+Page_Down { focus-workspace-down; }
+    Ctrl+Mod+Left { focus-workspace-up; }
+    Ctrl+Mod+Right { focus-workspace-down; }
+}
+
+// Screenshot and utility binds
+binds {
+    Mod+Shift+S { spawn "qs" "-p" "~/.config/quickshell/ii/screenshot.qml"; }
+    Print { spawn "sh" "-c" "grim - | wl-copy"; }
+    Ctrl+Print { spawn "sh" "-c" "mkdir -p $(xdg-user-dir PICTURES)/Screenshots && grim $(xdg-user-dir PICTURES)/Screenshots/Screenshot_\"$(date '+%Y-%m-%d_%H.%M.%S')\".png"; }
+    Mod+Shift+C { spawn "hyprpicker" "-a"; }
+    Mod+Shift+T { spawn "sh" "-c" "grim -g \"$(slurp)\" \"tmp.png\" && tesseract \"tmp.png\" - | wl-copy && rm \"tmp.png\""; }
+    
+    // Recording
+    Mod+Alt+R { spawn "~/.config/niri/niri/scripts/record.sh"; }
+    Ctrl+Alt+R { spawn "~/.config/niri/niri/scripts/record.sh" "--fullscreen"; }
+    Mod+Shift+Alt+R { spawn "~/.config/niri/niri/scripts/record.sh" "--fullscreen-sound"; }
+}
+
+// System and miscellaneous
+binds {
+    Ctrl+Mod+T { spawn "~/.config/quickshell/ii/scripts/colors/switchwall.sh"; }
+    Ctrl+Mod+R { spawn "sh" "-c" "killall qs quickshell; qs -c ii &"; }
+    
+    // Power/session
+    Mod+L { spawn "hyprlock"; }
+}

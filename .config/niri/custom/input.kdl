@@ -1,0 +1,12 @@
+// Custom input configuration
+// Add your custom input settings here
+
+// Example:
+// input {
+//     keyboard {
+//         xkb {
+//             layout "us,de"
+//             options "grp:alt_shift_toggle"
+//         }
+//     }
+// }

@@ -1,0 +1,8 @@
+// Custom window rules
+// Add your custom window rules here
+
+// Example:
+// window-rule {
+//     match app-id="my-app"
+//     default-floating true
+// }

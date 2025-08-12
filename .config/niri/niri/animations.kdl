@@ -1,0 +1,39 @@
+// Animations for niri
+
+animations {
+    slowdown 1.0
+    
+    window-open {
+        duration-ms 300
+        curve "ease-out-expo"
+    }
+    
+    window-close {
+        duration-ms 250
+        curve "ease-in-expo"
+    }
+    
+    window-movement {
+        duration-ms 200
+        curve "ease-out-cubic"
+    }
+    
+    window-resize {
+        duration-ms 200
+        curve "ease-out-cubic"
+    }
+    
+    workspace-switch {
+        duration-ms 400
+        curve "ease-out-cubic"
+    }
+    
+    config-notification-open-close {
+        duration-ms 250
+    }
+    
+    horizontal-view-movement {
+        duration-ms 250
+        curve "ease-out-cubic"
+    }
+}

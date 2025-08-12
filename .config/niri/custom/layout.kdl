@@ -1,0 +1,8 @@
+// Custom layout configuration  
+// Add your custom layout settings here
+
+// Example:
+// layout {
+//     gaps 8
+//     default-column-width { proportion 0.4; }
+// }
