@@ -1,0 +1,20 @@
+// This file sources other files in `niri` and `custom` folders
+// You wanna add your stuff in files in `custom`
+
+// Defaults
+include "./niri/env.kdl"
+include "./niri/execs.kdl"
+include "./niri/general.kdl"
+include "./niri/rules.kdl"
+include "./niri/colors.kdl"
+include "./niri/keybinds.kdl"
+
+// Custom
+include "./custom/env.kdl"
+include "./custom/execs.kdl"
+include "./custom/general.kdl"
+include "./custom/rules.kdl"
+include "./custom/keybinds.kdl"
+include "./custom/devices.kdl"
+include "./custom/monitors.kdl"
+include "./custom/mouse.kdl"
