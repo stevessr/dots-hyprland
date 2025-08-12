@@ -29,13 +29,13 @@ ApplicationWindow {
     onClosing: {
         Quickshell.execDetached([
             "notify-send", 
-            Translation.tr("Welcome app"), 
-            Translation.tr("Enjoy! You can reopen the welcome app any time with <tt>Super+Shift+Alt+/</tt>. To open the settings app, hit <tt>Super+I</tt>"),
+            "欢迎应用",
+            "尽情享用！您可以随时使用 <tt>Super+Shift+Alt+/</tt> 重新打开欢迎应用。要打开���置应用，请按 <tt>Super+I</tt>",
             "-a", "Shell"
         ])
         Qt.quit()
     }
-    title: Translation.tr("illogical-impulse Welcome")
+    title: "illogical-impulse 欢迎"
 
     Component.onCompleted: {
         MaterialThemeLoader.reapplyTheme();
@@ -79,7 +79,7 @@ ApplicationWindow {
                     leftMargin: 12
                 }
                 color: Appearance.colors.colOnLayer0
-                text: Translation.tr("Hi there! First things first...")
+                text: "你好！��做正事..."
                 font.pixelSize: Appearance.font.pixelSize.title
                 font.family: Appearance.font.family.title
             }
@@ -89,7 +89,7 @@ ApplicationWindow {
                 anchors.right: parent.right
                 StyledText {
                     font.pixelSize: Appearance.font.pixelSize.smaller
-                    text: Translation.tr("Show next time")
+                    text: "下次显示"
                 }
                 StyledSwitch {
                     id: showNextTimeSwitch
@@ -132,7 +132,7 @@ ApplicationWindow {
                 anchors.fill: parent
 
                 ContentSection {
-                    title: Translation.tr("Bar")
+                    title: "状态栏"
 
                     ContentSubsection {
                         title: "Corner style"
@@ -145,15 +145,15 @@ ApplicationWindow {
                             }
                             options: [
                                 {
-                                    displayName: Translation.tr("Hug"),
+                                    displayName: "贴合",
                                     value: 0
                                 },
                                 {
-                                    displayName: Translation.tr("Float"),
+                                    displayName: "悬浮",
                                     value: 1
                                 },
                                 {
-                                    displayName: Translation.tr("Plain rectangle"),
+                                    displayName: "直角矩形",
                                     value: 2
                                 }
                             ]
@@ -162,14 +162,14 @@ ApplicationWindow {
 
                     ConfigRow {
                         ConfigSwitch {
-                            text: Translation.tr("Automatically hide")
+                            text: "自动隐藏"
                             checked: Config.options.bar.autoHide.enable
                             onCheckedChanged: {
                                 Config.options.bar.autoHide.enable = checked;
                             }
                         }
                         ConfigSwitch {
-                            text: Translation.tr("Place at the bottom")
+                            text: "置于底部"
                             checked: Config.options.bar.bottom
                             onCheckedChanged: {
                                 Config.options.bar.bottom = checked;
@@ -179,7 +179,7 @@ ApplicationWindow {
                 }
 
                 ContentSection {
-                    title: Translation.tr("Style & wallpaper")
+                    title: "样式和壁纸"
 
                     ButtonGroup {
                         Layout.fillWidth: true
@@ -198,19 +198,19 @@ ApplicationWindow {
                             Layout.alignment: Qt.AlignHCenter
                             buttonRadius: Appearance.rounding.small
                             materialIcon: "wallpaper"
-                            mainText: konachanWallProc.running ? Translation.tr("Be patient...") : Translation.tr("Random: Konachan")
+                            mainText: konachanWallProc.running ? "请耐心等���..." : "随机：Konachan"
                             onClicked: {
                                 console.log(konachanWallProc.command.join(" "));
                                 konachanWallProc.running = true;
                             }
                             StyledToolTip {
-                                content: Translation.tr("Random SFW Anime wallpaper from Konachan\nImage is saved to ~/Pictures/Wallpapers")
+                                content: "来自 Konachan 的随机 SFW 动漫壁纸\n图片保存在 ~/Pictures/Wallpapers"
                             }
                         }
                         RippleButtonWithIcon {
                             materialIcon: "wallpaper"
                             StyledToolTip {
-                                content: Translation.tr("Pick wallpaper image on your system")
+                                content: "从您的系统中选择壁纸图片"
                             }
                             onClicked: {
                                 Quickshell.execDetached([`${Directories.wallpaperSwitchScriptPath}`]);
@@ -220,7 +220,7 @@ ApplicationWindow {
                                     spacing: 10
                                     StyledText {
                                         font.pixelSize: Appearance.font.pixelSize.small
-                                        text: Translation.tr("Choose file")
+                                        text: "选择文件"
                                         color: Appearance.colors.colOnSecondaryContainer
                                     }
                                     RowLayout {
@@ -246,14 +246,14 @@ ApplicationWindow {
 
                     StyledText {
                         Layout.alignment: Qt.AlignHCenter
-                        text: Translation.tr("Change any time later with /dark, /light, /img in the launcher")
+                        text: "稍后可随时在启动器中使用 /dark、/light、/img 进行更改"
                         font.pixelSize: Appearance.font.pixelSize.smaller
                         color: Appearance.colors.colSubtext
                     }
                 }
 
                 ContentSection {
-                    title: Translation.tr("Policies")
+                    title: "策略"
 
                     ConfigRow {
                         Layout.fillWidth: true
@@ -269,15 +269,15 @@ ApplicationWindow {
                                 }
                                 options: [
                                     {
-                                        displayName: Translation.tr("No"),
+                                        displayName: "否",
                                         value: 0
                                     },
                                     {
-                                        displayName: Translation.tr("Yes"),
+                                        displayName: "是",
                                         value: 1
                                     },
                                     {
-                                        displayName: Translation.tr("Closet"),
+                                        displayName: "隐藏",
                                         value: 2
                                     }
                                 ]
@@ -295,15 +295,15 @@ ApplicationWindow {
                                 }
                                 options: [
                                     {
-                                        displayName: Translation.tr("No"),
+                                        displayName: "否",
                                         value: 0
                                     },
                                     {
-                                        displayName: Translation.tr("Yes"),
+                                        displayName: "是",
                                         value: 1
                                     },
                                     {
-                                        displayName: Translation.tr("Local only"),
+                                        displayName: "仅本地",
                                         value: 2
                                     }
                                 ]
@@ -313,7 +313,7 @@ ApplicationWindow {
                 }
 
                 ContentSection {
-                    title: Translation.tr("Info")
+                    title: "信息"
 
                     Flow {
                         Layout.fillWidth: true
@@ -329,7 +329,7 @@ ApplicationWindow {
                                     spacing: 10
                                     StyledText {
                                         font.pixelSize: Appearance.font.pixelSize.small
-                                        text: Translation.tr("Keybinds")
+                                        text: "���捷键"
                                         color: Appearance.colors.colOnSecondaryContainer
                                     }
                                     RowLayout {
@@ -351,14 +351,14 @@ ApplicationWindow {
 
                         RippleButtonWithIcon {
                             materialIcon: "help"
-                            mainText: Translation.tr("Usage")
+                            mainText: "使用方法"
                             onClicked: {
                                 Qt.openUrlExternally("https://end-4.github.io/dots-hyprland-wiki/en/ii-qs/02usage/");
                             }
                         }
                         RippleButtonWithIcon {
                             materialIcon: "construction"
-                            mainText: Translation.tr("Configuration")
+                            mainText: "配置"
                             onClicked: {
                                 Qt.openUrlExternally("https://end-4.github.io/dots-hyprland-wiki/en/ii-qs/03config/");
                             }
@@ -367,7 +367,7 @@ ApplicationWindow {
                 }
 
                 ContentSection {
-                    title: Translation.tr("Useless buttons")
+                    title: "无用���按钮"
 
                     Flow {
                         Layout.fillWidth: true
@@ -375,7 +375,7 @@ ApplicationWindow {
 
                         RippleButtonWithIcon {
                             nerdIcon: "󰊤"
-                            mainText: Translation.tr("GitHub")
+                            mainText: "GitHub"
                             onClicked: {
                                 Qt.openUrlExternally("https://github.com/end-4/dots-hyprland");
                             }

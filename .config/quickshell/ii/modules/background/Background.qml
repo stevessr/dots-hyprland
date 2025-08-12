@@ -289,7 +289,7 @@ Variants {
             Behavior on opacity {
                 animation: Appearance.animation.elementMoveFast.numberAnimation.createObject(this)
             }
-            text: GlobalStates.screenUnlockFailed ? Translation.tr("Incorrect password") : Translation.tr("Enter password")
+            text: GlobalStates.screenUnlockFailed ? "密码错误" : "输入密码"
             color: GlobalStates.screenUnlockFailed ? Appearance.colors.colError : bgRoot.colText
             font {
                 pixelSize: Appearance.font.pixelSize.normal

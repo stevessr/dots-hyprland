@@ -11,7 +11,7 @@ ContentPage {
     forceWidth: true
 
     ContentSection {
-        title: Translation.tr("Distro")
+        title: "发行版"
         
         RowLayout {
             Layout.alignment: Qt.AlignHCenter
@@ -47,21 +47,21 @@ ContentPage {
 
             RippleButtonWithIcon {
                 materialIcon: "auto_stories"
-                mainText: Translation.tr("Documentation")
+                mainText: "文档"
                 onClicked: {
                     Qt.openUrlExternally(SystemInfo.documentationUrl)
                 }
             }
             RippleButtonWithIcon {
                 materialIcon: "support"
-                mainText: Translation.tr("Help & Support")
+                mainText: "帮助和支持"
                 onClicked: {
                     Qt.openUrlExternally(SystemInfo.supportUrl)
                 }
             }
             RippleButtonWithIcon {
                 materialIcon: "bug_report"
-                mainText: Translation.tr("Report a Bug")
+                mainText: "报��错误"
                 onClicked: {
                     Qt.openUrlExternally(SystemInfo.bugReportUrl)
                 }
@@ -69,7 +69,7 @@ ContentPage {
             RippleButtonWithIcon {
                 materialIcon: "policy"
                 materialIconFill: false
-                mainText: Translation.tr("Privacy Policy")
+                mainText: "隐���政策"
                 onClicked: {
                     Qt.openUrlExternally(SystemInfo.privacyPolicyUrl)
                 }
@@ -79,7 +79,7 @@ ContentPage {
 
     }
     ContentSection {
-        title: Translation.tr("Dotfiles")
+        title: "点文件"
 
         RowLayout {
             Layout.alignment: Qt.AlignHCenter
@@ -94,7 +94,7 @@ ContentPage {
                 Layout.alignment: Qt.AlignVCenter
                 // spacing: 10
                 StyledText {
-                    text: Translation.tr("illogical-impulse")
+                    text: "illogical-impulse"
                     font.pixelSize: Appearance.font.pixelSize.title
                 }
                 StyledText {
@@ -115,7 +115,7 @@ ContentPage {
 
             RippleButtonWithIcon {
                 materialIcon: "auto_stories"
-                mainText: Translation.tr("Documentation")
+                mainText: "文档"
                 onClicked: {
                     Qt.openUrlExternally("https://end-4.github.io/dots-hyprland-wiki/en/ii-qs/02usage/")
                 }
@@ -123,21 +123,21 @@ ContentPage {
             RippleButtonWithIcon {
                 materialIcon: "adjust"
                 materialIconFill: false
-                mainText: Translation.tr("Issues")
+                mainText: "问题"
                 onClicked: {
                     Qt.openUrlExternally("https://github.com/end-4/dots-hyprland/issues")
                 }
             }
             RippleButtonWithIcon {
                 materialIcon: "forum"
-                mainText: Translation.tr("Discussions")
+                mainText: "讨论"
                 onClicked: {
                     Qt.openUrlExternally("https://github.com/end-4/dots-hyprland/discussions")
                 }
             }
             RippleButtonWithIcon {
                 materialIcon: "favorite"
-                mainText: Translation.tr("Donate")
+                mainText: "捐赠"
                 onClicked: {
                     Qt.openUrlExternally("https://github.com/sponsors/end-4")
                 }

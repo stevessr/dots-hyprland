@@ -150,7 +150,7 @@ Button {
                         MenuButton {
                             id: openFileLinkButton
                             Layout.fillWidth: true
-                            buttonText: Translation.tr("Open file link")
+                            buttonText: "打开文件链接"
                             onClicked: {
                                 root.showActions = false
                                 Hyprland.dispatch("keyword cursor:no_warps true")
@@ -162,7 +162,7 @@ Button {
                             id: sourceButton
                             visible: root.imageData.source && root.imageData.source.length > 0
                             Layout.fillWidth: true
-                            buttonText: Translation.tr("Go to source (%1)").arg(StringUtils.getDomain(root.imageData.source))
+                            buttonText: "转到来源 (%1)".arg(StringUtils.getDomain(root.imageData.source))
                             enabled: root.imageData.source && root.imageData.source.length > 0
                             onClicked: {
                                 root.showActions = false
@@ -174,11 +174,11 @@ Button {
                         MenuButton {
                             id: downloadButton
                             Layout.fillWidth: true
-                            buttonText: Translation.tr("Download")
+                            buttonText: "下载"
                             onClicked: {
                                 root.showActions = false
                                 Quickshell.execDetached(["bash", "-c", 
-                                    `curl '${root.imageData.file_url}' -o '${root.imageData.is_nsfw ? root.nsfwPath : root.downloadPath}/${root.fileName}' && notify-send '${Translation.tr("Download complete")}' '${root.downloadPath}/${root.fileName}' -a 'Shell'`
+                                    `curl '${root.imageData.file_url}' -o '${root.imageData.is_nsfw ? root.nsfwPath : root.downloadPath}/${root.fileName}' && notify-send '下载完成' '${root.downloadPath}/${root.fileName}' -a 'Shell'`
                                 ])
                             }
                         }

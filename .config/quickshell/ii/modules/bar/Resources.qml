@@ -25,11 +25,11 @@ Item {
             percentage: ResourceUsage.memoryUsedPercentage
 
             tooltipHeaderIcon: "memory"
-            tooltipHeaderText: Translation.tr("Memory usage")
+            tooltipHeaderText: "内存使用情况"
             tooltipData: [
-                { icon: "clock_loader_60", label: Translation.tr("Used:"), value: formatKB(ResourceUsage.memoryUsed) },
-                { icon: "check_circle", label: Translation.tr("Free:"), value: formatKB(ResourceUsage.memoryFree) },
-                { icon: "empty_dashboard", label: Translation.tr("Total:"), value: formatKB(ResourceUsage.memoryTotal) },
+                { icon: "clock_loader_60", label: "已用：", value: formatKB(ResourceUsage.memoryUsed) },
+                { icon: "check_circle", label: "可用：", value: formatKB(ResourceUsage.memoryFree) },
+                { icon: "empty_dashboard", label: "总计：", value: formatKB(ResourceUsage.memoryTotal) },
             ]
         }
 
@@ -42,13 +42,13 @@ Item {
             Layout.leftMargin: shown ? 4 : 0
 
             tooltipHeaderIcon: "swap_horiz"
-            tooltipHeaderText: Translation.tr("Swap usage")
+            tooltipHeaderText: "交换空间使用情况"
             tooltipData: ResourceUsage.swapTotal > 0 ? [
-                { icon: "clock_loader_60", label: Translation.tr("Used:"), value: formatKB(ResourceUsage.swapUsed) },
-                { icon: "check_circle", label: Translation.tr("Free:"), value: formatKB(ResourceUsage.swapFree) },
-                { icon: "empty_dashboard", label: Translation.tr("Total:"), value: formatKB(ResourceUsage.swapTotal) },
+                { icon: "clock_loader_60", label: "已用：", value: formatKB(ResourceUsage.swapUsed) },
+                { icon: "check_circle", label: "可用：", value: formatKB(ResourceUsage.swapFree) },
+                { icon: "empty_dashboard", label: "总计：", value: formatKB(ResourceUsage.swapTotal) },
             ] : [
-                { icon: "swap_horiz", label: Translation.tr("Swap:"), value: Translation.tr("Not configured") }
+                { icon: "swap_horiz", label: "交换：", value: "未配置" }
             ]
         }
 
@@ -61,11 +61,11 @@ Item {
             Layout.leftMargin: shown ? 4 : 0
 
             tooltipHeaderIcon: "settings_slow_motion"
-            tooltipHeaderText: Translation.tr("CPU usage")
+            tooltipHeaderText: "CPU 使用情况"
             tooltipData: [
-                { icon: "bolt", label: Translation.tr("Load:"), value: (ResourceUsage.cpuUsage > 0.8 ?
-                    Translation.tr("High") :
-                    ResourceUsage.cpuUsage > 0.4 ? Translation.tr("Medium") : Translation.tr("Low"))
+                { icon: "bolt", label: "负��：", value: (ResourceUsage.cpuUsage > 0.8 ?
+                    "高" :
+                    ResourceUsage.cpuUsage > 0.4 ? "中" : "低")
                     + ` (${Math.round(ResourceUsage.cpuUsage * 100)}%)`
                 }
             ]

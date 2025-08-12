@@ -10,8 +10,8 @@ Item {
     id: root
     property int currentTab: 0
     property var tabButtonList: [
-        {"name": Translation.tr("Pomodoro"), "icon": "search_activity"},
-        {"name": Translation.tr("Stopwatch"), "icon": "timer"}
+        {"name": "番茄钟", "icon": "search_activity"},
+        {"name": "��表", "icon": "timer"}
     ]
 
     // These are keybinds for stopwatch and pomodoro

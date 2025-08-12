@@ -139,14 +139,14 @@ Scope {
                         font.family: Appearance.font.family.title
                         font.pixelSize: Appearance.font.pixelSize.title
                         font.weight: Font.DemiBold
-                        text: Translation.tr("Session")
+                        text: "会话"
                     }
 
                     StyledText { // Small instruction
                         Layout.alignment: Qt.AlignHCenter
                         horizontalAlignment: Text.AlignHCenter
                         font.pixelSize: Appearance.font.pixelSize.normal
-                        text: Translation.tr("Arrow keys to navigate, Enter to select\nEsc or click anywhere to cancel")
+                        text: "使用方向键导航，回车键选择\nEsc 或单击任意位置取消"
                     }
                 }
 
@@ -159,7 +159,7 @@ Scope {
                         id: sessionLock
                         focus: sessionRoot.visible
                         buttonIcon: "lock"
-                        buttonText: Translation.tr("Lock")
+                        buttonText: "锁定"
                         onClicked:  { Quickshell.execDetached(["loginctl", "lock-session"]); sessionRoot.hide() }
                         onFocusChanged: { if (focus) sessionRoot.subtitle = buttonText }
                         KeyNavigation.right: sessionSleep
@@ -168,7 +168,7 @@ Scope {
                     SessionActionButton {
                         id: sessionSleep
                         buttonIcon: "dark_mode"
-                        buttonText: Translation.tr("Sleep")
+                        buttonText: "睡眠"
                         onClicked:  { Quickshell.execDetached(["bash", "-c", "systemctl suspend || loginctl suspend"]); sessionRoot.hide() }
                         onFocusChanged: { if (focus) sessionRoot.subtitle = buttonText }
                         KeyNavigation.left: sessionLock
@@ -178,7 +178,7 @@ Scope {
                     SessionActionButton {
                         id: sessionLogout
                         buttonIcon: "logout"
-                        buttonText: Translation.tr("Logout")
+                        buttonText: "注销"
                         onClicked: { root.closeAllWindows(); Quickshell.execDetached(["pkill", "Hyprland"]); sessionRoot.hide() }
                         onFocusChanged: { if (focus) sessionRoot.subtitle = buttonText }
                         KeyNavigation.left: sessionSleep
@@ -188,7 +188,7 @@ Scope {
                     SessionActionButton {
                         id: sessionTaskManager
                         buttonIcon: "browse_activity"
-                        buttonText: Translation.tr("Task Manager")
+                        buttonText: "任务管理器"
                         onClicked:  { Quickshell.execDetached(["bash", "-c", `${Config.options.apps.taskManager}`]); sessionRoot.hide() }
                         onFocusChanged: { if (focus) sessionRoot.subtitle = buttonText }
                         KeyNavigation.left: sessionLogout
@@ -198,7 +198,7 @@ Scope {
                     SessionActionButton {
                         id: sessionHibernate
                         buttonIcon: "downloading"
-                        buttonText: Translation.tr("Hibernate")
+                        buttonText: "休眠"
                         onClicked:  { Quickshell.execDetached(["bash", "-c", `systemctl hibernate || loginctl hibernate`]); sessionRoot.hide() }
                         onFocusChanged: { if (focus) sessionRoot.subtitle = buttonText }
                         KeyNavigation.up: sessionLock
@@ -207,7 +207,7 @@ Scope {
                     SessionActionButton {
                         id: sessionShutdown
                         buttonIcon: "power_settings_new"
-                        buttonText: Translation.tr("Shutdown")
+                        buttonText: "关机"
                         onClicked:  { root.closeAllWindows(); Quickshell.execDetached(["bash", "-c", `systemctl poweroff || loginctl poweroff`]); sessionRoot.hide() }
                         onFocusChanged: { if (focus) sessionRoot.subtitle = buttonText }
                         KeyNavigation.left: sessionHibernate
@@ -217,7 +217,7 @@ Scope {
                     SessionActionButton {
                         id: sessionReboot
                         buttonIcon: "restart_alt"
-                        buttonText: Translation.tr("Reboot")
+                        buttonText: "重启"
                         onClicked:  { root.closeAllWindows(); Quickshell.execDetached(["bash", "-c", `reboot || loginctl reboot`]); sessionRoot.hide() }
                         onFocusChanged: { if (focus) sessionRoot.subtitle = buttonText }
                         KeyNavigation.left: sessionShutdown
@@ -227,7 +227,7 @@ Scope {
                     SessionActionButton {
                         id: sessionFirmwareReboot
                         buttonIcon: "settings_applications"
-                        buttonText: Translation.tr("Reboot to firmware settings")
+                        buttonText: "重启到固件设置"
                         onClicked:  { root.closeAllWindows(); Quickshell.execDetached(["bash", "-c", `systemctl reboot --firmware-setup || loginctl reboot --firmware-setup`]); sessionRoot.hide() }
                         onFocusChanged: { if (focus) sessionRoot.subtitle = buttonText }
                         KeyNavigation.up: sessionTaskManager
@@ -253,7 +253,7 @@ Scope {
                     active: root.packageManagerRunning
                     visible: active
                     sourceComponent: DescriptionLabel {
-                        text: Translation.tr("Your package manager is running")
+                        text: "您的包管理器正在运行"
                         textColor: Appearance.m3colors.m3onErrorContainer
                         color: Appearance.m3colors.m3errorContainer
                     }
@@ -262,7 +262,7 @@ Scope {
                     active: root.downloadRunning
                     visible: active
                     sourceComponent: DescriptionLabel {
-                        text: Translation.tr("There might be a download in progress")
+                        text: "可能有下载正在进行中"
                         textColor: Appearance.m3colors.m3onErrorContainer
                         color: Appearance.m3colors.m3errorContainer
                     }

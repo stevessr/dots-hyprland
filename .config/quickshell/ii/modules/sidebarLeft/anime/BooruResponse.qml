@@ -92,7 +92,7 @@ Rectangle {
                     font.pixelSize: Appearance.font.pixelSize.smaller
                     color: Appearance.colors.colOnLayer2
                     // text: `Page ${root.responseData.page}`
-                    text: Translation.tr("Page %1").arg(root.responseData.page)
+                    text: "第 %1 页".arg(root.responseData.page)
                 }
             }
         }

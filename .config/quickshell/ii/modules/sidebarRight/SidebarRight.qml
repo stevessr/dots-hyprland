@@ -109,7 +109,7 @@ Scope {
                             StyledText {
                                 font.pixelSize: Appearance.font.pixelSize.normal
                                 color: Appearance.colors.colOnLayer0
-                                text: Translation.tr("Up %1").arg(DateTime.uptime)
+                                text: "已运行 %1".arg(DateTime.uptime)
                                 textFormat: Text.MarkdownText
                             }
 
@@ -126,7 +126,7 @@ Scope {
                                         Quickshell.reload(true)
                                     }
                                     StyledToolTip {
-                                        content: Translation.tr("Reload Hyprland & Quickshell")
+                                        content: "重新加载 Hyprland 和 Quickshell"
                                     }
                                 }
                                 QuickToggleButton {
@@ -137,7 +137,7 @@ Scope {
                                         Quickshell.execDetached(["qs", "-p", root.settingsQmlPath])
                                     }
                                     StyledToolTip {
-                                        content: Translation.tr("Settings")
+                                        content: "设置"
                                     }
                                 }
                                 QuickToggleButton {
@@ -147,7 +147,7 @@ Scope {
                                         GlobalStates.sessionOpen = true
                                     }
                                     StyledToolTip {
-                                        content: Translation.tr("Session")
+                                        content: "会话"
                                     }
                                 }
                             }

@@ -205,7 +205,7 @@ Item { // Wrapper
                     color: activeFocus ? Appearance.m3colors.m3onSurface : Appearance.m3colors.m3onSurfaceVariant
                     selectedTextColor: Appearance.m3colors.m3onSecondaryContainer
                     selectionColor: Appearance.colors.colSecondaryContainer
-                    placeholderText: Translation.tr("Search, calculate or run")
+                    placeholderText: "搜索、计算或运行"
                     placeholderTextColor: Appearance.m3colors.m3outline
                     implicitWidth: root.searchingText == "" ? Appearance.sizes.searchWidthCollapsed : Appearance.sizes.searchWidth
 
@@ -333,8 +333,8 @@ Item { // Wrapper
                         nonAppResultsTimer.restart();
                         const mathResultObject = {
                             name: root.mathResult,
-                            clickActionName: Translation.tr("Copy"),
-                            type: Translation.tr("Math result"),
+                            clickActionName: "���制",
+                            type: "数学结果",
                             fontType: "monospace",
                             materialSymbol: 'calculate',
                             execute: () => {
@@ -343,8 +343,8 @@ Item { // Wrapper
                         };
                         const commandResultObject = {
                             name: searchingText.replace("file://", ""),
-                            clickActionName: Translation.tr("Run"),
-                            type: Translation.tr("Run command"),
+                            clickActionName: "运行",
+                            type: "运行命令",
                             fontType: "monospace",
                             materialSymbol: 'terminal',
                             execute: () => {
@@ -357,8 +357,8 @@ Item { // Wrapper
                             if (actionString.startsWith(root.searchingText) || root.searchingText.startsWith(actionString)) {
                                 return {
                                     name: root.searchingText.startsWith(actionString) ? root.searchingText : actionString,
-                                    clickActionName: Translation.tr("Run"),
-                                    type: Translation.tr("Action"),
+                                    clickActionName: "运行",
+                                    type: "动作",
                                     materialSymbol: 'settings_suggest',
                                     execute: () => {
                                         action.execute(root.searchingText.split(" ").slice(1).join(" "));
@@ -372,8 +372,8 @@ Item { // Wrapper
 
                         //////////////// Apps //////////////////
                         result = result.concat(AppSearch.fuzzyQuery(root.searchingText).map(entry => {
-                            entry.clickActionName = Translation.tr("Launch");
-                            entry.type = Translation.tr("App");
+                            entry.clickActionName = "启动";
+                            entry.type = "应用";
                             return entry;
                         }));
 
@@ -393,8 +393,8 @@ Item { // Wrapper
                         ///////////////// Web search ////////////////
                         result.push({
                             name: root.searchingText,
-                            clickActionName: Translation.tr("Search"),
-                            type: Translation.tr("Search the web"),
+                            clickActionName: "搜索",
+                            type: "网页搜索",
                             materialSymbol: 'travel_explore',
                             execute: () => {
                                 let url = Config.options.search.engineBaseUrl + root.searchingText;

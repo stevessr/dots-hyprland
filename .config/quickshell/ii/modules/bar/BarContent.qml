@@ -108,7 +108,7 @@ Item { // Bar content region
             ScrollHint {
                 reveal: barLeftSideMouseArea.hovered
                 icon: "light_mode"
-                tooltipText: Translation.tr("Scroll to change brightness")
+                tooltipText: "滚动以更改亮度"
                 side: "left"
                 anchors.left: parent.left
                 anchors.verticalCenter: parent.verticalCenter
@@ -317,7 +317,7 @@ Item { // Bar content region
             ScrollHint {
                 reveal: barRightSideMouseArea.hovered
                 icon: "volume_up"
-                tooltipText: Translation.tr("Scroll to change volume")
+                tooltipText: "滚动以更改音量"
                 side: "right"
                 anchors.right: parent.right
                 anchors.verticalCenter: parent.verticalCenter

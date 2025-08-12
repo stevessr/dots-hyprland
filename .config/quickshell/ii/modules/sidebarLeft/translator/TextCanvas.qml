@@ -75,7 +75,7 @@ Rectangle {
                 visible: root.isInput
                 Layout.leftMargin: 10
                 sourceComponent: Text {
-                    text: Translation.tr("%1 characters").arg(inputLoader.item.text.length)
+                    text: "%1 个字符".arg(inputLoader.item.text.length)
                     color: Appearance.colors.colOnLayer1
                     font.pixelSize: Appearance.font.pixelSize.smaller
                 }

@@ -84,7 +84,7 @@ ColumnLayout {
                         }
                     }
                     StyledToolTip {
-                        content: Translation.tr("Copy code")
+                        content: "复制代码"
                     }
                 }
                 AiMessageControlButton {
@@ -97,8 +97,8 @@ ColumnLayout {
                             `echo '${StringUtils.shellSingleQuoteEscape(segmentContent)}' > '${downloadPath}/code.${segmentLang || "txt"}'`
                         ])
                         Quickshell.execDetached(["notify-send", 
-                            Translation.tr("Code saved to file"), 
-                            Translation.tr("Saved to %1").arg(`${downloadPath}/code.${segmentLang || "txt"}`),
+                            "代码已保存到文件",
+                            "已保存到 %1".arg(`${downloadPath}/code.${segmentLang || "txt"}`),
                             "-a", "Shell"
                         ])
                         saveCodeButton.activated = true
@@ -114,7 +114,7 @@ ColumnLayout {
                         }
                     }
                     StyledToolTip {
-                        content: Translation.tr("Save to Downloads")
+                        content: "保存到下��"
                     }
                 }
             }
@@ -262,7 +262,7 @@ ColumnLayout {
                         ButtonGroup {
                             GroupButton {
                                 contentItem: StyledText {
-                                    text: Translation.tr("Reject")
+                                    text: "拒绝"
                                     font.pixelSize: Appearance.font.pixelSize.small
                                     color: Appearance.colors.colOnLayer2
                                 }
@@ -271,7 +271,7 @@ ColumnLayout {
                             GroupButton {
                                 toggled: true
                                 contentItem: StyledText {
-                                    text: Translation.tr("Approve")
+                                    text: "批准"
                                     font.pixelSize: Appearance.font.pixelSize.small
                                     color: Appearance.colors.colOnPrimary
                                 }

@@ -26,7 +26,7 @@ ContentPage {
     }
 
     ContentSection {
-        title: Translation.tr("Colors & Wallpaper")
+        title: "颜色和壁纸"
 
         // Light/Dark mode preference
         ButtonGroup {
@@ -42,7 +42,7 @@ ContentPage {
 
         // Material palette selection
         ContentSubsection {
-            title: Translation.tr("Material palette")
+            title: "Material 调色板"
             ConfigSelectionArray {
                 currentValue: Config.options.appearance.palette.type
                 configOptionName: "appearance.palette.type"
@@ -51,15 +51,15 @@ ContentPage {
                     Quickshell.execDetached(["bash", "-c", `${Directories.wallpaperSwitchScriptPath} --noswitch`])
                 }
                 options: [
-                    {"value": "auto", "displayName": Translation.tr("Auto")},
-                    {"value": "scheme-content", "displayName": Translation.tr("Content")},
-                    {"value": "scheme-expressive", "displayName": Translation.tr("Expressive")},
-                    {"value": "scheme-fidelity", "displayName": Translation.tr("Fidelity")},
-                    {"value": "scheme-fruit-salad", "displayName": Translation.tr("Fruit Salad")},
-                    {"value": "scheme-monochrome", "displayName": Translation.tr("Monochrome")},
-                    {"value": "scheme-neutral", "displayName": Translation.tr("Neutral")},
-                    {"value": "scheme-rainbow", "displayName": Translation.tr("Rainbow")},
-                    {"value": "scheme-tonal-spot", "displayName": Translation.tr("Tonal Spot")}
+                    {"value": "auto", "displayName": "自动"},
+                    {"value": "scheme-content", "displayName": "内容"},
+                    {"value": "scheme-expressive", "displayName": "富有表现力"},
+                    {"value": "scheme-fidelity", "displayName": "保真"},
+                    {"value": "scheme-fruit-salad", "displayName": "水果沙拉"},
+                    {"value": "scheme-monochrome", "displayName": "单色"},
+                    {"value": "scheme-neutral", "displayName": "中性"},
+                    {"value": "scheme-rainbow", "displayName": "彩虹"},
+                    {"value": "scheme-tonal-spot", "displayName": "色调点"}
                 ]
             }
         }
@@ -67,26 +67,26 @@ ContentPage {
 
         // Wallpaper selection
         ContentSubsection {
-            title: Translation.tr("Wallpaper")
+            title: "壁纸"
             RowLayout {
                 Layout.alignment: Qt.AlignHCenter
                 RippleButtonWithIcon {
                     id: rndWallBtn
                     buttonRadius: Appearance.rounding.small
                     materialIcon: "wallpaper"
-                    mainText: konachanWallProc.running ? Translation.tr("Be patient...") : Translation.tr("Random: Konachan")
+                    mainText: konachanWallProc.running ? "请耐心等待..." : "随机：Konachan"
                     onClicked: {
                         console.log(konachanWallProc.command.join(" "))
                         konachanWallProc.running = true;
                     }
                     StyledToolTip {
-                        content: Translation.tr("Random SFW Anime wallpaper from Konachan\nImage is saved to ~/Pictures/Wallpapers")
+                        content: "来自 Konachan 的随机 SFW 动漫壁纸\n图片保存在 ~/Pictures/Wallpapers"
                     }
                 }
                 RippleButtonWithIcon {
                     materialIcon: "wallpaper"
                     StyledToolTip {
-                        content: Translation.tr("Pick wallpaper image on your system")
+                        content: "从您的系统中选择壁纸图片"
                     }
                     onClicked: {
                         Quickshell.execDetached(`${Directories.wallpaperSwitchScriptPath}`)
@@ -96,7 +96,7 @@ ContentPage {
                             spacing: 10
                             StyledText {
                                 font.pixelSize: Appearance.font.pixelSize.small
-                                text: Translation.tr("Choose file")
+                                text: "选择文件"
                                 color: Appearance.colors.colOnSecondaryContainer
                             }
                             RowLayout {
@@ -124,7 +124,7 @@ ContentPage {
         StyledText {
             Layout.topMargin: 5
             Layout.alignment: Qt.AlignHCenter
-            text: Translation.tr("Alternatively use /dark, /light, /img in the launcher")
+            text: "或者在启动器中使用 /dark、/light、/img"
             font.pixelSize: Appearance.font.pixelSize.smaller
             color: Appearance.colors.colSubtext
         }
@@ -132,27 +132,27 @@ ContentPage {
     }
 
     ContentSection {
-        title: Translation.tr("Decorations & Effects")
+        title: "装饰和效果"
 
         ContentSubsection {
-            title: Translation.tr("Transparency")
+            title: "透明度"
 
             ConfigRow {
                 ConfigSwitch {
-                    text: Translation.tr("Enable")
+                    text: "启用"
                     checked: Config.options.appearance.transparency.enable
                     onCheckedChanged: {
                         Config.options.appearance.transparency.enable = checked;
                     }
                     StyledToolTip {
-                        content: Translation.tr("Might look ass. Unsupported.")
+                        content: "可能看起来很糟糕。不支持。"
                     }
                 }
             }
         }
 
         ContentSubsection {
-            title: Translation.tr("Fake screen rounding")
+            title: "伪屏幕圆角"
 
             ButtonGroup {
                 id: fakeScreenRoundingButtonGroup
@@ -161,7 +161,7 @@ ContentPage {
                 SelectionGroupButton {
                     property int value: 0
                     leftmost: true
-                    buttonText: Translation.tr("No")
+                    buttonText: "否"
                     toggled: (fakeScreenRoundingButtonGroup.selectedPolicy === value)
                     onClicked: {
                         Config.options.appearance.fakeScreenRounding = value;
@@ -169,7 +169,7 @@ ContentPage {
                 }
                 SelectionGroupButton {
                     property int value: 1
-                    buttonText: Translation.tr("Yes")
+                    buttonText: "是"
                     toggled: (fakeScreenRoundingButtonGroup.selectedPolicy === value)
                     onClicked: {
                         Config.options.appearance.fakeScreenRounding = value;
@@ -178,7 +178,7 @@ ContentPage {
                 SelectionGroupButton {
                     property int value: 2
                     rightmost: true
-                    buttonText: Translation.tr("When not fullscreen")
+                    buttonText: "非全屏时"
                     toggled: (fakeScreenRoundingButtonGroup.selectedPolicy === value)
                     onClicked: {
                         Config.options.appearance.fakeScreenRounding = value;
@@ -188,19 +188,19 @@ ContentPage {
         }
 
         ContentSubsection {
-            title: Translation.tr("Shell windows")
+            title: "Shell 窗口"
 
             ConfigRow {
                 uniform: true
                 ConfigSwitch {
-                    text: Translation.tr("Title bar")
+                    text: "标题栏"
                     checked: Config.options.windows.showTitlebar
                     onCheckedChanged: {
                         Config.options.windows.showTitlebar = checked;
                     }
                 }
                 ConfigSwitch {
-                    text: Translation.tr("Center title")
+                    text: "居中标题"
                     checked: Config.options.windows.centerTitle
                     onCheckedChanged: {
                         Config.options.windows.centerTitle = checked;
@@ -210,19 +210,19 @@ ContentPage {
         }
 
         ContentSubsection {
-            title: Translation.tr("Wallpaper parallax")
+            title: "壁纸视差"
 
             ConfigRow {
                 uniform: true
                 ConfigSwitch {
-                    text: Translation.tr("Depends on workspace")
+                    text: "取决于工作区"
                     checked: Config.options.background.parallax.enableWorkspace
                     onCheckedChanged: {
                         Config.options.background.parallax.enableWorkspace = checked;
                     }
                 }
                 ConfigSwitch {
-                    text: Translation.tr("Depends on sidebars")
+                    text: "取决于侧边栏"
                     checked: Config.options.background.parallax.enableSidebar
                     onCheckedChanged: {
                         Config.options.background.parallax.enableSidebar = checked;
@@ -230,7 +230,7 @@ ContentPage {
                 }
             }
             ConfigSpinBox {
-                text: Translation.tr("Preferred wallpaper zoom (%)")
+                text: "首选壁纸缩放 (%)"
                 value: Config.options.background.parallax.workspaceZoom * 100
                 from: 100
                 to: 150

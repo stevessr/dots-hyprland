@@ -24,27 +24,27 @@ ApplicationWindow {
     property bool showNextTime: false
     property var pages: [
         {
-            name: Translation.tr("Style"),
+            name: "样式",
             icon: "palette",
             component: "modules/settings/StyleConfig.qml"
         },
         {
-            name: Translation.tr("Interface"),
+            name: "界面",
             icon: "cards",
             component: "modules/settings/InterfaceConfig.qml"
         },
         {
-            name: Translation.tr("Services"),
+            name: "服务",
             icon: "settings",
             component: "modules/settings/ServicesConfig.qml"
         },
         {
-            name: Translation.tr("Advanced"),
+            name: "高级",
             icon: "construction",
             component: "modules/settings/AdvancedConfig.qml"
         },
         {
-            name: Translation.tr("About"),
+            name: "关于",
             icon: "info",
             component: "modules/settings/About.qml"
         }
@@ -106,7 +106,7 @@ ApplicationWindow {
                     leftMargin: 12
                 }
                 color: Appearance.colors.colOnLayer0
-                text: Translation.tr("Settings")
+                text: "设置"
                 font.pixelSize: Appearance.font.pixelSize.title
                 font.family: Appearance.font.family.title
             }
@@ -158,7 +158,7 @@ ApplicationWindow {
                     FloatingActionButton {
                         id: fab
                         iconText: "edit"
-                        buttonText: Translation.tr("Edit config")
+                        buttonText: "编辑配置"
                         expanded: navRail.expanded
                         onClicked: {
                             Qt.openUrlExternally(`${Directories.config}/illogical-impulse/config.json`);

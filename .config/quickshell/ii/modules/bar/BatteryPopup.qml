@@ -59,7 +59,7 @@ StyledPopup {
                 iconSize: Appearance.font.pixelSize.large
             }
             StyledText {
-                text: Battery.isCharging ? Translation.tr("Time to full:") : Translation.tr("Time to empty:")
+                text: Battery.isCharging ? "充���电所需时间：" : "剩余电��可用时间："
                 color: Appearance.colors.colOnSurfaceVariant
             }
             StyledText {
@@ -105,11 +105,11 @@ StyledPopup {
             StyledText {
                 text: {
                     if (Battery.chargeState == 4) {
-                        return Translation.tr("Fully charged");
+                        return "已充满";
                     } else if (Battery.chargeState == 1) {
-                        return Translation.tr("Charging:");
+                        return "正在充电：";
                     } else {
-                        return Translation.tr("Discharging:");
+                        return "正在���电：";
                     }
                 }
                 color: Appearance.colors.colOnSurfaceVariant

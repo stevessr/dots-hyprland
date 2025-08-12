@@ -11,22 +11,22 @@ ContentPage {
     forceWidth: true
 
     ContentSection {
-        title: Translation.tr("Audio")
+        title: "音频"
 
         ConfigSwitch {
-            text: Translation.tr("Earbang protection")
+            text: "听力保护"
             checked: Config.options.audio.protection.enable
             onCheckedChanged: {
                 Config.options.audio.protection.enable = checked;
             }
             StyledToolTip {
-                content: Translation.tr("Prevents abrupt increments and restricts volume limit")
+                content: "防止音量突增并限制音量上限"
             }
         }
         ConfigRow {
             // uniform: true
             ConfigSpinBox {
-                text: Translation.tr("Max allowed increase")
+                text: "最大允许增量"
                 value: Config.options.audio.protection.maxAllowedIncrease
                 from: 0
                 to: 100
@@ -36,7 +36,7 @@ ContentPage {
                 }
             }
             ConfigSpinBox {
-                text: Translation.tr("Volume limit")
+                text: "音量限制"
                 value: Config.options.audio.protection.maxAllowed
                 from: 0
                 to: 100
@@ -48,10 +48,10 @@ ContentPage {
         }
     }
     ContentSection {
-        title: Translation.tr("AI")
+        title: "人工智能"
         MaterialTextField {
             Layout.fillWidth: true
-            placeholderText: Translation.tr("System prompt")
+            placeholderText: "系统提示"
             text: Config.options.ai.systemPrompt
             wrapMode: TextEdit.Wrap
             onTextChanged: {
@@ -63,12 +63,12 @@ ContentPage {
     }
 
     ContentSection {
-        title: Translation.tr("Battery")
+        title: "电池"
 
         ConfigRow {
             uniform: true
             ConfigSpinBox {
-                text: Translation.tr("Low warning")
+                text: "低电量警告"
                 value: Config.options.battery.low
                 from: 0
                 to: 100
@@ -78,7 +78,7 @@ ContentPage {
                 }
             }
             ConfigSpinBox {
-                text: Translation.tr("Critical warning")
+                text: "严重低电量警告"
                 value: Config.options.battery.critical
                 from: 0
                 to: 100
@@ -91,17 +91,17 @@ ContentPage {
         ConfigRow {
             uniform: true
             ConfigSwitch {
-                text: Translation.tr("Automatic suspend")
+                text: "自动挂起"
                 checked: Config.options.battery.automaticSuspend
                 onCheckedChanged: {
                     Config.options.battery.automaticSuspend = checked;
                 }
                 StyledToolTip {
-                    content: Translation.tr("Automatically suspends the system when battery is low")
+                    content: "电池电量低时自动挂起系统"
                 }
             }
             ConfigSpinBox {
-                text: Translation.tr("Suspend at")
+                text: "挂起电量"
                 value: Config.options.battery.suspend
                 from: 0
                 to: 100
@@ -114,10 +114,10 @@ ContentPage {
     }
 
     ContentSection {
-        title: Translation.tr("Networking")
+        title: "网络"
         MaterialTextField {
             Layout.fillWidth: true
-            placeholderText: Translation.tr("User agent (for services that require it)")
+            placeholderText: "用户代理（需要时使用）"
             text: Config.options.networking.userAgent
             wrapMode: TextEdit.Wrap
             onTextChanged: {
@@ -127,9 +127,9 @@ ContentPage {
     }
 
     ContentSection {
-        title: Translation.tr("Resources")
+        title: "资源"
         ConfigSpinBox {
-            text: Translation.tr("Polling interval (ms)")
+            text: "轮询间隔 (ms)"
             value: Config.options.resources.updateInterval
             from: 100
             to: 10000
@@ -141,27 +141,27 @@ ContentPage {
     }
 
     ContentSection {
-        title: Translation.tr("Search")
+        title: "搜索"
 
         ConfigSwitch {
-            text: Translation.tr("Use Levenshtein distance-based algorithm instead of fuzzy")
+            text: "使用基于莱文斯坦距离的算法而非模糊搜索"
             checked: Config.options.search.sloppy
             onCheckedChanged: {
                 Config.options.search.sloppy = checked;
             }
             StyledToolTip {
-                content: Translation.tr("Could be better if you make a ton of typos,\nbut results can be weird and might not work with acronyms\n(e.g. \"GIMP\" might not give you the paint program)")
+                content: "如果你有很多拼写错误，效果可能会更好，\n但结果可能会很奇怪，并且可能不适用于首字母缩略词\n（例如，“GIMP” 可能不会给你 GIMP）"
             }
         }
 
         ContentSubsection {
-            title: Translation.tr("Prefixes")
+            title: "前缀"
             ConfigRow {
                 uniform: true
 
                 MaterialTextField {
                     Layout.fillWidth: true
-                    placeholderText: Translation.tr("Action")
+                    placeholderText: "动作"
                     text: Config.options.search.prefix.action
                     wrapMode: TextEdit.Wrap
                     onTextChanged: {
@@ -170,7 +170,7 @@ ContentPage {
                 }
                 MaterialTextField {
                     Layout.fillWidth: true
-                    placeholderText: Translation.tr("Clipboard")
+                    placeholderText: "剪贴板"
                     text: Config.options.search.prefix.clipboard
                     wrapMode: TextEdit.Wrap
                     onTextChanged: {
@@ -179,7 +179,7 @@ ContentPage {
                 }
                 MaterialTextField {
                     Layout.fillWidth: true
-                    placeholderText: Translation.tr("Emojis")
+                    placeholderText: "表情符号"
                     text: Config.options.search.prefix.emojis
                     wrapMode: TextEdit.Wrap
                     onTextChanged: {
@@ -189,10 +189,10 @@ ContentPage {
             }
         }
         ContentSubsection {
-            title: Translation.tr("Web search")
+            title: "网页搜索"
             MaterialTextField {
                 Layout.fillWidth: true
-                placeholderText: Translation.tr("Base URL")
+                placeholderText: "基本 URL"
                 text: Config.options.search.engineBaseUrl
                 wrapMode: TextEdit.Wrap
                 onTextChanged: {
@@ -203,10 +203,10 @@ ContentPage {
     }
 
     ContentSection {
-        title: Translation.tr("Time")
+        title: "时间"
 
         ContentSubsection {
-            title: Translation.tr("Format")
+            title: "格式"
             tooltip: ""
 
             ConfigSelectionArray {
@@ -224,15 +224,15 @@ ContentPage {
                 }
                 options: [
                     {
-                        displayName: Translation.tr("24h"),
+                        displayName: "24小时",
                         value: "hh:mm"
                     },
                     {
-                        displayName: Translation.tr("12h am/pm"),
+                        displayName: "12小时 am/pm",
                         value: "h:mm ap"
                     },
                     {
-                        displayName: Translation.tr("12h AM/PM"),
+                        displayName: "12小时 AM/PM",
                         value: "h:mm AP"
                     },
                 ]

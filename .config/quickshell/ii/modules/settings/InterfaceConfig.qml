@@ -8,13 +8,13 @@ import qs.modules.common.widgets
 ContentPage {
     forceWidth: true
     ContentSection {
-        title: Translation.tr("Policies")
+        title: "策略"
 
         ConfigRow {
             ColumnLayout {
                 // Weeb policy
                 ContentSubsectionLabel {
-                    text: Translation.tr("Weeb")
+                    text: "动漫"
                 }
                 ConfigSelectionArray {
                     currentValue: Config.options.policies.weeb
@@ -24,15 +24,15 @@ ContentPage {
                     }
                     options: [
                         {
-                            displayName: Translation.tr("No"),
+                            displayName: "否",
                             value: 0
                         },
                         {
-                            displayName: Translation.tr("Yes"),
+                            displayName: "是",
                             value: 1
                         },
                         {
-                            displayName: Translation.tr("Closet"),
+                            displayName: "隐藏",
                             value: 2
                         }
                     ]
@@ -42,7 +42,7 @@ ContentPage {
             ColumnLayout {
                 // AI policy
                 ContentSubsectionLabel {
-                    text: Translation.tr("AI")
+                    text: "人工智能"
                 }
                 ConfigSelectionArray {
                     currentValue: Config.options.policies.ai
@@ -52,15 +52,15 @@ ContentPage {
                     }
                     options: [
                         {
-                            displayName: Translation.tr("No"),
+                            displayName: "否",
                             value: 0
                         },
                         {
-                            displayName: Translation.tr("Yes"),
+                            displayName: "是",
                             value: 1
                         },
                         {
-                            displayName: Translation.tr("Local only"),
+                            displayName: "仅本���",
                             value: 2
                         }
                     ]
@@ -70,7 +70,7 @@ ContentPage {
     }
 
     ContentSection {
-        title: Translation.tr("Bar")
+        title: "状态栏"
 
         ConfigSelectionArray {
             currentValue: Config.options.bar.cornerStyle
@@ -80,33 +80,33 @@ ContentPage {
             }
             options: [
                 {
-                    displayName: Translation.tr("Hug"),
+                    displayName: "贴合",
                     value: 0
                 },
                 {
-                    displayName: Translation.tr("Float"),
+                    displayName: "悬浮",
                     value: 1
                 },
                 {
-                    displayName: Translation.tr("Plain rectangle"),
+                    displayName: "直角矩形",
                     value: 2
                 }
             ]
         }
 
         ContentSubsection {
-            title: Translation.tr("Overall appearance")
+            title: "整体外观"
             ConfigRow {
                 uniform: true
                 ConfigSwitch {
-                    text: Translation.tr("Automatically hide")
+                    text: "自动隐藏"
                     checked: Config.options.bar.autoHide.enable
                     onCheckedChanged: {
                         Config.options.bar.autoHide.enable = checked;
                     }
                 }
                 ConfigSwitch {
-                    text: Translation.tr("Place at the bottom")
+                    text: "��于底部"
                     checked: Config.options.bar.bottom
                     onCheckedChanged: {
                         Config.options.bar.bottom = checked;
@@ -116,38 +116,38 @@ ContentPage {
             ConfigRow {
                 uniform: true
                 ConfigSwitch {
-                    text: Translation.tr('Borderless')
+                    text: '无边���'
                     checked: Config.options.bar.borderless
                     onCheckedChanged: {
                         Config.options.bar.borderless = checked;
                     }
                 }
                 ConfigSwitch {
-                    text: Translation.tr('Show background')
+                    text: '显示背景'
                     checked: Config.options.bar.showBackground
                     onCheckedChanged: {
                         Config.options.bar.showBackground = checked;
                     }
                     StyledToolTip {
-                        content: Translation.tr("Note: turning off can hurt readability")
+                        content: "注意：关闭可能会影响可读性"
                     }
                 }
             }
         }
 
         ContentSubsection {
-            title: Translation.tr("Buttons")
+            title: "按钮"
             ConfigRow {
                 uniform: true
                 ConfigSwitch {
-                    text: Translation.tr("Screen snip")
+                    text: "截屏"
                     checked: Config.options.bar.utilButtons.showScreenSnip
                     onCheckedChanged: {
                         Config.options.bar.utilButtons.showScreenSnip = checked;
                     }
                 }
                 ConfigSwitch {
-                    text: Translation.tr("Color picker")
+                    text: "颜色选择器"
                     checked: Config.options.bar.utilButtons.showColorPicker
                     onCheckedChanged: {
                         Config.options.bar.utilButtons.showColorPicker = checked;
@@ -157,14 +157,14 @@ ContentPage {
             ConfigRow {
                 uniform: true
                 ConfigSwitch {
-                    text: Translation.tr("Mic toggle")
+                    text: "麦克风切换"
                     checked: Config.options.bar.utilButtons.showMicToggle
                     onCheckedChanged: {
                         Config.options.bar.utilButtons.showMicToggle = checked;
                     }
                 }
                 ConfigSwitch {
-                    text: Translation.tr("Keyboard toggle")
+                    text: "键盘切换"
                     checked: Config.options.bar.utilButtons.showKeyboardToggle
                     onCheckedChanged: {
                         Config.options.bar.utilButtons.showKeyboardToggle = checked;
@@ -174,14 +174,14 @@ ContentPage {
             ConfigRow {
                 uniform: true
                 ConfigSwitch {
-                    text: Translation.tr("Dark/Light toggle")
+                    text: "深色/浅色切换"
                     checked: Config.options.bar.utilButtons.showDarkModeToggle
                     onCheckedChanged: {
                         Config.options.bar.utilButtons.showDarkModeToggle = checked;
                     }
                 }
                 ConfigSwitch {
-                    text: Translation.tr("Performance Profile toggle")
+                    text: "性���配置文件切换"
                     checked: Config.options.bar.utilButtons.showPerformanceProfileToggle
                     onCheckedChanged: {
                         Config.options.bar.utilButtons.showPerformanceProfileToggle = checked;
@@ -191,20 +191,20 @@ ContentPage {
         }
 
         ContentSubsection {
-            title: Translation.tr("Workspaces")
-            tooltip: Translation.tr("Tip: Hide icons and always show numbers for\nthe classic illogical-impulse experience")
+            title: "工作区"
+            tooltip: "提示：隐藏图标并始终显示数字以获得\n经典的 illogical-impulse 体验"
 
             ConfigRow {
                 uniform: true
                 ConfigSwitch {
-                    text: Translation.tr('Show app icons')
+                    text: '显示应用图标'
                     checked: Config.options.bar.workspaces.showAppIcons
                     onCheckedChanged: {
                         Config.options.bar.workspaces.showAppIcons = checked;
                     }
                 }
                 ConfigSwitch {
-                    text: Translation.tr('Tint app icons')
+                    text: '着色应用图标'
                     checked: Config.options.bar.workspaces.monochromeIcons
                     onCheckedChanged: {
                         Config.options.bar.workspaces.monochromeIcons = checked;
@@ -212,14 +212,14 @@ ContentPage {
                 }
             }
             ConfigSwitch {
-                text: Translation.tr('Always show numbers')
+                text: '始终显示数字'
                 checked: Config.options.bar.workspaces.alwaysShowNumbers
                 onCheckedChanged: {
                     Config.options.bar.workspaces.alwaysShowNumbers = checked;
                 }
             }
             ConfigSpinBox {
-                text: Translation.tr("Workspaces shown")
+                text: "显示的工作区"
                 value: Config.options.bar.workspaces.shown
                 from: 1
                 to: 30
@@ -229,7 +229,7 @@ ContentPage {
                 }
             }
             ConfigSpinBox {
-                text: Translation.tr("Number show delay when pressing Super (ms)")
+                text: "按下 Super 键时数字显示延迟 (ms)"
                 value: Config.options.bar.workspaces.showNumberDelay
                 from: 0
                 to: 1000
@@ -241,10 +241,10 @@ ContentPage {
         }
 
         ContentSubsection {
-            title: Translation.tr("Tray")
+            title: "托盘"
             
             ConfigSwitch {
-                text: Translation.tr('Tint icons')
+                text: '着色图标'
                 checked: Config.options.bar.tray.monochromeIcons
                 onCheckedChanged: {
                     Config.options.bar.tray.monochromeIcons = checked;
@@ -253,9 +253,9 @@ ContentPage {
         }
 
         ContentSubsection {
-            title: Translation.tr("Weather")
+            title: "天气"
             ConfigSwitch {
-                text: Translation.tr("Enable")
+                text: "启用"
                 checked: Config.options.bar.weather.enable
                 onCheckedChanged: {
                     Config.options.bar.weather.enable = checked;
@@ -265,12 +265,12 @@ ContentPage {
     }
 
     ContentSection {
-        title: Translation.tr("Battery")
+        title: "电池"
 
         ConfigRow {
             uniform: true
             ConfigSpinBox {
-                text: Translation.tr("Low warning")
+                text: "低电量警告"
                 value: Config.options.battery.low
                 from: 0
                 to: 100
@@ -280,7 +280,7 @@ ContentPage {
                 }
             }
             ConfigSpinBox {
-                text: Translation.tr("Critical warning")
+                text: "严重低电量警告"
                 value: Config.options.battery.critical
                 from: 0
                 to: 100
@@ -293,17 +293,17 @@ ContentPage {
         ConfigRow {
             uniform: true
             ConfigSwitch {
-                text: Translation.tr("Automatic suspend")
+                text: "自动挂起"
                 checked: Config.options.battery.automaticSuspend
                 onCheckedChanged: {
                     Config.options.battery.automaticSuspend = checked;
                 }
                 StyledToolTip {
-                    content: Translation.tr("Automatically suspends the system when battery is low")
+                    content: "电池电量低时自动挂起系统"
                 }
             }
             ConfigSpinBox {
-                text: Translation.tr("Suspend at")
+                text: "挂起电量"
                 value: Config.options.battery.suspend
                 from: 0
                 to: 100
@@ -316,10 +316,10 @@ ContentPage {
     }
 
     ContentSection {
-        title: Translation.tr("Dock")
+        title: "Dock"
 
         ConfigSwitch {
-            text: Translation.tr("Enable")
+            text: "启用"
             checked: Config.options.dock.enable
             onCheckedChanged: {
                 Config.options.dock.enable = checked;
@@ -329,14 +329,14 @@ ContentPage {
         ConfigRow {
             uniform: true
             ConfigSwitch {
-                text: Translation.tr("Hover to reveal")
+                text: "悬停显示"
                 checked: Config.options.dock.hoverToReveal
                 onCheckedChanged: {
                     Config.options.dock.hoverToReveal = checked;
                 }
             }
             ConfigSwitch {
-                text: Translation.tr("Pinned on startup")
+                text: "启动��固定"
                 checked: Config.options.dock.pinnedOnStartup
                 onCheckedChanged: {
                     Config.options.dock.pinnedOnStartup = checked;
@@ -344,7 +344,7 @@ ContentPage {
             }
         }
         ConfigSwitch {
-            text: Translation.tr("Tint app icons")
+            text: "着色应用图标"
             checked: Config.options.dock.monochromeIcons
             onCheckedChanged: {
                 Config.options.dock.monochromeIcons = checked;
@@ -353,23 +353,23 @@ ContentPage {
     }
 
     ContentSection {
-        title: Translation.tr("Sidebars")
+        title: "侧边��"
         ConfigSwitch {
-            text: Translation.tr('Keep right sidebar loaded')
+            text: '保持右侧边栏加载'
             checked: Config.options.sidebar.keepRightSidebarLoaded
             onCheckedChanged: {
                 Config.options.sidebar.keepRightSidebarLoaded = checked;
             }
             StyledToolTip {
-                content: Translation.tr("When enabled keeps the content of the right sidebar loaded to reduce the delay when opening,\nat the cost of around 15MB of consistent RAM usage. Delay significance depends on your system's performance.\nUsing a custom kernel like linux-cachyos might help")
+                content: "启用后，右侧边栏的���容将保持加载状态，以减少打开时的延迟，\n代价是���约 15MB 的持续 RAM 使用量。延迟的重要性取决于您的系统性能。\n使用像 linux-cachyos 这样的自定义内核可能会有所帮助"
             }
         }
     }
 
     ContentSection {
-        title: Translation.tr("On-screen display")
+        title: "屏幕显示"
         ConfigSpinBox {
-            text: Translation.tr("Timeout (ms)")
+            text: "超时 (ms)"
             value: Config.options.osd.timeout
             from: 100
             to: 3000
@@ -381,16 +381,16 @@ ContentPage {
     }
 
     ContentSection {
-        title: Translation.tr("Overview")
+        title: "概览"
         ConfigSwitch {
-            text: Translation.tr("Enable")
+            text: "启用"
             checked: Config.options.overview.enable
             onCheckedChanged: {
                 Config.options.overview.enable = checked;
             }
         }
         ConfigSpinBox {
-            text: Translation.tr("Scale (%)")
+            text: "缩放 (%)"
             value: Config.options.overview.scale * 100
             from: 1
             to: 100
@@ -402,7 +402,7 @@ ContentPage {
         ConfigRow {
             uniform: true
             ConfigSpinBox {
-                text: Translation.tr("Rows")
+                text: "行"
                 value: Config.options.overview.rows
                 from: 1
                 to: 20
@@ -412,7 +412,7 @@ ContentPage {
                 }
             }
             ConfigSpinBox {
-                text: Translation.tr("Columns")
+                text: "列"
                 value: Config.options.overview.columns
                 from: 1
                 to: 20
@@ -425,16 +425,16 @@ ContentPage {
     }
 
     ContentSection {
-        title: Translation.tr("Screenshot tool")
+        title: "截图工��"
 
         ConfigSwitch {
-            text: Translation.tr('Show regions of potential interest')
+            text: '显示可能感兴趣的区域'
             checked: Config.options.screenshotTool.showContentRegions
             onCheckedChanged: {
                 Config.options.screenshotTool.showContentRegions = checked;
             }
             StyledToolTip {
-                content: Translation.tr("Such regions could be images or parts of the screen that have some containment.\nMight not always be accurate.\nThis is done with an image processing algorithm run locally and no AI is used.")
+                content: "这些区域可能是图像或屏幕上包含某些内容的��分。\n可能不总是准确。\n这是通过本���运行的图像处理算法完成的，没有使用人工智能。"
             }
         }        
     }

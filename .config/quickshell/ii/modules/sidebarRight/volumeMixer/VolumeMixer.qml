@@ -93,7 +93,7 @@ Item {
                         font.pixelSize: Appearance.font.pixelSize.normal
                         color: Appearance.m3colors.m3outline
                         horizontalAlignment: Text.AlignHCenter
-                        text: Translation.tr("No audio source")
+                        text: "无��频源"
                     }
                 }
             }
@@ -170,7 +170,7 @@ Item {
                     Layout.alignment: Qt.AlignLeft
                     color: Appearance.m3colors.m3onSurface
                     font.pixelSize: Appearance.font.pixelSize.larger
-                    text: root.deviceSelectorInput ? Translation.tr("Select input device") : Translation.tr("Select output device")
+                    text: root.deviceSelectorInput ? "选择��入设备" : "选择输出设备"
                 }
 
                 Rectangle {
@@ -250,13 +250,13 @@ Item {
                     Layout.alignment: Qt.AlignRight
 
                     DialogButton {
-                        buttonText: Translation.tr("Cancel")
+                        buttonText: "取消"
                         onClicked: {
                             root.showDeviceSelector = false
                         }
                     }
                     DialogButton {
-                        buttonText: Translation.tr("OK")
+                        buttonText: "确定"
                         onClicked: {
                             root.showDeviceSelector = false
                             if (root.selectedDevice) {

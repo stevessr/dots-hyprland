@@ -445,7 +445,7 @@ ShellRoot {
                                 }
                             }
                             StyledText {
-                                text: Translation.tr("Drag or click a region • LMB: Copy • RMB: Edit")
+                                text: "拖动或单击一个区域 • 鼠标左键：复制 • 鼠标右键：编辑"
                                 color: root.genericContentForeground
                             }
                         }
