@@ -1,0 +1,9 @@
+// XWayland configuration for niri
+// Enables support for X11 applications
+
+prefer-no-csd true
+
+xwayland {
+    enable true
+    command "/usr/bin/Xwayland"
+}

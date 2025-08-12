@@ -19,12 +19,41 @@
    cp -r .config/niri ~/.config/
    ```
 
-3. **Install Dependencies** (same as Hyprland setup):
+3. **Install Dependencies**:
+   
+   **Core Dependencies** (same as Hyprland setup):
    - quickshell
    - wf-recorder, slurp, grim
    - fuzzel, cliphist
    - kitty, fcitx5
    - All other dependencies from the main setup
+
+   **Additional Dependencies for Niri**:
+   - **Display Management** (install at least one):
+     - `nwg-displays` (recommended graphical tool)
+     - `wdisplays` (alternative graphical tool) 
+     - `kanshi` + `kanshi-gui` (configuration-based display management)
+     - `wlr-randr` (command-line tool, minimal fallback)
+   
+   - **Network & Bluetooth Management**:
+     - `networkmanager` + `plasma-nm` (for network GUI)
+     - `bluez` + `bluez-utils` + `bluedevil` (for Bluetooth)
+     - `systemsettings` (KDE system settings)
+   
+   - **XWayland Support**:
+     - `xwayland` (for X11 application compatibility)
+   
+   **Installation Examples**:
+   ```bash
+   # Arch Linux
+   yay -S niri-git nwg-displays wlr-randr xwayland plasma-nm bluedevil systemsettings
+   
+   # Fedora
+   sudo dnf install niri nwg-displays wlr-randr xwayland NetworkManager-wifi bluedevil systemsettings
+   
+   # Ubuntu/Debian (may need additional repositories for niri)
+   sudo apt install wlr-randr xwayland network-manager-gnome blueman
+   ```
 
 4. **Start Niri**:
    ```bash

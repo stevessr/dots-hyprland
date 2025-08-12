@@ -1,5 +1,14 @@
 // Environment variables for niri
 
+// XWayland support
+environment {
+    DISPLAY ":0"
+    GDK_BACKEND "wayland,x11"
+    QT_QPA_PLATFORM "wayland;xcb"
+    SDL_VIDEODRIVER "wayland,x11"
+    CLUTTER_BACKEND "wayland"
+}
+
 // Input method - fcitx5
 environment {
     QT_IM_MODULE "fcitx"
@@ -15,6 +24,9 @@ environment {
     QT_QPA_PLATFORM "wayland"
     QT_QPA_PLATFORMTHEME "kde"
     XDG_MENU_PREFIX "plasma-"
+    XDG_CURRENT_DESKTOP "niri"
+    XDG_SESSION_DESKTOP "niri"
+    XDG_SESSION_TYPE "wayland"
 }
 
 // Virtual environment for illogical-impulse

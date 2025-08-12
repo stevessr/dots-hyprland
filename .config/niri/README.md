@@ -6,20 +6,52 @@ This directory contains a niri configuration that aims to provide a similar expe
 
 Niri is a scrollable-tiling Wayland compositor. This configuration adapts the illogical-impulse setup from Hyprland to work with niri's unique paradigm.
 
+## Features
+
+### Core Features
+- **XWayland Support**: Full compatibility with X11 applications
+- **Quickshell Integration**: Complete compatibility with existing illogical-impulse widgets
+- **Audio/Media Controls**: Full hardware function key support
+- **Screenshot & Recording**: Screen capture functionality adapted for niri
+- **System Menus**: Easy access to network, bluetooth, and display settings
+
+### New Keybindings for System Management
+- `Super+Ctrl+D` - Display/monitor configuration (graphical)
+- `Super+Ctrl+N` - Network settings menu
+- `Super+Ctrl+B` - Bluetooth settings menu
+- `Super+Ctrl+A` - Audio settings menu
+- `Super+Ctrl+S` - System settings
+- `Super+Ctrl+Q` - Quick settings panel
+- `Super+Ctrl+T` - Task manager
+- `Super+Shift+N` - Network connection editor
+- `Super+Shift+B` - Bluetooth device wizard
+
+### Display Management
+Multiple tools supported for monitor configuration:
+- **nwg-displays** (preferred graphical tool)
+- **wdisplays** (alternative graphical tool)
+- **kanshi-gui** (GUI for kanshi)
+- **wlr-randr** (command-line fallback)
+
 ## Structure
 
 - `config.kdl` - Main configuration file that imports all other configs
 - `niri/` - Default niri configuration modules
-  - `environment.kdl` - Environment variables
+  - `environment.kdl` - Environment variables (including XWayland)
   - `input.kdl` - Input device configuration
   - `layout.kdl` - Layout and appearance settings
+  - `xwayland.kdl` - XWayland configuration
   - `spawn-at-startup.kdl` - Autostart applications
   - `window-rules.kdl` - Window rules and behaviors
   - `binds.kdl` - Key bindings
+  - `system-menus.kdl` - System menu and configuration shortcuts
   - `screenshot.kdl` - Screenshot settings
   - `animations.kdl` - Animation configuration
   - `decoration.kdl` - Window decorations
   - `scripts/` - Helper scripts
+    - `display-config.sh` - Unified display configuration script
+    - `record.sh` - Screen recording script
+    - `start_geoclue_agent.sh` - Location services
 - `custom/` - Custom user overrides (add your changes here)
 
 ## Installation
