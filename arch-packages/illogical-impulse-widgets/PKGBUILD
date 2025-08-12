@@ -8,11 +8,11 @@ depends=(
 	fuzzel
 	glib2 # for `gsettings` it seems?
 	hypridle
-    hyprutils
+        hyprutils
 	hyprlock
 	hyprpicker
 	nm-connection-editor
-	quickshell-git
+	quickshell
 	translate-shell
 	wlogout
 )
