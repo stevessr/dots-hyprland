@@ -121,7 +121,7 @@ Item {
                 TextCanvas { // Content translation
                     id: outputCanvas
                     isInput: false
-                    placeholderText: Translation.tr("Translation goes here...")
+                    placeholderText: "翻译结果将显示在此处..."
                     property bool hasTranslation: (root.translatedText.trim().length > 0)
                     text: hasTranslation ? root.translatedText : ""
                     GroupButton {
@@ -176,7 +176,7 @@ Item {
         TextCanvas { // Content input
             id: inputCanvas
             isInput: true
-            placeholderText: Translation.tr("Enter text to translate...")
+            placeholderText: "���入要翻译的文本..."
             onInputTextChanged: {
                 translateTimer.restart();
             }
@@ -221,7 +221,7 @@ Item {
         z: 9999
         sourceComponent: SelectionDialog {
             id: languageSelectorDialog
-            titleText: Translation.tr("Select Language")
+            titleText: "���择语言"
             items: root.languages
             defaultChoice: root.languageSelectorTarget ? root.targetLanguage : root.sourceLanguage
             onCanceled: () => {

@@ -142,7 +142,7 @@ Rectangle {
                         color: Appearance.m3colors.m3onSecondaryContainer
                         text: messageData?.role == 'assistant' ? Ai.models[messageData?.model].name :
                             (messageData?.role == 'user' && SystemInfo.username) ? SystemInfo.username :
-                            Translation.tr("Interface")
+                            "界面"
                     }
                 }
             }
@@ -164,7 +164,7 @@ Rectangle {
                     text: "visibility_off"
                 }
                 StyledToolTip {
-                    content: Translation.tr("Not visible to model")
+                    content: "模型不可见"
                 }
             }
 
@@ -191,7 +191,7 @@ Rectangle {
                     }
                     
                     StyledToolTip {
-                        content: Translation.tr("Copy")
+                        content: "复制"
                     }
                 }
                 AiMessageControlButton {
@@ -206,7 +206,7 @@ Rectangle {
                         }
                     }
                     StyledToolTip {
-                        content: root.editing ? Translation.tr("Save") : Translation.tr("Edit")
+                        content: root.editing ? "保存" : "编辑"
                     }
                 }
                 AiMessageControlButton {
@@ -217,7 +217,7 @@ Rectangle {
                         root.renderMarkdown = !root.renderMarkdown
                     }
                     StyledToolTip {
-                        content: Translation.tr("View Markdown source")
+                        content: "查看 Markdown 源码"
                     }
                 }
                 AiMessageControlButton {
@@ -227,7 +227,7 @@ Rectangle {
                         Ai.removeMessage(root.messageIndex)
                     }
                     StyledToolTip {
-                        content: Translation.tr("Delete")
+                        content: "删除"
                     }
                 }
             }

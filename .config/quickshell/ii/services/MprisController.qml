@@ -86,9 +86,9 @@ Singleton {
 		this.activeTrack = {
 			uniqueId: this.activePlayer?.uniqueId ?? 0,
 			artUrl: this.activePlayer?.trackArtUrl ?? "",
-			title: this.activePlayer?.trackTitle || Translation.tr("Unknown Title"),
-			artist: this.activePlayer?.trackArtist || Translation.tr("Unknown Artist"),
-			album: this.activePlayer?.trackAlbum || Translation.tr("Unknown Album"),
+			title: this.activePlayer?.trackTitle || "未知标题",
+			artist: this.activePlayer?.trackArtist || "未知艺术家",
+			album: this.activePlayer?.trackAlbum || "未知专辑",
 		};
 
 		this.trackChanged(__reverse);

@@ -45,7 +45,7 @@ Item {
                 }
                 StyledText {
                     Layout.alignment: Qt.AlignHCenter
-                    text: TimerService.pomodoroLongBreak ? Translation.tr("Long break") : TimerService.pomodoroBreak ? Translation.tr("Break") : Translation.tr("Focus")
+                    text: TimerService.pomodoroLongBreak ? "长休息" : TimerService.pomodoroBreak ? "休息" : "专注"
                     font.pixelSize: Appearance.font.pixelSize.normal
                     color: Appearance.colors.colSubtext
                 }
@@ -80,7 +80,7 @@ Item {
                 contentItem: StyledText {
                     anchors.centerIn: parent
                     horizontalAlignment: Text.AlignHCenter
-                    text: TimerService.pomodoroRunning ? Translation.tr("Pause") : (TimerService.pomodoroSecondsLeft === TimerService.focusTime) ? Translation.tr("Start") : Translation.tr("Resume")
+                    text: TimerService.pomodoroRunning ? "暂停" : (TimerService.pomodoroSecondsLeft === TimerService.focusTime) ? "开始" : "继续"
                     color: TimerService.pomodoroRunning ? Appearance.colors.colOnSecondaryContainer : Appearance.colors.colOnPrimary
                 }
                 implicitHeight: 35
@@ -106,7 +106,7 @@ Item {
                 contentItem: StyledText {
                     anchors.centerIn: parent
                     horizontalAlignment: Text.AlignHCenter
-                    text: Translation.tr("Reset")
+                    text: "重置"
                     color: Appearance.colors.colOnErrorContainer
                 }
             }

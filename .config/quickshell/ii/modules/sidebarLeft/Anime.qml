@@ -43,21 +43,21 @@ Item {
     property var allCommands: [
         {
             name: "mode",
-            description: Translation.tr("Set the current API provider"),
+            description: "设置当前的 API 提供商",
             execute: (args) => {
                 Booru.setProvider(args[0]);
             }
         },
         {
             name: "clear",
-            description: Translation.tr("Clear the current list of images"),
+            description: "清除当前图像列表",
             execute: () => {
                 Booru.clearResponses();
             }
         },
         {
             name: "next",
-            description: Translation.tr("Get the next page of results"),
+            description: "获取下一页结果",
             execute: () => {
                 if (root.responses.length > 0) {
                     const lastResponse = root.responses[root.responses.length - 1];
@@ -67,14 +67,14 @@ Item {
         },
         {
             name: "safe",
-            description: Translation.tr("Disable NSFW content"),
+            description: "禁用 NSFW 内容",
             execute: () => {
                 Persistent.states.booru.allowNsfw = false;
             }
         },
         {
             name: "lewd",
-            description: Translation.tr("Allow NSFW content"),
+            description: "允许 NSFW 内容",
             execute: () => {
                 Persistent.states.booru.allowNsfw = true;
             }
@@ -90,7 +90,7 @@ Item {
             if (commandObj) {
                 commandObj.execute(args);
             } else {
-                Booru.addSystemMessage(Translation.tr("Unknown command: ") + command);
+                Booru.addSystemMessage("未知命令：" + command);
             }
         }
         else if (inputText.trim() == "+") {
@@ -206,7 +206,7 @@ Item {
                         font.family: Appearance.font.family.title
                         color: Appearance.m3colors.m3outline
                         horizontalAlignment: Text.AlignHCenter
-                        text: Translation.tr("Anime boorus")
+                        text: "动漫图片站"
                     }
                 }
             }
@@ -243,7 +243,7 @@ Item {
                         font.pixelSize: Appearance.font.pixelSize.smaller
                         color: Appearance.m3colors.m3inverseOnSurface
                         wrapMode: Text.Wrap
-                        text: Translation.tr("%1 queries pending").arg(Booru.runningRequests)
+                        text: "%1 个查询待处理".arg(Booru.runningRequests)
                     }
                 }
             }
@@ -355,7 +355,7 @@ Item {
                     padding: 10
                     color: activeFocus ? Appearance.m3colors.m3onSurface : Appearance.m3colors.m3onSurfaceVariant
                     renderType: Text.NativeRendering
-                    placeholderText: Translation.tr('Enter tags, or "%1" for commands').arg(root.commandPrefix)
+                    placeholderText: '输入标签，或使用“%1”获取命令'.arg(root.commandPrefix)
 
                     background: null
 
@@ -498,7 +498,7 @@ Item {
                 ApiInputBoxIndicator { // Tool indicator
                     icon: "api"
                     text: Booru.providers[Booru.currentProvider].name
-                    tooltipText: Translation.tr("Current API endpoint: %1\nSet it with %2mode PROVIDER")
+                    tooltipText: "当前 API 端点：%1\n使用 %2mode PROVIDER 设置"
                         .arg(Booru.providers[Booru.currentProvider].url)
                         .arg(root.commandPrefix)
                 }
@@ -533,7 +533,7 @@ Item {
                             Layout.alignment: Qt.AlignVCenter
                             font.pixelSize: Appearance.font.pixelSize.smaller
                             color: nsfwSwitch.enabled ? Appearance.colors.colOnLayer1 : Appearance.m3colors.m3outline
-                            text: Translation.tr("Allow NSFW")
+                            text: "允许 NSFW"
                         }
                         StyledSwitch {
                             id: nsfwSwitch

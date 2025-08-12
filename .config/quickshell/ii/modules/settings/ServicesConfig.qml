@@ -16,7 +16,7 @@ ContentPage {
 
         MaterialTextArea {
             Layout.fillWidth: true
-            placeholderText: Translation.tr("System prompt")
+            placeholderText: "系统提示"
             text: Config.options.ai.systemPrompt
             wrapMode: TextEdit.Wrap
             onTextChanged: {
@@ -33,7 +33,7 @@ ContentPage {
 
         MaterialTextArea {
             Layout.fillWidth: true
-            placeholderText: Translation.tr("User agent (for services that require it)")
+            placeholderText: "用户代理（需要时使用）"
             text: Config.options.networking.userAgent
             wrapMode: TextEdit.Wrap
             onTextChanged: {
@@ -47,7 +47,7 @@ ContentPage {
         title: Translation.tr("Resources")
 
         ConfigSpinBox {
-            text: Translation.tr("Polling interval (ms)")
+            text: "轮询间隔 (ms)"
             value: Config.options.resources.updateInterval
             from: 100
             to: 10000
@@ -63,23 +63,23 @@ ContentPage {
         title: Translation.tr("Search")
 
         ConfigSwitch {
-            text: Translation.tr("Use Levenshtein distance-based algorithm instead of fuzzy")
+            text: "使用基于莱文斯坦距离的算法而非模糊搜索"
             checked: Config.options.search.sloppy
             onCheckedChanged: {
                 Config.options.search.sloppy = checked;
             }
             StyledToolTip {
-                content: Translation.tr("Could be better if you make a ton of typos,\nbut results can be weird and might not work with acronyms\n(e.g. \"GIMP\" might not give you the paint program)")
+                content: "如果你有很多拼写错误，效果可能会更好，\n但结果可能会很奇怪，并且可能不适用于首字母缩略词\n（例如，“GIMP” 可能不会给你 GIMP）"
             }
         }
 
         ContentSubsection {
-            title: Translation.tr("Prefixes")
+            title: "前缀"
             ConfigRow {
                 uniform: true
                 MaterialTextArea {
                     Layout.fillWidth: true
-                    placeholderText: Translation.tr("Action")
+                    placeholderText: "动作"
                     text: Config.options.search.prefix.action
                     wrapMode: TextEdit.Wrap
                     onTextChanged: {
@@ -88,7 +88,7 @@ ContentPage {
                 }
                 MaterialTextArea {
                     Layout.fillWidth: true
-                    placeholderText: Translation.tr("Clipboard")
+                    placeholderText: "剪贴板"
                     text: Config.options.search.prefix.clipboard
                     wrapMode: TextEdit.Wrap
                     onTextChanged: {
@@ -97,7 +97,7 @@ ContentPage {
                 }
                 MaterialTextArea {
                     Layout.fillWidth: true
-                    placeholderText: Translation.tr("Emojis")
+                    placeholderText: "表情符号"
                     text: Config.options.search.prefix.emojis
                     wrapMode: TextEdit.Wrap
                     onTextChanged: {
@@ -141,7 +141,7 @@ ContentPage {
             title: Translation.tr("Web search")
             MaterialTextArea {
                 Layout.fillWidth: true
-                placeholderText: Translation.tr("Base URL")
+                placeholderText: "基本 URL"
                 text: Config.options.search.engineBaseUrl
                 wrapMode: TextEdit.Wrap
                 onTextChanged: {

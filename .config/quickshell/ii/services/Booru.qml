@@ -16,18 +16,18 @@ Singleton {
     signal tagSuggestion(string query, var suggestions)
     signal responseFinished()
 
-    property string failMessage: Translation.tr("That didn't work. Tips:\n- Check your tags and NSFW settings\n- If you don't have a tag in mind, type a page number")
+    property string failMessage: "操作失败。提示：\n- 检查您的标签和 NSFW 设置\n- 如果您没有想好标签，请输入页码"
     property var responses: []
     property int runningRequests: 0
     property var defaultUserAgent: Config.options?.networking?.userAgent || "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36"
     property var providerList: Object.keys(providers).filter(provider => provider !== "system" && providers[provider].api)
     property var providers: {
-        "system": { "name": Translation.tr("System") },
+        "system": { "name": "系统" },
         "yandere": {
             "name": "yande.re",
             "url": "https://yande.re",
             "api": "https://yande.re/post.json",
-            "description": Translation.tr("All-rounder | Good quality, decent quantity"),
+            "description": "全能型 | 质量好，数量可观",
             "mapFunc": (response) => {
                 return response.map(item => {
                     return {
@@ -61,7 +61,7 @@ Singleton {
             "name": "Konachan",
             "url": "https://konachan.net",
             "api": "https://konachan.net/post.json",
-            "description": Translation.tr("For desktop wallpapers | Good quality"),
+            "description": "适用于桌面壁纸 | 质量好",
             "mapFunc": (response) => {
                 return response.map(item => {
                     return {
@@ -95,7 +95,7 @@ Singleton {
             "name": "Zerochan",
             "url": "https://www.zerochan.net",
             "api": "https://www.zerochan.net/?json",
-            "description": Translation.tr("Clean stuff | Excellent quality, no NSFW"),
+            "description": "干净的内容 | 质量极佳，无 NSFW",
             "mapFunc": (response) => {
                 response = response.items
                 return response.map(item => {
@@ -122,7 +122,7 @@ Singleton {
             "name": "Danbooru",
             "url": "https://danbooru.donmai.us",
             "api": "https://danbooru.donmai.us/posts.json",
-            "description": Translation.tr("The popular one | Best quantity, but quality can vary wildly"),
+            "description": "热门之选 | 数量最多，但质量参差不齐",
             "mapFunc": (response) => {
                 return response.map(item => {
                     return {
@@ -157,7 +157,7 @@ Singleton {
             "name": "Gelbooru",
             "url": "https://gelbooru.com",
             "api": "https://gelbooru.com/index.php?page=dapi&s=post&q=index&json=1",
-            "description": Translation.tr("The hentai one | Great quantity, a lot of NSFW, quality varies wildly"),
+            "description": "Hentai 之选 | 数量多，大量 NSFW，质量参差不齐",
             "mapFunc": (response) => {
                 response = response.post
                 return response.map(item => {
@@ -192,7 +192,7 @@ Singleton {
             "name": "waifu.im",
             "url": "https://waifu.im",
             "api": "https://api.waifu.im/search",
-            "description": Translation.tr("Waifus only | Excellent quality, limited quantity"),
+            "description": "仅限 Waifu | 质量极佳，数量有限",
             "mapFunc": (response) => {
                 response = response.images
                 return response.map(item => {
@@ -223,7 +223,7 @@ Singleton {
             "name": "Alcy",
             "url": "https://t.alcy.cc",
             "api": "https://t.alcy.cc/",
-            "description": Translation.tr("Large images | God tier quality, no NSFW."),
+            "description": "大图 | 神级画质，无 NSFW。",
             "fixedTags": [
                 {
                     "name": "ycy",
@@ -287,10 +287,10 @@ Singleton {
         provider = provider.toLowerCase()
         if (providerList.indexOf(provider) !== -1) {
             Persistent.states.booru.provider = provider
-            root.addSystemMessage(Translation.tr("Provider set to ") + providers[provider].name
-                + (provider == "zerochan" ? Translation.tr(". Notes for Zerochan:\n- You must enter a color\n- Set your zerochan username in `sidebar.booru.zerochan.username` config option. You [might be banned for not doing so](https://www.zerochan.net/api#:~:text=The%20request%20may%20still%20be%20completed%20successfully%20without%20this%20custom%20header%2C%20but%20your%20project%20may%20be%20banned%20for%20being%20anonymous.)!") : ""))
+            root.addSystemMessage("提供商已设置为 " + providers[provider].name
+                + (provider == "zerochan" ? ". Zerochan 注意事项：\n- 您必须输入一种颜色\n- 在 `sidebar.booru.zerochan.username` 配置选项中设置您的 zerochan 用户名。您 [可能会因此被禁止](https://www.zerochan.net/api#:~:text=The%20request%20may%20still%20be%20completed%20successfully%20without%20this%20custom%20header%2C%20but%20your%20project%20may%20be%20banned%20for%20being%20anonymous.)！" : ""))
         } else {
-            root.addSystemMessage(Translation.tr("Invalid API provider. Supported: \n- ") + providerList.join("\n- "))
+            root.addSystemMessage("无效的 API 提供商。支持： \n- " + providerList.join("\n- "))
         }
     }
 

@@ -34,7 +34,7 @@ Item {
             elide: Text.ElideRight
             text: root.focusingThisMonitor && root.activeWindow?.activated && root.biggestWindow ? 
                 root.activeWindow?.appId :
-                (root.biggestWindow?.class) ?? Translation.tr("Desktop")
+                (root.biggestWindow?.class) ?? "桌面"
 
         }
 
@@ -45,7 +45,7 @@ Item {
             elide: Text.ElideRight
             text: root.focusingThisMonitor && root.activeWindow?.activated && root.biggestWindow ? 
                 root.activeWindow?.title :
-                (root.biggestWindow?.title) ?? `${Translation.tr("Workspace")} ${monitor?.activeWorkspace?.id ?? 1}`
+                (root.biggestWindow?.title) ?? `工作区 ${monitor?.activeWorkspace?.id ?? 1}`
         }
 
     }

@@ -176,7 +176,7 @@ Item {
                 contentItem: StyledText {
                     horizontalAlignment: Text.AlignHCenter
                     color: TimerService.stopwatchRunning ? Appearance.colors.colOnSecondaryContainer : Appearance.colors.colOnPrimary
-                    text: TimerService.stopwatchRunning ? Translation.tr("Pause") : TimerService.stopwatchTime === 0 ? Translation.tr("Start") : Translation.tr("Resume")
+                    text: TimerService.stopwatchRunning ? "暂停" : TimerService.stopwatchTime === 0 ? "开始" : "继续"
                 }
             }
 
@@ -199,7 +199,7 @@ Item {
 
                 contentItem: StyledText {
                     horizontalAlignment: Text.AlignHCenter
-                    text: TimerService.stopwatchRunning ? Translation.tr("Lap") : Translation.tr("Reset")
+                    text: TimerService.stopwatchRunning ? "计次" : "重置"
                     color: TimerService.stopwatchRunning ? Appearance.colors.colOnLayer2 : Appearance.colors.colOnErrorContainer
                 }
             }

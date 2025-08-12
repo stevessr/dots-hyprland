@@ -7,7 +7,7 @@ import QtQuick.Layouts
 ColumnLayout {
     id: root
     spacing: 0
-    required property var tabButtonList // Something like [{"icon": "notifications", "name": Translation.tr("Notifications")}, {"icon": "volume_up", "name": Translation.tr("Volume mixer")}]
+    required property var tabButtonList // Something like [{"icon": "notifications", "name": "通知"}, {"icon": "volume_up", "name": "音量混合器"}]
     required property var externalTrackedTab
     property bool enableIndicatorAnimation: false
     property color colIndicator: Appearance?.colors.colPrimary ?? "#65558F"

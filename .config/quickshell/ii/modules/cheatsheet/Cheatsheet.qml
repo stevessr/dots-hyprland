@@ -16,11 +16,11 @@ Scope { // Scope
     property var tabButtonList: [
         {
             "icon": "keyboard",
-            "name": Translation.tr("Keybinds")
+            "name": "快捷键"
         },
         {
             "icon": "experiment",
-            "name": Translation.tr("Elements")
+            "name": "元素"
         },
     ]
     property int selectedTab: 0
@@ -136,7 +136,7 @@ Scope { // Scope
                         Layout.alignment: Qt.AlignHCenter
                         font.family: Appearance.font.family.title
                         font.pixelSize: Appearance.font.pixelSize.title
-                        text: Translation.tr("Cheat sheet")
+                        text: "速查表"
                     }
                     PrimaryTabBar { // Tab strip
                         id: tabBar

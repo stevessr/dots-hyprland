@@ -61,42 +61,42 @@ StyledPopup {
             uniformCellWidths: true
 
             WeatherCard {
-                title: Translation.tr("UV Index")
+                title: "紫外线指数"
                 symbol: "wb_sunny"
                 value: Weather.data.uv
             }
             WeatherCard {
-                title: Translation.tr("Wind")
+                title: "风"
                 symbol: "air"
                 value: `(${Weather.data.windDir}) ${Weather.data.wind}`
             }
             WeatherCard {
-                title: Translation.tr("Precipitation")
+                title: "降水"
                 symbol: "rainy_light"
                 value: Weather.data.precip
             }
             WeatherCard {
-                title: Translation.tr("Humidity")
+                title: "湿度"
                 symbol: "humidity_low"
                 value: Weather.data.humidity
             }
             WeatherCard {
-                title: Translation.tr("Visibility")
+                title: "能见度"
                 symbol: "visibility"
                 value: Weather.data.visib
             }
             WeatherCard {
-                title: Translation.tr("Pressure")
+                title: "气压"
                 symbol: "readiness_score"
                 value: Weather.data.press
             }
             WeatherCard {
-                title: Translation.tr("Sunrise")
+                title: "日出"
                 symbol: "wb_twilight"
                 value: Weather.data.sunrise
             }
             WeatherCard {
-                title: Translation.tr("Sunset")
+                title: "日落"
                 symbol: "bedtime"
                 value: Weather.data.sunset
             }

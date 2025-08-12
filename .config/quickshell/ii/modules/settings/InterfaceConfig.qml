@@ -66,7 +66,7 @@ ContentPage {
         title: Translation.tr("Dock")
 
         ConfigSwitch {
-            text: Translation.tr("Enable")
+            text: "启用"
             checked: Config.options.dock.enable
             onCheckedChanged: {
                 Config.options.dock.enable = checked;
@@ -76,14 +76,14 @@ ContentPage {
         ConfigRow {
             uniform: true
             ConfigSwitch {
-                text: Translation.tr("Hover to reveal")
+                text: "悬停显示"
                 checked: Config.options.dock.hoverToReveal
                 onCheckedChanged: {
                     Config.options.dock.hoverToReveal = checked;
                 }
             }
             ConfigSwitch {
-                text: Translation.tr("Pinned on startup")
+                text: "启动��固定"
                 checked: Config.options.dock.pinnedOnStartup
                 onCheckedChanged: {
                     Config.options.dock.pinnedOnStartup = checked;
@@ -91,7 +91,7 @@ ContentPage {
             }
         }
         ConfigSwitch {
-            text: Translation.tr("Tint app icons")
+            text: "着色应用图标"
             checked: Config.options.dock.monochromeIcons
             onCheckedChanged: {
                 Config.options.dock.monochromeIcons = checked;
@@ -104,13 +104,13 @@ ContentPage {
         title: Translation.tr("Sidebars")
 
         ConfigSwitch {
-            text: Translation.tr('Keep right sidebar loaded')
+            text: '保持右侧边栏加载'
             checked: Config.options.sidebar.keepRightSidebarLoaded
             onCheckedChanged: {
                 Config.options.sidebar.keepRightSidebarLoaded = checked;
             }
             StyledToolTip {
-                content: Translation.tr("When enabled keeps the content of the right sidebar loaded to reduce the delay when opening,\nat the cost of around 15MB of consistent RAM usage. Delay significance depends on your system's performance.\nUsing a custom kernel like linux-cachyos might help")
+                content: "启用后，右侧边栏的���容将保持加载状态，以减少打开时的延迟，\n代价是���约 15MB 的持续 RAM 使用量。延迟的重要性取决于您的系统性能。\n使用像 linux-cachyos 这样的自定义内核可能会有所帮助"
             }
         }
 
@@ -200,7 +200,7 @@ ContentPage {
         title: Translation.tr("On-screen display")
 
         ConfigSpinBox {
-            text: Translation.tr("Timeout (ms)")
+            text: "超时 (ms)"
             value: Config.options.osd.timeout
             from: 100
             to: 3000
@@ -216,14 +216,14 @@ ContentPage {
         title: Translation.tr("Overview")
 
         ConfigSwitch {
-            text: Translation.tr("Enable")
+            text: "启用"
             checked: Config.options.overview.enable
             onCheckedChanged: {
                 Config.options.overview.enable = checked;
             }
         }
         ConfigSpinBox {
-            text: Translation.tr("Scale (%)")
+            text: "缩放 (%)"
             value: Config.options.overview.scale * 100
             from: 1
             to: 100
@@ -235,7 +235,7 @@ ContentPage {
         ConfigRow {
             uniform: true
             ConfigSpinBox {
-                text: Translation.tr("Rows")
+                text: "行"
                 value: Config.options.overview.rows
                 from: 1
                 to: 20
@@ -245,7 +245,7 @@ ContentPage {
                 }
             }
             ConfigSpinBox {
-                text: Translation.tr("Columns")
+                text: "列"
                 value: Config.options.overview.columns
                 from: 1
                 to: 20
@@ -262,13 +262,13 @@ ContentPage {
         title: Translation.tr("Screenshot tool")
 
         ConfigSwitch {
-            text: Translation.tr('Show regions of potential interest')
+            text: '显示可能感兴趣的区域'
             checked: Config.options.screenshotTool.showContentRegions
             onCheckedChanged: {
                 Config.options.screenshotTool.showContentRegions = checked;
             }
             StyledToolTip {
-                content: Translation.tr("Such regions could be images or parts of the screen that have some containment.\nMight not always be accurate.\nThis is done with an image processing algorithm run locally and no AI is used.")
+                content: "这些区域可能是图像或屏幕上包含某些内容的��分。\n可能不总是准确。\n这是通过本���运行的图像处理算法完成的，没有使用人工智能。"
             }
         }
     }

@@ -133,14 +133,14 @@ Scope {
                         font.family: Appearance.font.family.title
                         font.pixelSize: Appearance.font.pixelSize.title
                         font.weight: Font.DemiBold
-                        text: Translation.tr("Session")
+                        text: "会话"
                     }
 
                     StyledText { // Small instruction
                         Layout.alignment: Qt.AlignHCenter
                         horizontalAlignment: Text.AlignHCenter
                         font.pixelSize: Appearance.font.pixelSize.normal
-                        text: Translation.tr("Arrow keys to navigate, Enter to select\nEsc or click anywhere to cancel")
+                        text: "使用方向键导航，回车键选择\nEsc 或单击任意位置取消"
                     }
                 }
 
@@ -247,7 +247,7 @@ Scope {
                     active: root.packageManagerRunning
                     visible: active
                     sourceComponent: DescriptionLabel {
-                        text: Translation.tr("Your package manager is running")
+                        text: "您的包管理器正在运行"
                         textColor: Appearance.m3colors.m3onErrorContainer
                         color: Appearance.m3colors.m3errorContainer
                     }
@@ -256,7 +256,7 @@ Scope {
                     active: root.downloadRunning
                     visible: active
                     sourceComponent: DescriptionLabel {
-                        text: Translation.tr("There might be a download in progress")
+                        text: "可能有下载正在进行中"
                         textColor: Appearance.m3colors.m3onErrorContainer
                         color: Appearance.m3colors.m3errorContainer
                     }

@@ -113,11 +113,11 @@ Item {
                 Layout.alignment: Qt.AlignRight
 
                 DialogButton {
-                    buttonText: Translation.tr("Cancel")
+                    buttonText: "取消"
                     onClicked: root.canceled()
                 }
                 DialogButton {
-                    buttonText: Translation.tr("OK")
+                    buttonText: "确定"
                     onClicked: root.selected(
                         root.selectedId === -1 ? null :
                         root.items[root.selectedId]

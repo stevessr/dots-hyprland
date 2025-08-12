@@ -82,10 +82,13 @@ Item { // Bar content region
             anchors.fill: parent
             spacing: 10
 
-            LeftSidebarButton { // Left sidebar button
-                Layout.alignment: Qt.AlignVCenter
-                Layout.leftMargin: Appearance.rounding.screenRounding
-                colBackground: barLeftSideMouseArea.hovered ? Appearance.colors.colLayer1Hover : ColorUtils.transparentize(Appearance.colors.colLayer1Hover, 1)
+            ScrollHint {
+                reveal: barLeftSideMouseArea.hovered
+                icon: "light_mode"
+                tooltipText: "滚动以更改亮度"
+                side: "left"
+                anchors.left: parent.left
+                anchors.verticalCenter: parent.verticalCenter
             }
 
             ActiveWindow {

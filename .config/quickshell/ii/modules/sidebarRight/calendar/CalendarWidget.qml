@@ -49,7 +49,7 @@ Item {
             CalendarHeaderButton {
                 clip: true
                 buttonText: `${monthShift != 0 ? "• " : ""}${viewingDate.toLocaleDateString(Qt.locale(), "MMMM yyyy")}`
-                tooltipText: (monthShift === 0) ? "" : Translation.tr("Jump to current month")
+                tooltipText: (monthShift === 0) ? "" : "跳转到当前月份"
                 onClicked: {
                     monthShift = 0;
                 }
@@ -93,7 +93,7 @@ Item {
             Repeater {
                 model: CalendarLayout.weekDays
                 delegate: CalendarDayButton {
-                    day: Translation.tr(modelData.day)
+                    day: modelData.day
                     isToday: modelData.today
                     bold: true
                     enabled: false

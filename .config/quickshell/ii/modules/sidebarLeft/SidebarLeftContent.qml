@@ -13,9 +13,9 @@ Item {
     required property var scopeRoot
     anchors.fill: parent
     property var tabButtonList: [
-        ...(Config.options.policies.ai !== 0 ? [{"icon": "neurology", "name": Translation.tr("Intelligence")}] : []),
-        {"icon": "translate", "name": Translation.tr("Translator")},
-        ...(Config.options.policies.weeb === 1 ? [{"icon": "bookmark_heart", "name": Translation.tr("Anime")}] : [])
+        ...(Config.options.policies.ai !== 0 ? [{"icon": "neurology", "name": "智能"}] : []),
+        {"icon": "translate", "name": "翻译"},
+        ...(Config.options.policies.weeb === 1 ? [{"icon": "bookmark_heart", "name": "动漫"}] : [])
     ]
     property int selectedTab: 0
 

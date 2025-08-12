@@ -48,7 +48,7 @@ Item { // Tag suggestion description
             }
             StyledText {
                 visible: root.showArrows && root.showTab
-                text: Translation.tr("or")
+                text: "或"
                 font.pixelSize: Appearance.font.pixelSize.smaller
             }
             KeyboardKey {

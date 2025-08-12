@@ -17,7 +17,7 @@ StyledPopup {
             return !item.done;
         });
         if (unfinishedTodos.length === 0) {
-            return Translation.tr("No pending tasks");
+            return "无待办任务";
         }
 
         // Limit to first 5 todos to keep popup manageable
@@ -27,7 +27,7 @@ StyledPopup {
         }).join('\n');
 
         if (unfinishedTodos.length > 5) {
-            todoText += `\n${Translation.tr("... and %1 more").arg(unfinishedTodos.length - 5)}`;
+            todoText += `\n${"... 还有 %1 项".arg(unfinishedTodos.length - 5)}`;
         }
 
         return todoText;
@@ -67,7 +67,7 @@ StyledPopup {
                 font.pixelSize: Appearance.font.pixelSize.large
             }
             StyledText {
-                text: Translation.tr("System uptime:")
+                text: "系统运行时间："
                 color: Appearance.colors.colOnSurfaceVariant
             }
             StyledText {
@@ -92,7 +92,7 @@ StyledPopup {
                     font.pixelSize: Appearance.font.pixelSize.large
                 }
                 StyledText {
-                    text: Translation.tr("To Do:")
+                    text: "待办："
                     color: Appearance.colors.colOnSurfaceVariant
                 }
             }

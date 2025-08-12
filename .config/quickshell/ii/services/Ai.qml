@@ -238,9 +238,9 @@ Singleton {
     }
     property list<var> availableTools: Object.keys(root.tools[models[currentModelId]?.api_format])
     property var toolDescriptions: {
-        "functions": Translation.tr("Commands, edit configs, search.\nTakes an extra turn to switch to search mode if that's needed"),
-        "search": Translation.tr("Gives the model search capabilities (immediately)"),
-        "none": Translation.tr("Disable tools")
+        "functions": "命令、编辑配置、搜索。\n如果需要，需要额外一步切换到搜索模式",
+        "search": "立即为模型提供搜索功能",
+        "none": "禁用工具"
     }
 
     // Model properties:
@@ -259,66 +259,66 @@ Singleton {
         "gemini-2.0-flash": aiModelComponent.createObject(this, {
             "name": "Gemini 2.0 Flash",
             "icon": "google-gemini-symbolic",
-            "description": Translation.tr("Online | Google's model\nFast, can perform searches for up-to-date information"),
+            "description": "在线 | 谷歌模型\n速度快，可执行最新信息的搜索",
             "homepage": "https://aistudio.google.com",
             "endpoint": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:streamGenerateContent",
             "model": "gemini-2.0-flash",
             "requires_key": true,
             "key_id": "gemini",
             "key_get_link": "https://aistudio.google.com/app/apikey",
-            "key_get_description": Translation.tr("**Pricing**: free. Data used for training.\n\n**Instructions**: Log into Google account, allow AI Studio to create Google Cloud project or whatever it asks, go back and click Get API key"),
+            "key_get_description": "**定价**：免费。数据用于训练。\n\n**说明**：登录谷歌账户，允许 AI Studio 创建谷歌云项目或任何它要求的内容，然后返回并单击获取 API 密钥",
             "api_format": "gemini",
         }),
         "gemini-2.5-flash": aiModelComponent.createObject(this, {
             "name": "Gemini 2.5 Flash",
             "icon": "google-gemini-symbolic",
-            "description": Translation.tr("Online | Google's model\nNewer model that's slower than its predecessor but should deliver higher quality answers"),
+            "description": "在线 | 谷歌模型\n比其前身慢的新模型，但应提供更高质量的答案",
             "homepage": "https://aistudio.google.com",
             "endpoint": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:streamGenerateContent",
             "model": "gemini-2.5-flash",
             "requires_key": true,
             "key_id": "gemini",
             "key_get_link": "https://aistudio.google.com/app/apikey",
-            "key_get_description": Translation.tr("**Pricing**: free. Data used for training.\n\n**Instructions**: Log into Google account, allow AI Studio to create Google Cloud project or whatever it asks, go back and click Get API key"),
+            "key_get_description": "**定价**：免费。数据用于训练。\n\n**说明**：登录谷歌账户，允许 AI Studio 创建谷歌云项目或任何它要求的内容，然后返回并单击获取 API 密钥",
             "api_format": "gemini",
         }),
         "gemini-2.5-flash-pro": aiModelComponent.createObject(this, {
             "name": "Gemini 2.5 Pro",
             "icon": "google-gemini-symbolic",
-            "description": Translation.tr("Online | Google's model\nGoogle's state-of-the-art multipurpose model that excels at coding and complex reasoning tasks."),
+            "description": "在线 | 谷歌模型\n谷歌最先进的多功能模型，擅长编码和复杂推理任务。",
             "homepage": "https://aistudio.google.com",
             "endpoint": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:streamGenerateContent",
             "model": "gemini-2.5-pro",
             "requires_key": true,
             "key_id": "gemini",
             "key_get_link": "https://aistudio.google.com/app/apikey",
-            "key_get_description": Translation.tr("**Pricing**: free. Data used for training.\n\n**Instructions**: Log into Google account, allow AI Studio to create Google Cloud project or whatever it asks, go back and click Get API key"),
+            "key_get_description": "**定价**：免费。数据用于训练。\n\n**说明**：登录谷歌账户，允许 AI Studio 创建谷歌云项目或任何它要求的内容，然后返回并单击获取 API 密钥",
             "api_format": "gemini",
         }),
         "gemini-2.5-flash-lite": aiModelComponent.createObject(this, {
             "name": "Gemini 2.5 Flash-Lite",
             "icon": "google-gemini-symbolic",
-            "description": Translation.tr("Online | Google's model\nA Gemini 2.5 Flash model optimized for cost-efficiency and high throughput."),
+            "description": "在线 | 谷歌模型\n为成本效益和高吞吐量而优化的 Gemini 2.5 Flash 模型。",
             "homepage": "https://aistudio.google.com",
             "endpoint": "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-lite:streamGenerateContent",
             "model": "gemini-2.5-flash-lite",
             "requires_key": true,
             "key_id": "gemini",
             "key_get_link": "https://aistudio.google.com/app/apikey",
-            "key_get_description": Translation.tr("**Pricing**: free. Data used for training.\n\n**Instructions**: Log into Google account, allow AI Studio to create Google Cloud project or whatever it asks, go back and click Get API key"),
+            "key_get_description": "**定价**：免费。数据用于训练。\n\n**说明**：登录谷歌账户，允许 AI Studio 创建谷歌云项目或任何它要求的内容，然后返回并单击获取 API 密钥",
             "api_format": "gemini",
         }),
         "mistral-medium-3": aiModelComponent.createObject(this, {
             "name": "Mistral Medium 3",
             "icon": "mistral-symbolic",
-            "description": Translation.tr("Online | %1's model | Delivers fast, responsive and well-formatted answers. Disadvantages: not very eager to do stuff; might make up unknown function calls").arg("Mistral"),
+            "description": "在线 | %1 的模型 | 提供快速、响应迅速且格式良好的答案。缺点：不太愿意做事；可能会编造未知的函数调用".arg("Mistral"),
             "homepage": "https://mistral.ai/news/mistral-medium-3",
             "endpoint": "https://api.mistral.ai/v1/chat/completions",
             "model": "mistral-medium-2505",
             "requires_key": true,
             "key_id": "mistral",
             "key_get_link": "https://console.mistral.ai/api-keys",
-            "key_get_description": Translation.tr("**Instructions**: Log into Mistral account, go to Keys on the sidebar, click Create new key"),
+            "key_get_description": "**说明**：登录 Mistral 账户，转到侧边栏的密钥，然后单击创建新密钥",
             "api_format": "mistral",
         }),
         "github-gpt-5-nano": aiModelComponent.createObject(this, {
@@ -337,14 +337,14 @@ Singleton {
         "openrouter-deepseek-r1": aiModelComponent.createObject(this, {
             "name": "DeepSeek R1",
             "icon": "deepseek-symbolic",
-            "description": Translation.tr("Online via %1 | %2's model").arg("OpenRouter").arg("DeepSeek"),
+            "description": "通过 %1 在线 | %2 的模型".arg("OpenRouter").arg("DeepSeek"),
             "homepage": "https://openrouter.ai/deepseek/deepseek-r1:free",
             "endpoint": "https://openrouter.ai/api/v1/chat/completions",
             "model": "deepseek/deepseek-r1:free",
             "requires_key": true,
             "key_id": "openrouter",
             "key_get_link": "https://openrouter.ai/settings/keys",
-            "key_get_description": Translation.tr("**Pricing**: free. Data use policy varies depending on your OpenRouter account settings.\n\n**Instructions**: Log into OpenRouter account, go to Keys on the topright menu, click Create API Key"),
+            "key_get_description": "**定价**：免费。数据使用政策因您的 OpenRouter 账户设置而异。\n\n**说明**：登录 OpenRouter 账户，转到右上角菜单中的密钥，然后单击创建 API 密钥",
         }),
     }
     property var modelList: Object.keys(root.models)
@@ -415,7 +415,7 @@ Singleton {
                         root.addModel(safeModelName, {
                             "name": guessModelName(model),
                             "icon": guessModelLogo(model),
-                            "description": Translation.tr("Local Ollama model | %1").arg(model),
+                            "description": "本地 Ollama 模型 | %1".arg(model),
                             "homepage": `https://ollama.com/library/${model}`,
                             "endpoint": "http://localhost:11434/v1/chat/completions",
                             "model": model,
@@ -480,12 +480,12 @@ Singleton {
         onLoadedChanged: {
             if (!promptLoader.loaded) return;
             Config.options.ai.systemPrompt = promptLoader.text();
-            root.addMessage(Translation.tr("Loaded the following system prompt\n\n---\n\n%1").arg(Config.options.ai.systemPrompt), root.interfaceRole);
+            root.addMessage("已加载以下系统提示\n\n---\n\n%1".arg(Config.options.ai.systemPrompt), root.interfaceRole);
         }
     }
 
     function printPrompt() {
-        root.addMessage(Translation.tr("The current system prompt is\n\n---\n\n%1").arg(Config.options.ai.systemPrompt), root.interfaceRole);
+        root.addMessage("当前系统提示为\n\n---\n\n%1".arg(Config.options.ai.systemPrompt), root.interfaceRole);
     }
 
     function loadPrompt(filePath) {
@@ -518,8 +518,8 @@ Singleton {
 
     function addApiKeyAdvice(model) {
         root.addMessage(
-            Translation.tr('To set an API key, pass it with the %4 command\n\nTo view the key, pass "get" with the command<br/>\n\n### For %1:\n\n**Link**: %2\n\n%3')
-                .arg(model.name).arg(model.key_get_link).arg(model.key_get_description ?? Translation.tr("<i>No further instruction provided</i>")).arg("/key"), 
+            '要设置 API 密钥，请使用 %4 命令传递它\n\n要查看密钥，请使用命令传递“get”<br/>\n\n### 对于 %1：\n\n**链接**： %2\n\n%3'
+                .arg(model.name).arg(model.key_get_link).arg(model.key_get_description ?? "<i>未提供进一步说明</i>").arg("/key"),
             Ai.interfaceRole
         );
     }
@@ -538,13 +538,13 @@ Singleton {
             // See if policy prevents online models
             if (Config.options.policies.ai === 2 && !model.endpoint.includes("localhost")) {
                 root.addMessage(
-                    Translation.tr("Online models disallowed\n\nControlled by `policies.ai` config option"),
+                    "不允许使用在线模型\n\n由 `policies.ai` 配置选项控制",
                     root.interfaceRole
                 );
                 return;
             }
             if (setPersistentState) Persistent.states.ai.model = modelId;
-            if (feedback) root.addMessage(Translation.tr("Model set to %1").arg(model.name), root.interfaceRole);
+            if (feedback) root.addMessage("模型已设置为 %1".arg(model.name), root.interfaceRole);
             if (model.requires_key) {
                 // If key not there show advice
                 if (root.apiKeysLoaded && (!root.apiKeys[model.key_id] || root.apiKeys[model.key_id].length === 0)) {
@@ -552,13 +552,13 @@ Singleton {
                 }
             }
         } else {
-            if (feedback) root.addMessage(Translation.tr("Invalid model. Supported: \n```\n") + modelList.join("\n```\n```\n"), Ai.interfaceRole) + "\n```"
+            if (feedback) root.addMessage("无效模型。支持： \n```\n" + modelList.join("\n```\n```\n"), Ai.interfaceRole) + "\n```"
         }
     }
 
     function setTool(tool) {
         if (!root.tools[models[currentModelId]?.api_format] || !(tool in root.tools[models[currentModelId]?.api_format])) {
-            root.addMessage(Translation.tr("Invalid tool. Supported tools:\n- %1").arg(root.availableTools.join("\n- ")), root.interfaceRole);
+            root.addMessage("无效工具。支持的工具：\n- %1".arg(root.availableTools.join("\n- ")), root.interfaceRole);
             return false;
         }
         Config.options.ai.tool = tool;
@@ -571,18 +571,18 @@ Singleton {
 
     function setTemperature(value) {
         if (value == NaN || value < 0 || value > 2) {
-            root.addMessage(Translation.tr("Temperature must be between 0 and 2"), Ai.interfaceRole);
+            root.addMessage("温度必须介于 0 和 2 之间", Ai.interfaceRole);
             return;
         }
         Persistent.states.ai.temperature = value;
         root.temperature = value;
-        root.addMessage(Translation.tr("Temperature set to %1").arg(value), Ai.interfaceRole);
+        root.addMessage("温度已设置为 %1".arg(value), Ai.interfaceRole);
     }
 
     function setApiKey(key) {
         const model = models[currentModelId];
         if (!model.requires_key) {
-            root.addMessage(Translation.tr("%1 does not require an API key").arg(model.name), Ai.interfaceRole);
+            root.addMessage("%1 不需要 API 密钥".arg(model.name), Ai.interfaceRole);
             return;
         }
         if (!key || key.length === 0) {
@@ -591,7 +591,7 @@ Singleton {
             return;
         }
         KeyringStorage.setNestedField(["apiKeys", model.key_id], key.trim());
-        root.addMessage(Translation.tr("API key set for %1").arg(model.name), Ai.interfaceRole);
+        root.addMessage("已为 %1 设置 API 密钥".arg(model.name), Ai.interfaceRole);
     }
 
     function printApiKey() {
@@ -599,17 +599,17 @@ Singleton {
         if (model.requires_key) {
             const key = root.apiKeys[model.key_id];
             if (key) {
-                root.addMessage(Translation.tr("API key:\n\n```txt\n%1\n```").arg(key), Ai.interfaceRole);
+                root.addMessage("API 密钥：\n\n```txt\n%1\n```".arg(key), Ai.interfaceRole);
             } else {
-                root.addMessage(Translation.tr("No API key set for %1").arg(model.name), Ai.interfaceRole);
+                root.addMessage("未为 %1 设置 API 密钥".arg(model.name), Ai.interfaceRole);
             }
         } else {
-            root.addMessage(Translation.tr("%1 does not require an API key").arg(model.name), Ai.interfaceRole);
+            root.addMessage("%1 不需要 API 密钥".arg(model.name), Ai.interfaceRole);
         }
     }
 
     function printTemperature() {
-        root.addMessage(Translation.tr("Temperature: %1").arg(root.temperature), Ai.interfaceRole);
+        root.addMessage("温度： %1".arg(root.temperature), Ai.interfaceRole);
     }
 
     function clearMessages() {
@@ -793,7 +793,7 @@ Singleton {
     function rejectCommand(message: AiMessageData) {
         if (!message.functionPending) return;
         message.functionPending = false; // User decided, no more "thinking"
-        addFunctionOutputMessage(message.functionName, Translation.tr("Command rejected by user"))
+        addFunctionOutputMessage(message.functionName, "用户拒绝了命令")
     }
 
     function approveCommand(message: AiMessageData) {
@@ -836,7 +836,7 @@ Singleton {
             const modelId = root.currentModelId;
             root.currentTool = "search"
             root.postResponseHook = () => { root.currentTool = "functions" }
-            addFunctionOutputMessage(name, Translation.tr("Switched to search mode. Continue with the user's request."))
+            addFunctionOutputMessage(name, "已切换到搜索模式。继续处理用户请求。")
             requester.makeRequest();
         } else if (name === "get_shell_config") {
             const configJson = CF.ObjectUtils.toPlainObject(Config.options)
@@ -844,7 +844,7 @@ Singleton {
             requester.makeRequest();
         } else if (name === "set_shell_config") {
             if (!args.key || !args.value) {
-                addFunctionOutputMessage(name, Translation.tr("Invalid arguments. Must provide `key` and `value`."));
+                addFunctionOutputMessage(name, "无效参数。必须提供 `key` 和 `value`。");
                 return;
             }
             const key = args.key;
@@ -852,7 +852,7 @@ Singleton {
             Config.setNestedValue(key, value);
         } else if (name === "run_shell_command") {
             if (!args.command || args.command.length === 0) {
-                addFunctionOutputMessage(name, Translation.tr("Invalid arguments. Must provide `command`."));
+                addFunctionOutputMessage(name, "无效参数。必须提供 `command`。");
                 return;
             }
             const contentToAppend = `\n\n**Command execution request**\n\n\`\`\`command\n${args.command}\n\`\`\``;
@@ -860,7 +860,7 @@ Singleton {
             message.content += contentToAppend;
             message.functionPending = true; // Use thinking to indicate the command is waiting for approval
         }
-        else root.addMessage(Translation.tr("Unknown function call: %1").arg(name), "assistant");
+        else root.addMessage("未知的函数调用： %1".arg(name), "assistant");
     }
 
     function chatToJson() {
