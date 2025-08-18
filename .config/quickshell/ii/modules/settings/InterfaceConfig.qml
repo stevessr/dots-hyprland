@@ -72,26 +72,53 @@ ContentPage {
     ContentSection {
         title: "状态栏"
 
-        ConfigSelectionArray {
-            currentValue: Config.options.bar.cornerStyle
-            configOptionName: "bar.cornerStyle"
-            onSelected: newValue => {
-                Config.options.bar.cornerStyle = newValue;
-            }
-            options: [
-                {
-                    displayName: "贴合",
-                    value: 0
-                },
-                {
-                    displayName: "悬浮",
-                    value: 1
-                },
-                {
-                    displayName: "直角矩形",
-                    value: 2
+        ConfigRow {
+            ContentSubsection {
+                title: "Corner style"
+
+                ConfigSelectionArray {
+                    currentValue: Config.options.bar.cornerStyle
+                    configOptionName: "bar.cornerStyle"
+                    onSelected: newValue => {
+                        Config.options.bar.cornerStyle = newValue; // Update local copy
+                    }
+                    options: [
+                        {
+                            displayName: "贴合",
+                            value: 0
+                        },
+                        {
+                            displayName: "悬浮",
+                            value: 1
+                        },
+                        {
+                            displayName: "直角矩形",
+                            value: 2
+                        }
+                    ]
                 }
-            ]
+            }
+
+            ContentSubsection {
+                title: "Bar layout"
+                ConfigSelectionArray {
+                    currentValue: Config.options.bar.vertical
+                    configOptionName: "bar.vertical"
+                    onSelected: newValue => {
+                        Config.options.bar.vertical = newValue;
+                    }
+                    options: [
+                        {
+                            displayName: Translation.tr("Horizontal"),
+                            value: false
+                        },
+                        {
+                            displayName: Translation.tr("Vertical"),
+                            value: true
+                        },
+                    ]
+                }
+            }
         }
 
         ContentSubsection {
@@ -106,7 +133,7 @@ ContentPage {
                     }
                 }
                 ConfigSwitch {
-                    text: "��于底部"
+                    text: "置于底部"
                     checked: Config.options.bar.bottom
                     onCheckedChanged: {
                         Config.options.bar.bottom = checked;
@@ -181,7 +208,7 @@ ContentPage {
                     }
                 }
                 ConfigSwitch {
-                    text: "性���配置文件切换"
+                    text: "性能配置文件切换"
                     checked: Config.options.bar.utilButtons.showPerformanceProfileToggle
                     onCheckedChanged: {
                         Config.options.bar.utilButtons.showPerformanceProfileToggle = checked;

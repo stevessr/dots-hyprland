@@ -30,7 +30,7 @@ ApplicationWindow {
         Quickshell.execDetached([
             "notify-send", 
             "欢迎应用",
-            "尽情享用！您可以随时使用 <tt>Super+Shift+Alt+/</tt> 重新打开欢迎应用。要打开���置应用，请按 <tt>Super+I</tt>",
+            "尽情享用！您可以随时使用 <tt>Super+Shift+Alt+/</tt> 重新打开欢迎应用。要打开内置应用，请按 <tt>Super+I</tt>",
             "-a", "Shell"
         ])
         Qt.quit()
@@ -134,29 +134,52 @@ ApplicationWindow {
                 ContentSection {
                     title: "状态栏"
 
-                    ContentSubsection {
-                        title: "Corner style"
+                    ConfigRow {
+                        ContentSubsection {
+                            title: "Corner style"
 
-                        ConfigSelectionArray {
-                            currentValue: Config.options.bar.cornerStyle
-                            configOptionName: "bar.cornerStyle"
-                            onSelected: newValue => {
-                                Config.options.bar.cornerStyle = newValue; // Update local copy
-                            }
-                            options: [
-                                {
-                                    displayName: "贴合",
-                                    value: 0
-                                },
-                                {
-                                    displayName: "悬浮",
-                                    value: 1
-                                },
-                                {
-                                    displayName: "直角矩形",
-                                    value: 2
+                            ConfigSelectionArray {
+                                currentValue: Config.options.bar.cornerStyle
+                                configOptionName: "bar.cornerStyle"
+                                onSelected: newValue => {
+                                    Config.options.bar.cornerStyle = newValue; // Update local copy
                                 }
-                            ]
+                                options: [
+                                    {
+                                        displayName: Translation.tr("Hug"),
+                                        value: 0
+                                    },
+                                    {
+                                        displayName: Translation.tr("Float"),
+                                        value: 1
+                                    },
+                                    {
+                                        displayName: Translation.tr("Plain rectangle"),
+                                        value: 2
+                                    }
+                                ]
+                            }
+                        }
+
+                        ContentSubsection {
+                            title: "Bar layout"
+                            ConfigSelectionArray {
+                                currentValue: Config.options.bar.vertical
+                                configOptionName: "bar.vertical"
+                                onSelected: newValue => {
+                                    Config.options.bar.vertical = newValue;
+                                }
+                                options: [
+                                    {
+                                        displayName: Translation.tr("Horizontal"),
+                                        value: false
+                                    },
+                                    {
+                                        displayName: Translation.tr("Vertical"),
+                                        value: true
+                                    },
+                                ]
+                            }
                         }
                     }
 
@@ -169,7 +192,7 @@ ApplicationWindow {
                             }
                         }
                         ConfigSwitch {
-                            text: "置于底部"
+                            text: "置于底部/右方"
                             checked: Config.options.bar.bottom
                             onCheckedChanged: {
                                 Config.options.bar.bottom = checked;
