@@ -31,7 +31,7 @@ Singleton {
         if (available && isLowAndNotCharging) Quickshell.execDetached([
             "notify-send", 
             "低电量",
-            "���考虑插入电源",
+            "请考虑插入电源",
             "-u", "critical",
             "-a", "Shell"
         ])

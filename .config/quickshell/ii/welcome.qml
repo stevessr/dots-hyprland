@@ -73,7 +73,7 @@ ApplicationWindow {
                     leftMargin: 12
                 }
                 color: Appearance.colors.colOnLayer0
-                text: "你好！��做正事..."
+                text: "你好！该做正事..."
                 font.pixelSize: Appearance.font.pixelSize.title
                 font.family: Appearance.font.family.title
             }
@@ -240,7 +240,7 @@ ApplicationWindow {
                             Layout.alignment: Qt.AlignHCenter
                             buttonRadius: Appearance.rounding.small
                             materialIcon: "wallpaper"
-                            mainText: konachanWallProc.running ? "请耐心等���..." : "随机：Konachan"
+                            mainText: konachanWallProc.running ? "请耐心等待..." : "随机：Konachan"
                             onClicked: {
                                 console.log(konachanWallProc.command.join(" "));
                                 konachanWallProc.running = true;
@@ -375,7 +375,7 @@ ApplicationWindow {
                                     spacing: 10
                                     StyledText {
                                         font.pixelSize: Appearance.font.pixelSize.small
-                                        text: "���捷键"
+                                        text: "快捷键"
                                         color: Appearance.colors.colOnSecondaryContainer
                                     }
                                     RowLayout {

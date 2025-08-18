@@ -17,7 +17,7 @@ Rectangle {
     property int selectedTab: Persistent.states.sidebar.bottomGroup.tab
     property bool collapsed: Persistent.states.sidebar.bottomGroup.collapsed
     property var tabs: [
-        {"type": "calendar", "name": "日���", "icon": "calendar_month", "widget": calendarWidget},
+        {"type": "calendar", "name": "日历", "icon": "calendar_month", "widget": calendarWidget},
         {"type": "todo", "name": "待办", "icon": "done_outline", "widget": todoWidget},
         {"type": "timer", "name": "计时器", "icon": "schedule", "widget": pomodoroWidget},
     ]

@@ -11,7 +11,7 @@ Item {
     property int currentTab: 0
     property var tabButtonList: [
         {"name": "番茄钟", "icon": "search_activity"},
-        {"name": "��表", "icon": "timer"}
+        {"name": "秒表", "icon": "timer"}
     ]
 
     // These are keybinds for stopwatch and pomodoro

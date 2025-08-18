@@ -62,7 +62,7 @@ ContentPage {
             }
             RippleButtonWithIcon {
                 materialIcon: "bug_report"
-                mainText: "报��错误"
+                mainText: "报告错误"
                 onClicked: {
                     Qt.openUrlExternally(SystemInfo.bugReportUrl)
                 }
@@ -70,7 +70,7 @@ ContentPage {
             RippleButtonWithIcon {
                 materialIcon: "policy"
                 materialIconFill: false
-                mainText: "隐���政策"
+                mainText: "隐私政策"
                 onClicked: {
                     Qt.openUrlExternally(SystemInfo.privacyPolicyUrl)
                 }

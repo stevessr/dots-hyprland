@@ -21,7 +21,7 @@ startask () {
   printf '      如果您仍然需要它，请在其分支中运行脚本：git checkout ii-ags && ./install.sh\n'
   printf '\n'
   printf '此脚本 1. 仅适用于 ArchLinux 和基于 Arch 的发行版。\n'
-  printf '            2. 不处理系统级/硬件相关的东西，如 Nvidia 驱动程序\n'
+  printf '            2. 不处理系统级/硬件问题，如 Nvidia 驱动程序\n'
   printf "\e[31m"
 
   printf "您想为 \"$XDG_CONFIG_HOME\" 和 \"$HOME/.local/\" 文件夹创建备份吗？\n[y/N]: "
@@ -31,15 +31,15 @@ startask () {
       backup_configs
       ;;
     *)
-      echo "跳过备份..."
+      echo "正在跳过备份..."
       ;;
   esac
 
 
   printf '\n'
   printf '您想在执行每个命令之前都进行确认吗？\n'
-  printf '  y = 是的，在执行每个命令前询问我。（默认）\n'
-  printf '  n = 不，直接自动执行它们。\n'
+  printf '  y = 是的，在执行每个命令之前询问我。(默认)\n'
+  printf '  n = 不，自动执行它们。\n'
   printf '  a = 中止。\n'
   read -p "====> " p
   case $p in
@@ -58,7 +58,7 @@ set -e
 #####################################################################################
 printf "\e[36m[$0]: 1. 获取软件包并设置用户组/服务\n\e[0m"
 
-# Issue #363
+# 问题 #363
 case $SKIP_SYSUPDATE in
   true) sleep 0;;
   *) v sudo pacman -Syu;;
@@ -122,22 +122,22 @@ done
 showfun install-python-packages
 v install-python-packages
 
-## 可选依赖项
+## 可选依赖
 if pacman -Qs ^plasma-browser-integration$ ;then SKIP_PLASMAINTG=true;fi
 case $SKIP_PLASMAINTG in
   true) sleep 0;;
   *)
     if $ask;then
       echo -e "\e[33m[$0]: 注意: \"plasma-browser-integration\" 的大小约为 600 MiB。\e[0m"
-      echo -e "\e[33m如果您希望在音乐控制小部件上显示 Firefox 中媒体的播放时间，则需要它。\e[0m"
-      echo -e "\e[33m要安装吗？ [y/N]\e[0m"
+      echo -e "\e[33m如果您希望在音乐控件小部件上显示 Firefox 中媒体的播放时间，则需要它。\e[0m"
+      echo -e "\e[33m安装它？ [y/N]\e[0m"
       read -p "====> " p
     else
       p=y
     fi
     case $p in
       y) x sudo pacman -S --needed --noconfirm plasma-browser-integration ;;
-      *) echo "好的，不安装"
+      *) echo "好的，不会安装"
     esac
     ;;
 esac
@@ -157,11 +157,11 @@ printf "\e[36m[$0]: 2. 复制 + 配置\e[0m\n"
 # 以防某些文件夹不存在
 v mkdir -p $XDG_BIN_HOME $XDG_CACHE_HOME $XDG_CONFIG_HOME $XDG_DATA_HOME
 
-# `--delete' for rsync to make sure that
-# original dotfiles and new ones in the SAME DIRECTORY
-# (eg. in ~/.config/hypr) won't be mixed together
+# rsync 的 `--delete' 选项可确保
+# 原始点文件和新点文件在同一目录中
+# (例如在 ~/.config/hypr 中) 不会混合在一起
 
-# MISC (For .config/* but not fish, not Hyprland)
+# MISC (对于 .config/* 但不是 fish，也不是 Hyprland)
 case $SKIP_MISCCONF in
   true) sleep 0;;
   *)
@@ -182,7 +182,7 @@ case $SKIP_FISH in
     ;;
 esac
 
-# For Hyprland
+# 对于 Hyprland
 case $SKIP_HYPRLAND in
   true) sleep 0;;
   *)
@@ -229,13 +229,13 @@ case $SKIP_HYPRLAND in
 esac
 
 
-# some foldes (eg. .local/bin) should be processed separately to avoid `--delete' for rsync,
-# since the files here come from different places, not only about one program.
-# v rsync -av ".local/bin/" "$XDG_BIN_HOME" # No longer needed since scripts are no longer in ~/.local/bin
+# 某些文件夹 (例如 .local/bin) 应单独处理以避免 rsync 的 `--delete' 选项，
+# 因为这里的文件来自不同的地方，而不仅仅是一个程序。
+# v rsync -av ".local/bin/" "$XDG_BIN_HOME" # 不再需要，因为脚本不再位于 ~/.local/bin
 v rsync -av ".local/share/icons/" "${XDG_DATA_HOME:-$HOME/.local/share}"/icons/
 v rsync -av ".local/share/konsole/" "${XDG_DATA_HOME:-$HOME/.local/share}"/konsole/
 
-# Prevent hyprland from not fully loaded
+# 防止 hyprland 未完全加载
 sleep 1
 try hyprctl reload
 
@@ -259,36 +259,40 @@ for i in ${warn_files_tests[@]}; do
 done
 
 #####################################################################################
-printf "\e[36m[$0]: 完成。请查看 \"Import Manually\" 文件夹并获取您需要的任何内容。\e[0m\n"
 printf "\n"
-printf "\e[36m建议您查看\n"
-printf "https://end-4.github.io/dots-hyprland-wiki/en/i-i/01setup/#post-installation \n"
-printf "以获取有关启动 Hyprland 的提示。\e[0m\n"
+printf "\n"
+printf "\n"
+printf "\e[36m[$0]: 已完成\e[0m\n"
+printf "\n"
+printf "\e[36m从您的显示管理器（登录屏幕）启动 Hyprland 时 \e[30m\e[46m 不要选择 UWSM \e[0m\e[36m\e[0m\n"
 printf "\n"
 printf "\e[36m如果您已经在运行 Hyprland，\e[0m\n"
 printf "\e[36m按 \e[30m\e[46m Ctrl+Super+T \e[0m\e[36m 选择壁纸\e[0m\n"
-printf "\e[36m按 \e[30m\e[46m Super+/ \e[0m\e[36m 查看键位绑定列表\e[0m\n"
+printf "\e[36m按 \e[30m\e[46m Super+/ \e[0m\e[36m 查看快捷键列表\e[0m\n"
+printf "\n"
+printf "\e[36m有关安装后的建议/提示：\e[0m\n"
+printf "\e[36m\e[4m https://end-4.github.io/dots-hyprland-wiki/en/ii-qs/01setup/#post-installation \e[0m\n"
 printf "\n"
 
 case $existed_hypr_conf_firstrun in
-  y) printf "\n\e[33m[$0]: 警告: \"$XDG_CONFIG_HOME/hypr/hyprland.conf\" 已存在。由于这似乎是您的首次运行，我们已将其替换为新的。 \e[0m\n"
-     printf "\e[33m旧文件已重命名为 \"$XDG_CONFIG_HOME/hypr/hyprland.conf.old\"。\e[0m\n"
+  y) printf "\n\e[33m[$0]: 警告: \"$XDG_CONFIG_HOME/hypr/hyprland.conf\" 之前已存在。由于这似乎是您第一次运行，我们已将其替换为新的。 \e[0m\n"
+     printf "\e[33m由于这似乎是您第一次运行，我们已将其替换为新的。旧的已重命名为 \"$XDG_CONFIG_HOME/hypr/hyprland.conf.old\"。\e[0m\n"
 ;;esac
 case $existed_hypr_conf in
-  y) printf "\n\e[33m[$0]: 警告: \"$XDG_CONFIG_HOME/hypr/hyprland.conf\" 已存在，我们没有覆盖它。 \e[0m\n"
+  y) printf "\n\e[33m[$0]: 警告: \"$XDG_CONFIG_HOME/hypr/hyprland.conf\" 之前已存在，我们没有覆盖它。 \e[0m\n"
      printf "\e[33m请使用 \"$XDG_CONFIG_HOME/hypr/hyprland.conf.new\" 作为正确格式的参考。\e[0m\n"
 ;;esac
 case $existed_hypridle_conf in
-  y) printf "\n\e[33m[$0]: 警告: \"$XDG_CONFIG_HOME/hypr/hypridle.conf\" 已存在，我们没有覆盖它。 \e[0m\n"
+  y) printf "\n\e[33m[$0]: 警告: \"$XDG_CONFIG_HOME/hypr/hypridle.conf\" 之前已存在，我们没有覆盖它。 \e[0m\n"
      printf "\e[33m请使用 \"$XDG_CONFIG_HOME/hypr/hypridle.conf.new\" 作为正确格式的参考。\e[0m\n"
 ;;esac
 case $existed_hyprlock_conf in
-  y) printf "\n\e[33m[$0]: 警告: \"$XDG_CONFIG_HOME/hypr/hyprlock.conf\" 已存在，我们没有覆盖它。 \e[0m\n"
+  y) printf "\n\e[33m[$0]: 警告: \"$XDG_CONFIG_HOME/hypr/hyprlock.conf\" 之前已存在，我们没有覆盖它。 \e[0m\n"
      printf "\e[33m请使用 \"$XDG_CONFIG_HOME/hypr/hyprlock.conf.new\" 作为正确格式的参考。\e[0m\n"
 ;;esac
 
 if [[ -z "${ILLOGICAL_IMPULSE_VIRTUAL_ENV}" ]]; then
-  printf "\n\e[31m[$0]: \!! 重要 \!! : 请确保环境变量 \e[0m \$ILLOGICAL_IMPULSE_VIRTUAL_ENV \e[31m 设置为正确的值（默认为 \"~/.local/state/quickshell/.venv\"），否则 Quickshell 配置将无法工作。我们已经在 ~/.config/hypr/hyprland/env.conf 中提供了此配置，但您需要确保它包含在 hyprland.conf 中，并且需要重新启动才能应用它。\e[0m\n"
+  printf "\n\e[31m[$0]: \!! 重要 \!! : 请确保环境变量 \e[0m \$ILLOGICAL_IMPULSE_VIRTUAL_ENV \e[31m 设置为正确的值 (默认为 \"~/.local/state/quickshell/.venv\")，否则 Quickshell 配置将无法工作。我们已经在 ~/.config/hypr/hyprland/env.conf 中提供了此配置，但您需要确保它包含在 hyprland.conf 中，并且需要重新启动才能应用它。\e[0m\n"
 fi
 
 if [[ ! -z "${warn_files[@]}" ]]; then

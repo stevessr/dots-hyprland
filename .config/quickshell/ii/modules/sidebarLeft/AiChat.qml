@@ -117,7 +117,7 @@ Item {
         },
         {
             name: "clear",
-            description: "清除聊天记��",
+            description: "清除聊天记录",
             execute: () => {
                 Ai.clearMessages();
             }
@@ -137,7 +137,7 @@ Item {
         },
         {
             name: "test",
-            description: "Markdown 测���",
+            description: "Markdown 测试",
             execute: () => {
                 Ai.addMessage(`
 <think>
@@ -380,7 +380,7 @@ Inline w/ backslash and round brackets \\(e^{i\\pi} + 1 = 0\\)
                         color: Appearance.m3colors.m3outline
                         horizontalAlignment: Text.AlignLeft
                         wrapMode: Text.Wrap
-                        text: "输入 /key 开始使用在线模型\nCtrl+O 展开侧���栏\nCtrl+P 将侧边栏分离为窗口"
+                        text: "输入 /key 开始使用在线模型\nCtrl+O 展开侧边栏\nCtrl+P 将侧边栏分离为窗口"
                     }
                 }
             }
@@ -707,7 +707,7 @@ Inline w/ backslash and round brackets \\(e^{i\\pi} + 1 = 0\\)
                 ApiInputBoxIndicator { // Model indicator
                     icon: "api"
                     text: Ai.getModel().name
-                    tooltipText: "���前模型：%1\n使用 %2model MODEL 设置"
+                    tooltipText: "当前模型：%1\n使用 %2model MODEL 设置"
                         .arg(Ai.getModel().name)
                         .arg(root.commandPrefix)
                 }

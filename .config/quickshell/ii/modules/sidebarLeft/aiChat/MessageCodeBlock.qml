@@ -114,7 +114,7 @@ ColumnLayout {
                         }
                     }
                     StyledToolTip {
-                        content: "保存到下��"
+                        content: "保存到下载"
                     }
                 }
             }

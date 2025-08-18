@@ -59,7 +59,7 @@ StyledPopup {
                 iconSize: Appearance.font.pixelSize.large
             }
             StyledText {
-                text: Battery.isCharging ? "充���电所需时间：" : "剩余电��可用时间："
+                text: Battery.isCharging ? "充满电所需时间：" : "剩余电量可用时间："
                 color: Appearance.colors.colOnSurfaceVariant
             }
             StyledText {
@@ -109,7 +109,7 @@ StyledPopup {
                     } else if (Battery.chargeState == 1) {
                         return "正在充电：";
                     } else {
-                        return "正在���电：";
+                        return "正在放电：";
                     }
                 }
                 color: Appearance.colors.colOnSurfaceVariant

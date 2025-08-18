@@ -176,7 +176,7 @@ Item {
         TextCanvas { // Content input
             id: inputCanvas
             isInput: true
-            placeholderText: "���入要翻译的文本..."
+            placeholderText: "输入要翻译的文本..."
             onInputTextChanged: {
                 translateTimer.restart();
             }
@@ -221,7 +221,7 @@ Item {
         z: 9999
         sourceComponent: SelectionDialog {
             id: languageSelectorDialog
-            titleText: "���择语言"
+            titleText: "选择语言"
             items: root.languages
             defaultChoice: root.languageSelectorTarget ? root.targetLanguage : root.sourceLanguage
             onCanceled: () => {

@@ -93,7 +93,7 @@ Item {
                         font.pixelSize: Appearance.font.pixelSize.normal
                         color: Appearance.m3colors.m3outline
                         horizontalAlignment: Text.AlignHCenter
-                        text: "无��频源"
+                        text: "无音频源"
                     }
                 }
             }
@@ -170,7 +170,7 @@ Item {
                     Layout.alignment: Qt.AlignLeft
                     color: Appearance.m3colors.m3onSurface
                     font.pixelSize: Appearance.font.pixelSize.larger
-                    text: root.deviceSelectorInput ? "选择��入设备" : "选择输出设备"
+                    text: root.deviceSelectorInput ? "选择输入设备" : "选择输出设备"
                 }
 
                 Rectangle {

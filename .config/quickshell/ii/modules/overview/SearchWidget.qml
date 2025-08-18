@@ -360,7 +360,7 @@ Item { // Wrapper
                         nonAppResultsTimer.restart();
                         const mathResultObject = {
                             name: root.mathResult,
-                            clickActionName: "���制",
+                            clickActionName: "复制",
                             type: "数学结果",
                             fontType: "monospace",
                             materialSymbol: 'calculate',

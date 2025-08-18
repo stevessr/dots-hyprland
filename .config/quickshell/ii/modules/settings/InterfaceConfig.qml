@@ -83,7 +83,7 @@ ContentPage {
                 }
             }
             ConfigSwitch {
-                text: "启动��固定"
+                text: "启动时固定"
                 checked: Config.options.dock.pinnedOnStartup
                 onCheckedChanged: {
                     Config.options.dock.pinnedOnStartup = checked;
@@ -110,7 +110,7 @@ ContentPage {
                 Config.options.sidebar.keepRightSidebarLoaded = checked;
             }
             StyledToolTip {
-                content: "启用后，右侧边栏的���容将保持加载状态，以减少打开时的延迟，\n代价是���约 15MB 的持续 RAM 使用量。延迟的重要性取决于您的系统性能。\n使用像 linux-cachyos 这样的自定义内核可能会有所帮助"
+                content: "启用后，右侧边栏的内容将保持加载状态，以减少打开时的延迟，\n代价是大约 15MB 的持续 RAM 使用量。延迟的重要性取决于您的系统性能。\n使用像 linux-cachyos 这样的自定义内核可能会有所帮助"
             }
         }
 
@@ -268,7 +268,7 @@ ContentPage {
                 Config.options.screenshotTool.showContentRegions = checked;
             }
             StyledToolTip {
-                content: "这些区域可能是图像或屏幕上包含某些内容的��分。\n可能不总是准确。\n这是通过本���运行的图像处理算法完成的，没有使用人工智能。"
+                content: "这些区域可能是图像或屏幕上包含某些内容的部分。\n可能不总是准确。\n这是通过本地运行的图像处理算法完成的，没有使用人工智能。"
             }
         }
     }
