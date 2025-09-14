@@ -19,7 +19,7 @@ _might not be necessary depending on what you change, but this is recommended_
 
 _most stuff in the shell will work but not everything_
 
-- Install Hyprland and the development version of Quickshell (`yay -S hyprland quickshell-git`)
+- Install Hyprland and the development version of Quickshell (`yay -S hyprland quickshell`)
 - Copy `.config/quickshell` folder to your home directory
 
 ## Extra setup for Quickshell
