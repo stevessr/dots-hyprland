@@ -69,7 +69,7 @@ ContentPage {
                 Config.options.search.sloppy = checked;
             }
             StyledToolTip {
-                content: "如果你有很多拼写错误，效果可能会更好，\n但结果可能会很奇怪，并且可能不适用于首字母缩略词\n（例如，“GIMP” 可能不会给你 GIMP）"
+                text: Translation.tr("Could be better if you make a ton of typos,\nbut results can be weird and might not work with acronyms\n(e.g. \"GIMP\" might not give you the paint program)")
             }
         }
 

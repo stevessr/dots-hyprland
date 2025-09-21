@@ -84,7 +84,7 @@ ColumnLayout {
                         }
                     }
                     StyledToolTip {
-                        content: "复制代码"
+                        text: Translation.tr("Copy code")
                     }
                 }
                 AiMessageControlButton {
@@ -114,7 +114,7 @@ ColumnLayout {
                         }
                     }
                     StyledToolTip {
-                        content: "保存到下载"
+                        text: Translation.tr("Save to Downloads")
                     }
                 }
             }

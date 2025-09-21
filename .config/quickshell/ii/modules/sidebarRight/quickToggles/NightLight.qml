@@ -23,6 +23,6 @@ QuickToggleButton {
     }
     
     StyledToolTip {
-        content: "夜间模式 | 右键单击以切换自动模式"
+        text: Translation.tr("Night Light | Right-click to toggle Auto mode")
     }
 }

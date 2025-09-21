@@ -111,7 +111,7 @@ ApplicationWindow {
                     }
 
                     StyledToolTip {
-                        content: Translation.tr("Tip: Close a window with Super+Q")
+                        text: Translation.tr("Tip: Close a window with Super+Q")
                     }
                 }
             }
@@ -250,13 +250,13 @@ ApplicationWindow {
                                 konachanWallProc.running = true;
                             }
                             StyledToolTip {
-                                content: "来自 Konachan 的随机 SFW 动漫壁纸\n图片保存在 ~/Pictures/Wallpapers"
+                                text: Translation.tr("Random SFW Anime wallpaper from Konachan\nImage is saved to ~/Pictures/Wallpapers")
                             }
                         }
                         RippleButtonWithIcon {
                             materialIcon: "wallpaper"
                             StyledToolTip {
-                                content: "从您的系统中选择壁纸图片"
+                                text: Translation.tr("Pick wallpaper image on your system")
                             }
                             onClicked: {
                                 Quickshell.execDetached([`${Directories.wallpaperSwitchScriptPath}`]);

@@ -10,7 +10,7 @@ QuickToggleButton {
         Idle.toggleInhibit()
     }
     StyledToolTip {
-        content: "保持系统唤醒"
+        text: Translation.tr("Keep system awake")
     }
 
 }

@@ -164,7 +164,7 @@ Rectangle {
                     text: "visibility_off"
                 }
                 StyledToolTip {
-                    content: "模型不可见"
+                    text: Translation.tr("Not visible to model")
                 }
             }
 
@@ -191,7 +191,7 @@ Rectangle {
                     }
                     
                     StyledToolTip {
-                        content: "复制"
+                        text: Translation.tr("Copy")
                     }
                 }
                 AiMessageControlButton {
@@ -206,7 +206,7 @@ Rectangle {
                         }
                     }
                     StyledToolTip {
-                        content: root.editing ? "保存" : "编辑"
+                        text: root.editing ? Translation.tr("Save") : Translation.tr("Edit")
                     }
                 }
                 AiMessageControlButton {
@@ -217,7 +217,7 @@ Rectangle {
                         root.renderMarkdown = !root.renderMarkdown
                     }
                     StyledToolTip {
-                        content: "查看 Markdown 源码"
+                        text: Translation.tr("View Markdown source")
                     }
                 }
                 AiMessageControlButton {
@@ -227,7 +227,7 @@ Rectangle {
                         Ai.removeMessage(root.messageIndex)
                     }
                     StyledToolTip {
-                        content: "删除"
+                        text: Translation.tr("Delete")
                     }
                 }
             }

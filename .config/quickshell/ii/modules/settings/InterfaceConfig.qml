@@ -142,6 +142,22 @@ ContentPage {
     }
 
     ContentSection {
+        icon: "notifications"
+        title: Translation.tr("Notifications")
+
+        ConfigSpinBox {
+            text: Translation.tr("Timeout duration (if not defined by notification) (ms)")
+            value: Config.options.notifications.timeout
+            from: 1000
+            to: 60000
+            stepSize: 1000
+            onValueChanged: {
+                Config.options.notifications.timeout = value;
+            }
+        }
+    }
+
+    ContentSection {
         icon: "side_navigation"
         title: Translation.tr("Sidebars")
 
@@ -152,7 +168,7 @@ ContentPage {
                 Config.options.sidebar.keepRightSidebarLoaded = checked;
             }
             StyledToolTip {
-                content: "启用后，右侧边栏的内容将保持加载状态，以减少打开时的延迟，\n代价是大约 15MB 的持续 RAM 使用量。延迟的重要性取决于您的系统性能。\n使用像 linux-cachyos 这样的自定义内核可能会有所帮助"
+                text: Translation.tr("When enabled keeps the content of the right sidebar loaded to reduce the delay when opening,\nat the cost of around 15MB of consistent RAM usage. Delay significance depends on your system's performance.\nUsing a custom kernel like linux-cachyos might help")
             }
         }
 
@@ -176,7 +192,7 @@ ContentPage {
                     }
 
                     StyledToolTip {
-                        content: Translation.tr("When this is off you'll have to click")
+                        text: Translation.tr("When this is off you'll have to click")
                     }
                 }
             }
@@ -190,7 +206,7 @@ ContentPage {
                     }
 
                     StyledToolTip {
-                        content: Translation.tr("Place the corners to trigger at the bottom")
+                        text: Translation.tr("Place the corners to trigger at the bottom")
                     }
                 }
                 ConfigSwitch {
@@ -201,7 +217,7 @@ ContentPage {
                     }
 
                     StyledToolTip {
-                        content: Translation.tr("Brightness and volume")
+                        text: Translation.tr("Brightness and volume")
                     }
                 }
             }
@@ -310,7 +326,7 @@ ContentPage {
                 Config.options.screenshotTool.showContentRegions = checked;
             }
             StyledToolTip {
-                content: "这些区域可能是图像或屏幕上包含某些内容的部分。\n可能不总是准确。\n这是通过本地运行的图像处理算法完成的，没有使用人工智能。"
+                text: Translation.tr("Such regions could be images or parts of the screen that have some containment.\nMight not always be accurate.\nThis is done with an image processing algorithm run locally and no AI is used.")
             }
         }
     }
