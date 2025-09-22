@@ -128,6 +128,8 @@ Singleton {
                 property bool showClock: true
                 property string wallpaperPath: ""
                 property string thumbnailPath: ""
+                property string quote: ""
+                property bool hideWhenFullscreen: true
                 property JsonObject parallax: JsonObject {
                     property bool vertical: false
                     property bool autoVertical: false
@@ -142,8 +144,13 @@ Singleton {
                     property bool showLockedText: true
                     property real extraZoom: 1.1
                 }
-                property string quote: ""
-                property bool hideWhenFullscreen: true
+                property JsonObject wallpaperSafety: JsonObject {
+                    property bool enable: true
+                    property JsonObject triggerCondition: JsonObject {
+                        property list<string> wallpaperKeywords: ["anime", "ecchi", "hentai", "yande.re", "konachan", "breast", "nipples", "pussy", "nsfw", "spoiler", "girl"]
+                        property list<string> networkNameKeywords: ["guest", "public", "free", "airport"]
+                    }
+                }
             }
 
             property JsonObject bar: JsonObject {
@@ -213,6 +220,11 @@ Singleton {
             property JsonObject conflictKiller: JsonObject {
                 property bool autoKillNotificationDaemons: false
                 property bool autoKillTrays: false
+            }
+
+            property JsonObject crosshair: JsonObject {
+                // Valorant crosshair format. Use https://www.vcrdb.net/builder
+                property string code: "0;P;d;1;0l;10;0o;2;1b;0"
             }
 
             property JsonObject dock: JsonObject {
